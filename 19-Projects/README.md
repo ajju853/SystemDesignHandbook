@@ -32,6 +32,12 @@ graph TB
 | 10 | [Google Drive Clone](10-google-drive-clone.md) | Advanced | File storage, sharing, OT |
 | 11 | [Food Delivery System](11-food-delivery-system.md) | Intermediate | Order matching, real-time |
 
+## Full Stack & End-to-End Guides
+
+| # | Guide | Description |
+|---|-------|-------------|
+| | [Java Full Stack Roadmap](19-java-full-stack-roadmap.md) | Complete end-to-end Java stack: Spring Boot, React, EKS, Kafka, Terraform, CI/CD — using E-Commerce OMS as example, with system design, data model, DevOps pipeline, cloud infra, and 20 interview questions |
+
 ---
 
 Previous: [18 — Case Studies](../18-Case-Studies/README.md)
