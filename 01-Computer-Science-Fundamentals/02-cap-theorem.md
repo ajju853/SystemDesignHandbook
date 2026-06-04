@@ -120,10 +120,10 @@ sequenceDiagram
 ```
 
 ## Related Topics
-- [Consistency Models](../01-Fundamentals/11-consistency.md) — Strong vs eventual consistency
-- [ACID Properties](../03-Databases/12-acid.md) — ACID guarantees in databases
-- [BASE Properties](../03-Databases/13-base.md) — BASE: the AP alternative to ACID
-- [Replication](../03-Databases/10-replication.md) — How data is replicated across nodes
+- [Consistency Models](../01-Computer-Science-Fundamentals/11-consistency.md) — Strong vs eventual consistency
+- [ACID Properties](../04-Databases/12-acid.md) — ACID guarantees in databases
+- [BASE Properties](../04-Databases/13-base.md) — BASE: the AP alternative to ACID
+- [Replication](../04-Databases/10-replication.md) — How data is replicated across nodes
 
 ## Interview Questions
 1. Explain CAP theorem with a real-world example

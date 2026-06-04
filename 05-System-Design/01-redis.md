@@ -78,10 +78,10 @@ tcp-backlog 511
 | `allkeys-random` | Random eviction | Equal value keys |
 
 ## Related Topics
-- [Memcached](../04-Caching/02-memcached.md) — Simple, fast, multi-threaded cache
-- [Cache Aside](../04-Caching/06-cache-aside.md) — Lazy loading pattern
-- [Write Through](../04-Caching/07-write-through.md) — Write-synchronized cache
-- [CDN Caching](../04-Caching/03-cdn-caching.md) — Edge caching with CDNs
+- [Memcached](../05-System-Design/02-memcached.md) — Simple, fast, multi-threaded cache
+- [Cache Aside](../05-System-Design/06-cache-aside.md) — Lazy loading pattern
+- [Write Through](../05-System-Design/07-write-through.md) — Write-synchronized cache
+- [CDN Caching](../05-System-Design/03-cdn-caching.md) — Edge caching with CDNs
 
 ## Interview Questions
 1. How do you configure Redis for caching vs persistent storage?

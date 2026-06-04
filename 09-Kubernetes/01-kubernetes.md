@@ -65,11 +65,11 @@ graph TB
 | **Namespace** | Virtual cluster isolation |
 
 ## Related Topics
-- [Docker](../07-Cloud-Architecture/05-docker.md) — Container runtime foundation
-- [EKS/GKE/AKS](../07-Cloud-Architecture/13-eks-gke-aks.md) — Managed Kubernetes comparison
-- [AWS](../07-Cloud-Architecture/01-aws.md) — Major cloud provider
+- [Docker](../08-Docker/07-docker.md) — Container runtime foundation
+- [EKS/GKE/AKS](13-eks-gke-aks.md) — Managed Kubernetes comparison (within K8s module)
+- [AWS Overview](../10-AWS/01-aws-overview.md) — Major cloud provider
 - [Service Discovery](../06-Distributed-Systems/08-service-discovery.md) — How services find each other
-- [VPC Networking](../07-Cloud-Architecture/08-vpc-networking.md) — Network isolation in cloud
+- [VPC Networking](../10-AWS/08-vpc-networking.md) — Network isolation in cloud
 
 ## Interview Questions
 1. How does Kubernetes handle pod scheduling?

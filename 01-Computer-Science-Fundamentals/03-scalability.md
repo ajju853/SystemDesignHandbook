@@ -90,9 +90,9 @@ Performance
 ```
 
 ## Related Topics
-- [Horizontal Scaling](../01-Fundamentals/04-horizontal-scaling.md) — Adding more machines
-- [Vertical Scaling](../01-Fundamentals/05-vertical-scaling.md) — Adding more power to existing machines
-- [Partitioning/Sharding](../01-Fundamentals/13-partitioning.md) — Splitting data across nodes
+- [Horizontal Scaling](../01-Computer-Science-Fundamentals/04-horizontal-scaling.md) — Adding more machines
+- [Vertical Scaling](../01-Computer-Science-Fundamentals/05-vertical-scaling.md) — Adding more power to existing machines
+- [Partitioning/Sharding](../01-Computer-Science-Fundamentals/13-partitioning.md) — Splitting data across nodes
 
 ## Interview Questions
 1. Design a system that can scale from 1K to 1M users

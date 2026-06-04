@@ -146,7 +146,7 @@ With DNSSEC:
 ## Related Topics
 - [CDN](../02-Networking/10-cdn.md) — CDNs rely on DNS for geographic routing
 - [How Browser Loads Google](../02-Networking/14-how-browser-loads-google.md) — Full DNS + TCP + TLS + HTTP in action
-- [Load Balancing](../07-Cloud-Architecture/02-ec2.md) — DNS-based load balancing with Route53
+- [Load Balancing](../05-System-Design/11-load-balancers.md) — DNS-based load balancing with Route53
 
 ## Interview Questions
 1. Walk through DNS resolution for google.com

@@ -126,10 +126,10 @@ PostgreSQL WAL:
 ```
 
 ## Related Topics
-- [BASE](../03-Databases/13-base.md) — The AP alternative to ACID
-- [Transactions](../03-Databases/11-transactions.md) — Transaction isolation levels and 2PC
-- [CAP Theorem](../01-Fundamentals/02-cap-theorem.md) — Consistency vs availability tradeoffs
-- [Consistency Models](../01-Fundamentals/11-consistency.md) — Consistency spectrum from strong to eventual
+- [BASE](../04-Databases/13-base.md) — The AP alternative to ACID
+- [Transactions](../04-Databases/11-transactions.md) — Transaction isolation levels and 2PC
+- [CAP Theorem](../01-Computer-Science-Fundamentals/02-cap-theorem.md) — Consistency vs availability tradeoffs
+- [Consistency Models](../01-Computer-Science-Fundamentals/11-consistency.md) — Consistency spectrum from strong to eventual
 
 ## Interview Questions
 1. Explain each ACID property with examples

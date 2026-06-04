@@ -65,11 +65,11 @@ graph LR
 | Use case | Event streaming, logs | Task queues, RPC |
 
 ## Related Topics
-- [RabbitMQ](../05-Message-Queues/02-rabbitmq.md) — AMQP-based message broker
-- [SQS](../05-Message-Queues/03-sqs.md) — AWS managed queue service
-- [Pulsar](../05-Message-Queues/04-pulsar.md) — Multi-tenant, geo-replicated messaging
-- [Delivery Guarantees](../05-Message-Queues/08-delivery-guarantees.md) — At-most-once, at-least-once, exactly-once
-- [Partition & Offset](../05-Message-Queues/07-partition-offset.md) — Kafka partitioning internals
+- [RabbitMQ](../05-System-Design/02-rabbitmq.md) — AMQP-based message broker
+- [SQS](../05-System-Design/03-sqs.md) — AWS managed queue service
+- [Pulsar](../05-System-Design/04-pulsar.md) — Multi-tenant, geo-replicated messaging
+- [Delivery Guarantees](../05-System-Design/08-delivery-guarantees.md) — At-most-once, at-least-once, exactly-once
+- [Partition & Offset](../05-System-Design/07-partition-offset.md) — Kafka partitioning internals
 
 ## Interview Questions
 1. How does Kafka achieve high throughput?

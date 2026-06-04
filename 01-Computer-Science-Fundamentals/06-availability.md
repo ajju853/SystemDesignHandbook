@@ -117,9 +117,9 @@ Example:
 ```
 
 ## Related Topics
-- [CAP Theorem](../01-Fundamentals/02-cap-theorem.md) — Availability vs consistency tradeoff
-- [Fault Tolerance](../01-Fundamentals/10-fault-tolerance.md) — Techniques to maintain availability during failures
-- [Reliability](../01-Fundamentals/07-reliability.md) — How availability differs from reliability
+- [CAP Theorem](../01-Computer-Science-Fundamentals/02-cap-theorem.md) — Availability vs consistency tradeoff
+- [Fault Tolerance](../01-Computer-Science-Fundamentals/10-fault-tolerance.md) — Techniques to maintain availability during failures
+- [Reliability](../01-Computer-Science-Fundamentals/07-reliability.md) — How availability differs from reliability
 
 ## Interview Questions
 1. How would you design a system with 99.999% availability?
