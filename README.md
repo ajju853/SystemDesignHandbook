@@ -74,7 +74,7 @@
 | 16 | [Security](16-Security/) | Auth, JWT, OAuth, RBAC, ABAC, Encryption, WAF, DDoS | 13 |
 | 17 | [Observability](17-Observability/) | Logging, Monitoring, Tracing, Metrics, Prometheus, Grafana, ELK | 11 |
 | 18 | [Case Studies](18-Case-Studies/) | Netflix, YouTube, Uber, WhatsApp, Instagram, Twitter, Spotify + 7 Production Incidents | 18 |
-| 19 | [Projects](19-Projects/) | URL Shortener, Chat System, Netflix Clone, Uber, Payment Gateway, + more | 12 |
+| 19 | [Projects](19-Projects/) | End-to-End Implementation Guide + URL Shortener, Chat System, Netflix Clone, Uber, Payment Gateway, + more | 13 |
 | 20 | [Interview Prep](20-Interview-Prep/) | 17 System Design Interview Solutions + Interactive Quiz/Tools | 21 |
 | 21 | [Staff Engineer](21-Staff-Engineer/) | Tradeoffs, RFC Writing, Cost Optimization, Multi-Region, DR | 10 |
 

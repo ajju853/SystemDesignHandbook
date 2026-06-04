@@ -1,8 +1,14 @@
-# 12 — Hands-On Projects
+# 19 — Projects
 
 > Build real systems. Each project includes requirements, capacity estimation, API design, database design, high/low level design, scaling strategy, and deployment.
 
-## Projects
+## Capstone Guide
+
+| # | Project | Description |
+|---|---------|-------------|
+| 🌟 | [End-to-End Implementation Guide](12-end-to-end-implementation-guide.md) | Complete playbook: requirements → architecture → APIs → security → Docker → K8s → Terraform → CI/CD → observability → SRE — with E-Commerce Platform as running example |
+
+## Design Projects
 
 | # | Project | Difficulty | Tech Stack |
 |---|---------|------------|------------|
@@ -20,5 +26,5 @@
 
 ---
 
-Previous: [11 — Production Incidents](../11-Production-Incidents/README.md)
-Next: [13 — System Design Interviews](../13-System-Design-Interviews/README.md)
+Previous: [18 — Case Studies](../18-Case-Studies/README.md)
+Next: [20 — Interview Prep](../20-Interview-Prep/README.md)
