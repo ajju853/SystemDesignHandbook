@@ -3,6 +3,15 @@
 ## Overview
 WhatsApp serves 2B+ users with only ~50 engineers at acquisition. The key: simple architecture, Erlang, and extreme efficiency.
 
+```mermaid
+graph LR
+    Client[Client Device<br/>End-to-End Encrypted] --> CM[Connection Manager<br/>Erlang - 1M+ connections per server]
+    CM --> Router[Chat Router<br/>Erlang]
+    Router --> Account[(Account Store<br/>Custom)]
+    Router --> Delivery[Message Delivery<br/>Ephemeral - deleted after delivery]
+    Router --> SMS[SMPP Gateway<br/>SMS Verification]
+```
+
 ## Key Stats
 - 2B+ users
 - 65B+ messages/day

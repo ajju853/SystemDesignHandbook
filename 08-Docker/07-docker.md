@@ -26,6 +26,19 @@ Docker is a containerization platform that packages applications and dependencie
 ~GB, minutes to start
 ```
 
+```mermaid
+graph LR
+    Client[Docker Client<br/>docker CLI] -->|Commands| Daemon[Docker Daemon]
+    Daemon -->|Pull / Push| Registry[Docker Registry<br/>Docker Hub / ECR]
+    Daemon -->|Build| Image[Docker Image]
+    Image -->|Run| Container[Docker Container]
+    Dockerfile[Dockerfile] -->|build| Image
+    subgraph Host Machine
+        Daemon
+        Container
+    end
+```
+
 ## Dockerfile Best Practices
 
 ```dockerfile

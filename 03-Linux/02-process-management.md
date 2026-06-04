@@ -11,6 +11,19 @@ A **process** is an instance of a running program with its own address space, fi
 - Container runtimes create process trees; orphan/zombie processes waste resources
 - systemd is the init system on nearly all modern Linux distributions — it manages services, which are the building blocks of cloud deployments
 
+```mermaid
+stateDiagram-v2
+    [*] --> Running: fork/exec
+    Running --> InterruptibleSleep: wait I/O
+    Running --> UninterruptibleSleep: disk I/O
+    Running --> Stopped: SIGSTOP
+    InterruptibleSleep --> Running: wake up
+    UninterruptibleSleep --> Running: I/O complete
+    Stopped --> Running: SIGCONT
+    Running --> Zombie: exit
+    Zombie --> [*]: wait()
+```
+
 ## Key Concepts
 
 ### Process States

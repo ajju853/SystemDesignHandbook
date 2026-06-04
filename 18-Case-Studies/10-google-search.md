@@ -3,6 +3,24 @@
 ## Overview
 Google processes 8.5B+ searches/day across billions of web pages, returning results in under 200ms.
 
+```mermaid
+graph LR
+    subgraph Crawl[Crawling Pipeline]
+        URL[URL Frontier] --> Download[Download Documents<br/>MapReduce]
+        Download --> Parse[Parse HTML]
+    end
+    subgraph Index[Indexing Pipeline]
+        Parse --> Bigtable[(Bigtable<br/>Inverted Index)]
+        Parse --> Anchor[Anchor Index]
+    end
+    subgraph Serve[Serving Pipeline]
+        Bigtable --> Rank[Ranking Engine<br/>200+ Signals - PageRank]
+        Anchor --> Rank
+        Rank --> Query[Query Processing<br/>1000s of machines]
+        Query --> Results[Search Results<br/>&lt;200ms]
+    end
+```
+
 ## Architecture
 
 ```

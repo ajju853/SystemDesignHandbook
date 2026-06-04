@@ -3,6 +3,25 @@
 ## Definition
 Query optimization is the process of improving database query performance by analyzing and tuning query execution plans, indexing strategies, and database configuration.
 
+```mermaid
+flowchart TD
+    SQ[Slow Query] --> EXP[Run EXPLAIN ANALYZE]
+    EXP --> Seq{Sequential Scans?}
+    Seq -->|Yes| AddIdx[Add Indexes]
+    Seq -->|No| Join{Expensive Joins?}
+    AddIdx --> Retest
+    Join -->|Yes| OptJoin[Optimize JOIN Order]
+    Join -->|No| Cols{Unnecessary Columns?}
+    OptJoin --> Retest
+    Cols -->|Yes| SelCols[SELECT only needed columns]
+    Cols -->|No| Pag{Pagination Needed?}
+    SelCols --> Retest
+    Pag -->|Yes| AddLim[Add LIMIT / Offset]
+    Pag -->|No| Done[Query Optimized]
+    AddLim --> Done
+    Retest --> EXP
+```
+
 ## Real-World Example
 **Shopify**: Reduced query time for product search from 2 seconds to 50ms by adding composite indexes, optimizing JOINs, and using covering indexes — directly improving page load times and conversion rates.
 

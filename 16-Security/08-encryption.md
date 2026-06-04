@@ -3,6 +3,23 @@
 ## Definition
 Encryption transforms data into an unreadable format using an algorithm and a key. Only those with the correct key can decrypt and read the data.
 
+```mermaid
+graph TD
+    subgraph "Encryption Types"
+        Sym[Symmetric Encryption] --> AES[AES-256]
+        Asym[Asymmetric Encryption] --> RSA[RSA]
+        Asym --> ECC[ECDSA]
+    end
+    subgraph "Data States"
+        AR[Data at Rest<br/>Database, S3, EBS]
+        IT[Data in Transit<br/>TLS, mTLS, VPN]
+    end
+    Sym -->|Same key for<br/>encrypt & decrypt| AR
+    Asym -->|Public/private<br/>key pair| IT
+    KM[Key Management<br/>KMS, Vault, HSM] -.-> Sym
+    KM -.-> Asym
+```
+
 ## Types
 
 | Type | Description | Use Case |

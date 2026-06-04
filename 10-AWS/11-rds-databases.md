@@ -3,6 +3,19 @@
 ## Definition
 Amazon RDS (Relational Database Service) is a managed service that makes it easy to set up, operate, and scale relational databases in the cloud. It handles database setup, patching, backup, and failover.
 
+```mermaid
+graph TD
+    subgraph Standard[Standard RDS Multi-AZ]
+        P1[Primary AZ-A] -->|Sync Replication| S1[Standby AZ-B]
+        P1 -.->|Async Replication| RR1[Read Replica AZ-C]
+    end
+    subgraph Aurora[Amazon Aurora]
+        P2[Writer AZ-A] -->|Write| Storage[(Shared Storage<br/>6 copies across 3 AZs)]
+        Storage --> AR1[Aurora Replica AZ-B]
+        Storage --> AR2[Aurora Replica AZ-C]
+    end
+```
+
 ## RDS Engines
 
 | Engine | Strengths | Best For |

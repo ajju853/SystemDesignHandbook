@@ -3,6 +3,26 @@
 ## Definition
 PostgreSQL is an advanced, open-source relational database management system (RDBMS) known for its reliability, feature robustness, and standards compliance. It supports both SQL and JSON queries, making it a hybrid relational/document database.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Parser
+    participant Rewriter
+    participant Planner
+    participant Executor
+    participant Storage
+    Client->>Parser: SQL Query
+    Parser->>Parser: Parse SQL, build AST
+    Parser->>Rewriter: Parse Tree
+    Rewriter->>Rewriter: Apply rules/views
+    Rewriter->>Planner: Rewritten Tree
+    Planner->>Planner: Cost-based optimization
+    Planner->>Executor: Execution Plan
+    Executor->>Storage: Read/Write Data
+    Storage-->>Executor: Results
+    Executor-->>Client: Query Result
+```
+
 ## Real-World Example
 **Instagram**: Uses PostgreSQL as their primary database, sharded across thousands of servers. They chose PostgreSQL for its reliability, extensibility, and strong consistency guarantees.
 

@@ -3,6 +3,16 @@
 ## Definition
 Reliability is the probability that a system will perform its intended function without failure for a specified period under stated conditions. Unlike availability (uptime), reliability measures correctness of operation.
 
+```mermaid
+flowchart LR
+    U[User Request] --> LB[Load Balancer HA]
+    LB --> AS[App Server N+1]
+    AS --> C[Cache Redis]
+    C -->|miss| DB[(Database Primary)]
+    DB --> R[(Database Replica)]
+    C -->|hit| U
+```
+
 ## Real-World Example
 **Amazon DynamoDB**: Guarantees 99.99% availability and 99.999% durability. Data is synchronously replicated across three availability zones in a region. Every write is confirmed by multiple nodes before acknowledgment.
 

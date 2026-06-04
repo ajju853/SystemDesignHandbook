@@ -12,6 +12,20 @@ A file system controls how data is stored, organized, and retrieved on a storage
 - RAID provides data protection and/or performance — essential knowledge for storage engineering
 - File system corruption recovery is a common production incident
 
+```mermaid
+flowchart LR
+    subgraph Physical_Disks["Physical Disks"]
+        PV1[PV /dev/sdb]
+        PV2[PV /dev/sdc]
+    end
+    PV1 --> VG[Volume Group myvg]
+    PV2 --> VG
+    VG --> LV1[Logical Volume data]
+    VG --> LV2[Logical Volume backup]
+    LV1 --> FS1[ext4 /mnt/data]
+    LV2 --> FS2[XFS /mnt/backup]
+```
+
 ## Key Concepts
 
 ### ext4 — The Default

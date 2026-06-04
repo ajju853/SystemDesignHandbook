@@ -3,6 +3,25 @@
 ## Definition
 Monitoring is the continuous collection, analysis, and visualization of metrics to understand system health and performance. It answers: "What is happening right now?"
 
+```mermaid
+graph TD
+    subgraph "Monitoring Frameworks"
+        GS["Four Golden Signals (Google SRE)"]
+        USE["USE Method (Infrastructure)"]
+        RED["RED Method (Services)"]
+    end
+    GS --> L[Latency<br/>p50/p95/p99]
+    GS --> T[Traffic<br/>Requests/sec]
+    GS --> ER[Errors<br/>5xx rate]
+    GS --> S[Saturation<br/>CPU, Memory]
+    USE --> U[Utilization<br/>% busy]
+    USE --> SA[Saturation<br/>Queue depth]
+    USE --> E[Errors<br/>Failures]
+    RED --> R[Rate<br/>Req/sec]
+    RED --> E2[Errors<br/>Failed req]
+    RED --> D[Duration<br/>Latency dist.]
+```
+
 ## The Four Golden Signals (Google SRE)
 
 | Signal | What It Measures | Example |

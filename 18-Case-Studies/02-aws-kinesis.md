@@ -3,6 +3,23 @@
 ## Event
 During the COVID-19 pandemic, AWS Kinesis experienced severe throttling across multiple regions. The surge in streaming data (as businesses shifted to remote work) exceeded Kinesis capacity, causing widespread failures for customers who depended on Kinesis for real-time data pipelines.
 
+```mermaid
+sequenceDiagram
+    participant Producers
+    participant Kinesis as Kinesis Stream
+    participant Lambda as Downstream Consumers
+    participant DLQ as Dead-Letter Queue
+    
+    Producers->>Kinesis: Surge in streaming data
+    Kinesis->>Kinesis: Shard throttling (capacity exceeded)
+    Kinesis-->>Producers: ProvisionedThroughputExceeded
+    Lambda->>Kinesis: Poll for records - backlog grows
+    Kinesis->>Lambda: Throttled reads
+    Lambda->>Lambda: Retry storm on failure
+    Lambda-->>DLQ: Failed records pushed
+    Note over Kinesis,DLQ: Recovery slow — drained capacity consumed by retries
+```
+
 ## Timeline
 - **March 2020**: COVID lockdowns cause massive spike in streaming data
 - **Weeks of throttling**: Kinesis customers hit service limits repeatedly

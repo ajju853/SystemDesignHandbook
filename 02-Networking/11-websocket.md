@@ -3,6 +3,22 @@
 ## Definition
 WebSocket is a protocol that provides full-duplex, bidirectional communication over a single TCP connection. Unlike HTTP's request-response cycle, WebSocket allows the server to push data to the client at any time.
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    C->>S: HTTP Upgrade: GET /chat (Upgrade: websocket)
+    S-->>C: 101 Switching Protocols
+    Note over C,S: WebSocket Connection Established
+    C->>S: Message (text/binary)
+    S-->>C: Push Message (server-initiated)
+    C->>S: Message
+    S-->>C: Push Message
+    Note over C,S: Full-duplex communication
+    C->>S: Close Frame
+    S-->>C: Close Frame
+```
+
 ## Real-World Example
 **Slack**: Uses WebSocket for real-time messaging. When a colleague sends a message, Slack's server pushes it to your browser instantly without you refreshing or polling. The WebSocket connection remains open for your entire session.
 

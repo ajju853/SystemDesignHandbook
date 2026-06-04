@@ -3,6 +3,19 @@
 ## Event
 On January 31, 2017, GitLab experienced a catastrophic data loss incident. A systems engineer accidentally deleted the production database during a maintenance operation, resulting in the loss of 300GB of data (6 hours of database changes).
 
+```mermaid
+timeline
+    title GitLab Data Loss – Jan 31, 2017
+    04:40 UTC : Engineer performing DB replication maintenance
+    04:45 : rm -rf run on wrong server
+    04:46 : Production database deleted
+    05:00 : All 5 backup mechanisms attempted
+    05:30 : All 5 backups failed (pg_dump, S3, Replica, LVM, Manual)
+    06:00 : GitLab enters read-only mode
+    11:00 : Partial restore from 6-hour-old snapshot
+    Ongoing : 6 hours of data permanently lost
+```
+
 ## Timeline
 - **04:40 UTC**: Engineer performing database replication maintenance
 - **04:45 UTC**: Engineer accidentally runs `rm -rf` on the wrong server

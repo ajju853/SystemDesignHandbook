@@ -8,6 +8,15 @@ Terraform is an open-source Infrastructure as Code tool created by HashiCorp. It
 
 Understanding the building blocks of Terraform — providers, resources, data sources, variables, outputs, and state — is essential before writing any real configuration. These concepts form the language you use every day as a Terraform practitioner.
 
+```mermaid
+graph LR
+    P[Providers] --> R[Resources]
+    D[Data Sources] --> R
+    V[Variables] --> R
+    R --> O[Outputs]
+    S[State File] -.-> R
+```
+
 ## Core Concepts with HCL Examples
 
 ### Providers

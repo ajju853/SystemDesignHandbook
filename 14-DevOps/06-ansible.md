@@ -12,6 +12,24 @@ Ansible is a radically simple IT automation engine that automates cloud provisio
 - **Large module ecosystem** — 750+ built-in modules for cloud, network, containers, monitoring, etc.
 - **Integration** — works with Terraform ([13-Terraform](../13-Terraform/README.md)), Docker ([08-Docker](../08-Docker/README.md)), Kubernetes ([09-Kubernetes](../09-Kubernetes/README.md)), and AWS ([10-AWS](../10-AWS/README.md))
 
+```mermaid
+graph TD
+    Control[Ansible Control Node] -->|SSH| Web1[Web Server 1]
+    Control -->|SSH| Web2[Web Server 2]
+    Control -->|SSH| DB1[Database Server]
+    Control -->|WinRM| Win[Windows Server]
+    Inventory[Inventory File<br/>hosts.ini/yaml] --> Control
+    Playbook[Playbook<br/>deploy-webapp.yaml] --> Control
+    Roles[Ansible Roles<br/>common / webapp / nginx] --> Playbook
+    Vault[Ansible Vault<br/>Encrypted Secrets] --> Playbook
+    subgraph Managed Nodes
+        Web1
+        Web2
+        DB1
+        Win
+    end
+```
+
 ## Implementation
 
 ### Inventory Files

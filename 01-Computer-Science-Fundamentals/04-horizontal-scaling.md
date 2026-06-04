@@ -3,6 +3,20 @@
 ## Definition
 Horizontal scaling (scaling out/in) means adding more machines or nodes to a system's pool of resources. Instead of upgrading a single server, you add additional servers to distribute the load.
 
+```mermaid
+flowchart TB
+    LB[Load Balancer] --> S1[Server 1]
+    LB --> S2[Server 2]
+    LB --> S3[Server 3]
+    LB --> SN[Server N]
+    S1 --> DB[(Database Cluster)]
+    S2 --> DB
+    S3 --> DB
+    SN --> DB
+    style LB fill:#4a90d9,color:#fff
+    style DB fill:#e67e22,color:#fff
+```
+
 ## Real-World Example
 **Google Search**: Processes 8.5 billion searches per day across hundreds of thousands of commodity servers. When traffic increases, Google adds more servers to the cluster rather than upgrading existing ones.
 

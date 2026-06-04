@@ -3,6 +3,32 @@
 ## Definition
 Logging records discrete events from applications and infrastructure. Logs provide a record of what happened at a specific time, essential for debugging, audit, and analysis.
 
+```mermaid
+flowchart LR
+    subgraph "Log Generation"
+        APP[Application] -->|Structured JSON| LOG[Log Entry]
+    end
+    subgraph "Log Entry Fields"
+        TS[timestamp]
+        LV[level]
+        SV[service]
+        TR[trace_id]
+        MS[message]
+        DU[duration_ms]
+    end
+    LOG --> TS
+    LOG --> LV
+    LOG --> SV
+    LOG --> TR
+    LOG --> MS
+    LOG --> DU
+    LOG -->|Forward| AG[Log Agent<br/>Filebeat/Fluentd]
+    AG -->|Stream| Q[Kafka Queue]
+    Q -->|Process| LS[Logstash]
+    LS -->|Index| ES[(Elasticsearch)]
+    ES -->|Search & Visualize| KB[Kibana]
+```
+
 ## Log Levels
 
 | Level | Purpose | Example |

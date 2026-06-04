@@ -12,6 +12,34 @@ Containerization leverages Linux kernel features to isolate processes and their 
 - Orchestrators (Kubernetes, Nomad) abstract these features but expose them via pod security contexts
 - Resource limits (CPU/memory requests) map directly to cgroup parameters
 
+```mermaid
+graph TD
+    subgraph Kernel_Features["Linux Kernel"]
+        NS[Namespaces]
+        CG[cgroups]
+        OV[OverlayFS]
+        CAP[Capabilities]
+        SC[seccomp]
+    end
+    subgraph Container["Docker Container"]
+        PID[PID Isolation]
+        NET[Network Isolation]
+        MNT[Mount Isolation]
+        CPU[CPU Limits]
+        MEM[Memory Limits]
+        IO[I/O Limits]
+    end
+    NS --> PID
+    NS --> NET
+    NS --> MNT
+    CG --> CPU
+    CG --> MEM
+    CG --> IO
+    OV --> Layer[Layered Images]
+    CAP --> Priv[Least Privilege]
+    SC --> Sys[Restricted Syscalls]
+```
+
 ## Key Concepts
 
 ### cgroups — Control Groups

@@ -3,6 +3,19 @@
 ## Definition
 Capacity planning is the process of determining the infrastructure resources needed to meet future demand while optimizing cost and performance.
 
+```mermaid
+graph TB
+    subgraph "Capacity Planning Process"
+        Collect["1. Collect Data<br/>Current usage, growth trends"] --> Forecast["2. Forecast Demand<br/>6mo, 1yr, 3yr"]
+        Forecast --> Model["3. Model Needs<br/>Servers, DB, bandwidth"]
+        Model --> Identify["4. Identify Bottlenecks<br/>First resource to saturate"]
+        Identify --> Plan["5. Plan Upgrades<br/>Optimization actions"]
+        Plan --> Budget["6. Budget & Procure"]
+        Budget --> Monitor["7. Monitor Actual vs Predicted"]
+        Monitor -->|"Update forecast"| Collect
+    end
+```
+
 ## Key Metrics
 
 | Metric | What It Measures | Example |

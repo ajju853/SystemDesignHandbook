@@ -23,6 +23,21 @@
 
 ## Quick Reference
 
+```mermaid
+flowchart LR
+    A[Application Layer] --> B[Transport Layer]
+    B --> C[Network Layer]
+    C --> D[Data Link Layer]
+    D --> E[Physical Layer]
+    A --> HTTP[HTTP/1.1, HTTP/2, HTTP/3]
+    A --> WS[WebSocket]
+    A --> GR[gRPC]
+    A --> GQ[GraphQL]
+    A --> RST[REST]
+    B --> TCP[TCP - Reliable]
+    B --> UDP[UDP - Fast]
+```
+
 ```
 OSI Layers:       Physical → Data Link → Network → Transport → Session → Presentation → Application
 TCP:              Connection-oriented, reliable, ordered

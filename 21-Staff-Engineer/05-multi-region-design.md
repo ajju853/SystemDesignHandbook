@@ -2,6 +2,19 @@
 
 ## Architecture Patterns
 
+```mermaid
+graph TB
+    subgraph "Multi-Region Patterns"
+        AP["Active-Passive<br/>RTO: 15-60 min, RPO: <5 min"] -->|"Higher availability"| AA["Active-Active<br/>RTO: <1 min, RPO: Near zero"]
+    end
+    subgraph "Key Concerns"
+        Geo["GeoDNS: Route users to nearest region"]
+        Data["Data Sovereignty (GDPR)"]
+        Conflict["Conflict Resolution: CRDTs / LWW"]
+        Fail["Failover: Route 53 health checks"]
+    end
+```
+
 ### Active-Passive
 ```
 ┌──────────────────────┐     ┌──────────────────────┐

@@ -3,6 +3,28 @@
 ## Definition
 Amazon DynamoDB is a fully managed NoSQL key-value and document database that delivers single-digit millisecond performance at any scale. It's serverless, auto-scaling, and highly available across multiple AZs.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant DynamoDB
+    participant Replica1
+    participant Replica2
+    participant Replica3
+    Client->>DynamoDB: Write x=5
+    DynamoDB->>Replica1: Write
+    DynamoDB->>Replica2: Write
+    DynamoDB->>Replica3: Write
+    DynamoDB-->>Client: 200 OK
+    Client->>DynamoDB: Eventually Consistent Read
+    DynamoDB->>Replica1: Read (any)
+    Replica1-->>DynamoDB: x=3 (stale)
+    DynamoDB-->>Client: x=3
+    Client->>DynamoDB: Strongly Consistent Read
+    DynamoDB->>Replica1: Read (majority)
+    Replica1-->>DynamoDB: x=5
+    DynamoDB-->>Client: x=5
+```
+
 ## Real-World Example
 **Lyft**: Uses DynamoDB for ride-matching, driver location, and pricing data. Handles millions of requests per second during peak hours with consistent single-digit millisecond latency.
 

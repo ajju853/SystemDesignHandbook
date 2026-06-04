@@ -2,6 +2,22 @@
 
 ## VPC Concepts
 
+```mermaid
+graph TD
+    Internet --> IGW[Internet Gateway]
+    IGW -->|Public Traffic| PubSub[Public Subnet<br/>10.0.1.0/24]
+    PubSub --> ALB[Application LB]
+    ALB --> App[App EC2<br/>Private Subnet<br/>10.0.2.0/24]
+    App --> NAT[NAT Gateway]
+    NAT -->|Outbound| IGW
+    App --> RDS[(RDS Database<br/>Database Subnet<br/>10.0.3.0/24)]
+    subgraph VPC
+        PubSub
+        App
+        RDS
+    end
+```
+
 ```
 ┌──────────────────────────────────┐
 │          VPC (10.0.0.0/16)       │

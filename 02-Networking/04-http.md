@@ -3,6 +3,17 @@
 ## Definition
 HTTP is the foundation protocol of the World Wide Web. It's a request-response protocol in the client-server model, where a client (usually a web browser) sends a request to a server, which returns a response.
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    C->>S: HTTP GET /api/users HTTP/1.1
+    Note over C,S: Headers: Host, User-Agent, Accept
+    S-->>C: HTTP/1.1 200 OK
+    Note over S,C: Headers: Content-Type, Content-Length
+    Note over S,C: Body: JSON data
+```
+
 ## Real-World Example
 **Every website visit**: When you visit github.com, your browser sends an HTTP GET request to GitHub's servers, which respond with HTML, CSS, JS, and images. Each resource is fetched via HTTP.
 

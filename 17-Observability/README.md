@@ -2,6 +2,28 @@
 
 > Understand what your system is doing. Monitor, trace, and log everything.
 
+```mermaid
+graph TD
+    subgraph "Three Pillars of Observability"
+        LOG[Logs<br/>Structured Events]
+        MET[Metrics<br/>Time-Series Data]
+        TRC[Traces<br/>Request Flows]
+    end
+    subgraph "Tools"
+        PRO[Prometheus] --> MET
+        GRA[Grafana] --> LOG
+        GRA --> MET
+        GRA --> TRC
+        ELK[ELK Stack] --> LOG
+        JAE[Jaeger] --> TRC
+        OTL[OpenTelemetry] --> LOG
+        OTL --> MET
+        OTL --> TRC
+        ALR[Alerting] -.->|Notify| OPS[Operators]
+        PRO --> ALR
+    end
+```
+
 ## Topics
 
 | # | Topic | Description |

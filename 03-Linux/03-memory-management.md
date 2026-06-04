@@ -12,6 +12,22 @@ Linux memory management handles how physical RAM and swap space are allocated to
 - NUMA awareness is essential for database servers (Redis, PostgreSQL, MySQL) on multi-socket machines
 - Memory pressure indicators (free, available, cached) guide scaling decisions
 
+```mermaid
+flowchart TD
+    P[Process Requests Memory] --> VM[Virtual Memory Allocated]
+    VM --> MMU{MMU Page Tables}
+    MMU -->|Page in RAM| Phys[Physical RAM]
+    MMU -->|Page not in RAM| PF[Page Fault]
+    PF --> Swap{Swap Free?}
+    Swap -->|Yes| SW[Load from Swap]
+    Swap -->|No| OOM{Memory Full?}
+    OOM -->|Yes| OOMK[OOM Killer]
+    OOMK --> KP[Kill Process]
+    OOM -->|No| AL[Allocate New Page]
+    SW --> Phys
+    AL --> Phys
+```
+
 ## Key Concepts
 
 ### Virtual Memory

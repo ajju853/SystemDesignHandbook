@@ -11,6 +11,27 @@ Design a rate limiter that prevents API abuse by limiting requests per user/IP.
 
 ## Algorithm: Sliding Window Log + Redis
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API as API Gateway
+    participant RL as Rate Limiter
+    participant Redis
+    Client->>API: GET /api/resource
+    API->>RL: is_allowed(user_id)
+    RL->>Redis: ZREMRANGEBYSCORE (clean old)
+    RL->>Redis: ZCARD (count recent requests)
+    Redis-->>RL: count
+    alt count < max_requests
+        RL->>Redis: ZADD + EXPIRE
+        RL-->>API: allowed
+        API-->>Client: 200 OK
+    else count >= max_requests
+        RL-->>API: denied
+        API-->>Client: 429 Too Many Requests<br/>Retry-After: N
+    end
+```
+
 ```python
 def is_allowed(user_id: str, max_requests: int, window_ms: int) -> bool:
     key = f"ratelimit:{user_id}"

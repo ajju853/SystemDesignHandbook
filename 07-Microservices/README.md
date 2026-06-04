@@ -7,6 +7,25 @@
 - [05-System-Design](../05-System-Design/README.md) — messaging, caching, load balancing
 - [06-Distributed-Systems](../06-Distributed-Systems/README.md) — consensus, coordination, service discovery
 
+```mermaid
+graph TD
+    Client[Client] --> GW[API Gateway]
+    GW --> Auth[Auth Service]
+    GW --> User[User Service]
+    GW --> Order[Order Service]
+    GW --> Payment[Payment Service]
+    User --> UserDB[(User DB)]
+    Order --> OrderDB[(Order DB)]
+    Payment --> PaymentDB[(Payment DB)]
+    User -->|Async Event| Order
+    Order -->|Async Event| Payment
+    subgraph Service Mesh
+        User
+        Order
+        Payment
+    end
+```
+
 ## Table of Contents
 
 | # | Topic | Description |

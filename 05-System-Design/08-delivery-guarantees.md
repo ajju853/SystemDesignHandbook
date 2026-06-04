@@ -44,3 +44,19 @@ Use case: Payments, financial transactions
 | At-most-once | ✅ Possible | ❌ No | Fastest |
 | At-least-once | ❌ No | ✅ Possible | Fast |
 | Exactly-once | ❌ No | ❌ No | Slowest |
+
+```mermaid
+flowchart LR
+    subgraph At-Most-Once
+        P1[Producer] -->|no ack| B1[Broker]
+        B1 -->|auto-ack| C1[Consumer]
+    end
+    subgraph At-Least-Once
+        P2[Producer] -->|ack| B2[Broker]
+        B2 -->|manual ack| C2[Consumer]
+    end
+    subgraph Exactly-Once
+        P3[Idempotent Producer] -->|transactional| B3[Broker]
+        B3 -->|transactional| C3[Transactional Consumer]
+    end
+```

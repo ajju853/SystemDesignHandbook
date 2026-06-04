@@ -3,6 +3,30 @@
 ## Definition
 ABAC grants access based on evaluating policies against **attributes** of the user, resource, action, and environment. It's more flexible than RBAC and enables fine-grained, context-aware authorization.
 
+```mermaid
+graph TD
+    subgraph Attributes
+        UA[User Attributes<br/>Dept, Clearance, Location]
+        RA[Resource Attributes<br/>Classification, Owner, Region]
+        AA[Action Attributes<br/>Read, Write, Delete]
+        EA[Environment Attributes<br/>Time, IP, Device, Network]
+    end
+    subgraph Policy Engine
+        PE{Evaluate Policies}
+        DN[Deny]
+        AL[Allow]
+    end
+    UA --> PE
+    RA --> PE
+    AA --> PE
+    EA --> PE
+    PE -->|No matching rule| DN
+    PE -->|Allow rule matches| AL
+    PE -->|Deny rule matches| DN
+    DN --> R[Access Denied]
+    AL --> G[Access Granted]
+```
+
 ## Attribute Types
 
 | Category | Examples | Source |

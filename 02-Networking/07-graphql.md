@@ -3,6 +3,20 @@
 ## Definition
 GraphQL is a query language for APIs that allows clients to request exactly the data they need, nothing more and nothing less. It provides a single endpoint and a strongly-typed schema.
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant G as GraphQL Gateway
+    participant SA as Service A (Users)
+    participant SB as Service B (Posts)
+    C->>G: query { user(id: 42) { name posts { title } } }
+    G->>SA: Resolve user(42)
+    SA-->>G: { name: "Alice" }
+    G->>SB: Resolve posts(userId: 42)
+    SB-->>G: [{ title: "Hello" }]
+    G-->>C: { user: { name: "Alice", posts: [...] } }
+```
+
 ## Real-World Example
 **GitHub GraphQL API**: Instead of fetching user profile and repos with multiple REST calls, a single GraphQL query gets everything: `query { user(login: "torvalds") { name, email, repositories(first: 10) { nodes { name, stars } } } }`
 

@@ -15,6 +15,18 @@ As Terraform usage scales across an organization, problems emerge:
 
 Terraform Cloud addresses all of these with a unified platform.
 
+```mermaid
+sequenceDiagram
+    Dev->>GitHub: Push PR with Terraform changes
+    GitHub->>TFC: Webhook triggers plan
+    TFC-->>GitHub: Post plan comment
+    Dev->>GitHub: Review and approve
+    GitHub->>TFC: Merge triggers apply
+    TFC->>AWS: terraform apply
+    AWS-->>TFC: Resources created
+    TFC-->>Dev: Apply complete notification
+```
+
 ## Core Features
 
 | Feature | Description |

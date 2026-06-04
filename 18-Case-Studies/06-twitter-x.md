@@ -3,6 +3,20 @@
 ## Overview
 Twitter handles 500M+ tweets/day, 6K+ tweets/second peak, with a fanout-based timeline delivery system.
 
+```mermaid
+graph LR
+    User[User] --> Write[Write API]
+    Write --> TweetSvc[Tweet Service]
+    TweetSvc --> Fanout[Fanout Engine]
+    Fanout --> Active[Active Users<br/>Redis Timeline Cache]
+    Fanout --> Inactive[Inactive Users<br/>MySQL Timeline]
+    Fanout --> Celeb[&gt;1M Followers<br/>Pull-based Fanout]
+    Active --> Read[Read API]
+    Inactive --> Read
+    Read --> Client[Client Timeline]
+    TweetSvc --> Snowflake[Snowflake ID Generator<br/>64-bit unique IDs]
+```
+
 ## Architecture
 
 ```

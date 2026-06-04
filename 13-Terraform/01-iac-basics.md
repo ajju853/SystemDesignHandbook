@@ -11,6 +11,18 @@ Infrastructure as Code (IaC) is the practice of managing and provisioning infras
 - **Version Control** — Infrastructure definitions are code, stored in Git
 - **Automation** — No manual steps; everything is scripted and repeatable
 
+```mermaid
+graph TD
+    subgraph Declarative
+        A1[Write Desired State] --> A2[Terraform Computes Diff]
+        A2 --> A3[Apply to Reach State]
+    end
+    subgraph Imperative
+        B1[Write Step-by-Step] --> B2[Execute Each Step]
+        B2 --> B3[Manual Verification]
+    end
+```
+
 ## Why it matters
 
 | Problem | IaC Solution |

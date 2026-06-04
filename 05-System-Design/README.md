@@ -2,6 +2,21 @@
 
 > Speed up your systems by storing frequently accessed data closer to where it's needed.
 
+```mermaid
+graph TD
+    subgraph "Caching Layers"
+        L1["L1: CPU Cache<br/>(~1ns, 90%+ hit rate)"]
+        L2["L2: In-Memory Cache<br/>(~1us, ~80% hit rate)"]
+        L3["L3: CDN Cache<br/>(~10ms, ~70% hit rate)"]
+        L4["L4: Disk Cache<br/>(~10ms, ~50% hit rate)"]
+    end
+    Request --> L1
+    L1 --> L2
+    L2 --> L3
+    L3 --> L4
+    L4 --> Database
+```
+
 ## Topics
 
 ### Cache Technologies

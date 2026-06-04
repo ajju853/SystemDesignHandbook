@@ -2,6 +2,18 @@
 
 > Learn from the best. Reverse-engineered architectures of the world's largest systems.
 
+```mermaid
+graph LR
+    A["Case Studies"] --> B["Architecture Deep Dives<br/>System Design of Major Platforms"]
+    A --> C["Outage Postmortems<br/>Root Cause &amp; Lessons Learned"]
+    B --> D["Netflix, YouTube, WhatsApp"]
+    B --> E["Instagram, Uber, Twitter/X"]
+    B --> F["Spotify, Airbnb, Amazon, Google Search"]
+    C --> G["Facebook BGP, AWS Kinesis"]
+    C --> H["Google Cloud, Cloudflare"]
+    C --> I["GitHub DB Failover, Fastly CDN, GitLab Backup"]
+```
+
 ## Topics
 
 | # | Architecture | Key Lessons |

@@ -2,6 +2,21 @@
 
 ## Core Concepts
 
+```mermaid
+graph TD
+    IAM[IAM] --> Users[Users]
+    IAM --> Groups[Groups]
+    IAM --> Roles[Roles]
+    IAM --> Policies[Policies]
+    Users -->|Belong to| Groups
+    Groups -->|Attached to| Policies
+    Users -->|Directly attached| Policies
+    Roles -->|Assumed by| Users
+    Roles -->|Attached to| Policies
+    Policies -->|Allow / Deny| Actions[AWS Actions]
+    Policies -->|On| Resources[AWS Resources]
+```
+
 | Concept | Description | Example |
 |---------|-------------|---------|
 | **User** | Individual person or service account | `alice@company.com` or `deploy-bot` |

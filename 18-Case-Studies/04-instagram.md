@@ -3,6 +3,32 @@
 ## Overview
 Instagram grew from 0 to 1B+ users with a small engineering team, using PostgreSQL, Redis, and Python.
 
+```mermaid
+graph LR
+    subgraph Phase1[Phase 1 - Monolith]
+        Django[Django App] --> PG1[(PostgreSQL)]
+        Django --> R1[(Redis)]
+        Django --> S3[(S3)]
+    end
+    subgraph Phase2[Phase 2 - Sharded]
+        Django2[Django App] --> PG2[(1000+ PostgreSQL Shards)]
+        Django2 --> R2[(Redis)]
+        Django2 --> Celery[Celery Workers]
+        Celery --> MQ[(RabbitMQ)]
+        MQ --> Feed[Feed Generation]
+    end
+    subgraph Phase3[Phase 3 - Microservices]
+        GW[API Gateway] --> User[User Service]
+        GW --> FeedSvc[Feed Service]
+        GW --> Media[Media Service]
+        GW --> Story[Story Service]
+        User --> PGS[(PostgreSQL)]
+        FeedSvc --> R3[(Redis)]
+        Media --> S3_2[(S3 + CDN)]
+        Story --> Cass[(Cassandra)]
+    end
+```
+
 ## Architecture Evolution
 
 ```

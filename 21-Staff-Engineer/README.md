@@ -2,6 +2,19 @@
 
 > Think beyond code. Design systems that span teams, regions, and years.
 
+```mermaid
+graph TB
+    subgraph "Staff Engineer Skills"
+        T["Tradeoffs"] --> AR["Architecture Reviews"]
+        AR --> RFC["RFC Writing"]
+        RFC --> CO["Cost Optimization"]
+        CO --> MR["Multi-Region Design"]
+        MR --> DR["Disaster Recovery"]
+        DR --> CE["Chaos Engineering"]
+        CE --> CP["Capacity Planning"]
+    end
+```
+
 ## Topics
 
 | # | Topic | Description |

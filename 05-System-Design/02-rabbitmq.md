@@ -3,6 +3,19 @@
 ## Definition
 RabbitMQ is a message broker implementing AMQP (Advanced Message Queuing Protocol). It supports flexible routing, delivery guarantees, and multiple messaging patterns.
 
+```mermaid
+graph LR
+    P[Producer] --> E{Exchange Type}
+    E -->|Direct: exact key| Q1[Queue A]
+    E -->|Topic: pattern match| Q2[Queue B]
+    E -->|Fanout: broadcast| Q3[Queue C]
+    E -->|Headers: header match| Q4[Queue D]
+    Q1 --> C1[Consumer 1]
+    Q2 --> C2[Consumer 2]
+    Q3 --> C3[Consumer 3]
+    Q4 --> C4[Consumer 4]
+```
+
 ## Real-World Example
 **Instagram**: Uses RabbitMQ for notification delivery (likes, comments, follows). When a user performs an action, RabbitMQ routes the notification to the appropriate channel.
 

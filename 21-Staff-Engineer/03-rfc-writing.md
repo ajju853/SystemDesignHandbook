@@ -3,6 +3,16 @@
 ## Definition
 An RFC (Request for Comments) is a structured technical design document used to propose, discuss, and document architecture decisions.
 
+```mermaid
+graph LR
+    subgraph "RFC Lifecycle"
+        Draft["Draft"] --> Review["In Review"]
+        Review --> Approved["Approved"]
+        Review --> Rejected["Rejected"]
+        Approved --> Implemented["Implemented"]
+    end
+```
+
 ## RFC Structure
 
 ```markdown

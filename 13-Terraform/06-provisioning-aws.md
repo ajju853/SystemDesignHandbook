@@ -8,6 +8,22 @@ This chapter demonstrates a complete, production-grade AWS infrastructure provis
 
 Provisioning AWS infrastructure manually through the Console is error-prone, unrepeatable, and impossible to version. With Terraform, the entire infrastructure is code: you can review it, test it, version it, and reproduce it across environments.
 
+```mermaid
+graph TD
+    Internet --> ALB[ALB - Public Subnet]
+    ALB --> ASG[Auto Scaling Group<br/>min:2 max:6]
+    ASG --> EC2[EC2 Instances<br/>Private Subnet]
+    EC2 --> RDS[RDS Database<br/>Private Subnet]
+    VPC[VPC 10.0.0.0/16] --> PubSub[Public Subnets<br/>with Internet Gateway]
+    VPC --> PrivSub[Private Subnets<br/>with NAT Gateway]
+    ALB --> PubSub
+    EC2 --> PrivSub
+    RDS --> PrivSub
+    subgraph AWS Cloud
+        VPC
+    end
+```
+
 > **See also**: [10-AWS](../10-AWS) for individual AWS service deep-dives.
 
 ## Complete Infrastructure

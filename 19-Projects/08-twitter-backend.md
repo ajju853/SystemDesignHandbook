@@ -112,6 +112,28 @@ CREATE TABLE tweet_counts (
 
 ## Low-Level Design: Timeline Fanout
 
+```mermaid
+sequenceDiagram
+    participant Author
+    participant TS as Tweet Service
+    participant DB as PostgreSQL
+    participant FW as Fanout Worker
+    participant Cache as Redis
+    participant Follower
+    Author->>TS: Post tweet
+    TS->>DB: Store tweet
+    TS->>FW: Fanout to followers
+    FW->>Cache: Get active followers
+    alt Active follower
+        FW->>Cache: LPUSH timeline:user_id
+    else Inactive follower
+        FW->>Queue: Schedule backfill on login
+    end
+    Follower->>Cache: GET home timeline
+    Cache-->>Follower: Tweet IDs
+    Follower->>DB: Hydrate tweets
+```
+
 ```python
 # Fanout-on-write strategy
 def on_tweet(tweet, author_id):

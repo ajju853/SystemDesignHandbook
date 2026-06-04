@@ -3,6 +3,18 @@
 ## Definition
 System design is the process of defining the architecture, components, modules, interfaces, and data flow of a system to satisfy specified requirements. It bridges the gap between requirements and implementation.
 
+```mermaid
+flowchart LR
+    R[Requirements] --> E[Estimation]
+    E --> D[Design]
+    D --> T[Tradeoff Analysis]
+    R --> F[Functional & Non-Functional Reqs]
+    E --> C[Capacity Planning]
+    D --> HL[High-Level Design]
+    D --> LL[Low-Level Design]
+    T --> Decisions[Documented Decisions]
+```
+
 ## Real-World Example
 **Amazon.com**: Handles millions of requests per second across thousands of microservices. The system design includes load balancers, CDN for static assets, product catalog service, recommendation engine, payment gateway, order processing, and inventory management — all working together seamlessly.
 

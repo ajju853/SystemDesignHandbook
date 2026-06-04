@@ -58,7 +58,25 @@ Need complex relationships & joins?
                                          ├── Yes ──► MongoDB
                                          └── No ────► Need caching?
                                                       ├── Yes ──► Redis
-                                                      └── No ────► DynamoDB
+                                                       └── No ────► DynamoDB
+```
+
+```mermaid
+graph TD
+    DB[Databases] --> SQL[SQL Databases]
+    DB --> NoSQL[NoSQL Databases]
+    SQL --> PG[PostgreSQL]
+    SQL --> MY[MySQL]
+    NoSQL --> Doc[Document]
+    NoSQL --> Wide[Wide-Column]
+    NoSQL --> Key[Key-Value]
+    NoSQL --> Search[Search Engine]
+    NoSQL --> Cache[In-Memory]
+    Doc --> MDB[MongoDB]
+    Wide --> CAS[Cassandra]
+    Key --> DDB[DynamoDB]
+    Cache --> RED[Redis]
+    Search --> ES[Elasticsearch]
 ```
 
 ---

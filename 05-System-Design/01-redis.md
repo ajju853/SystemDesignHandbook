@@ -3,6 +3,22 @@
 ## Definition
 Redis is an in-memory data structure store commonly used as a cache due to its sub-millisecond latency, rich data types, and built-in eviction policies.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Redis
+    participant DB as Database
+    Client->>Redis: GET user:123
+    alt Cache Hit
+        Redis-->>Client: Cached data
+    else Cache Miss
+        Redis-->>Client: nil
+        Client->>DB: SELECT * FROM users WHERE id=123
+        DB-->>Client: User data
+        Client->>Redis: SET user:123 data EX 3600
+    end
+```
+
 ## Real-World Example
 **Twitter**: Caches user timelines in Redis. When a user visits their feed, Redis serves the cached timeline with ~1ms latency instead of querying the database. Timeline cache is invalidated when new tweets arrive.
 

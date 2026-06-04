@@ -4,6 +4,19 @@
 
 DevOps is a set of practices, tools, and a cultural philosophy that automates and integrates the processes between software development and IT operations. It emphasizes collaboration, automation, continuous delivery, and short feedback loops to deliver value to users faster and more reliably.
 
+```mermaid
+graph LR
+    Plan --> Code
+    Code --> Build
+    Build --> Test
+    Test --> Release
+    Release --> Deploy
+    Deploy --> Operate
+    Operate --> Monitor
+    Monitor -->|Feedback| Plan
+    DORA[DORA Metrics:<br/>Deploy Frequency<br/>Lead Time<br/>Change Failure Rate<br/>Time to Restore] -.-> Deploy
+```
+
 ## The CALMS Framework
 
 | Pillar | Description |

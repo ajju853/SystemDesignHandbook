@@ -3,6 +3,25 @@
 ## Definition
 MySQL is a popular open-source relational database management system known for its speed, reliability, and ease of use. It's the "M" in the LAMP stack and powers many of the world's largest websites.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Master
+    participant Binlog
+    participant SlaveIO
+    participant RelayLog
+    participant SlaveSQL
+    participant Slave
+    Client->>Master: Write Query
+    Master->>Binlog: Log Event
+    Master-->>Client: OK
+    SlaveIO->>Binlog: Read Events
+    Binlog-->>SlaveIO: Binlog Events
+    SlaveIO->>RelayLog: Write to Relay Log
+    SlaveSQL->>RelayLog: Read Events
+    SlaveSQL->>Slave: Apply Events
+```
+
 ## Real-World Example
 **Uber**: Originally built on MySQL, Uber used MySQL with schemaless (a key-value layer on top of MySQL) to handle their massive scale before migrating to their own DocStore.
 

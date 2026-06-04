@@ -2,6 +2,14 @@
 
 > Build real systems. Each project includes requirements, capacity estimation, API design, database design, high/low level design, scaling strategy, and deployment.
 
+```mermaid
+graph TB
+    subgraph "Project Progression"
+        B["Beginner<br/>URL Shortener"] --> I["Intermediate<br/>Chat, Instagram, Twitter,<br/>Food Delivery"]
+        I --> A["Advanced<br/>Netflix, YouTube, Uber,<br/>Payment, Dropbox, Drive"]
+    end
+```
+
 ## Capstone Guide
 
 | # | Project | Description |

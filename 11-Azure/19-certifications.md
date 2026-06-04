@@ -2,6 +2,26 @@
 
 ## Learning Paths
 
+```mermaid
+graph TD
+    Azure[Azure Certifications] --> Found[Foundational]
+    Azure --> Assoc[Associate]
+    Azure --> Expert[Expert]
+    Found --> AZ900[AZ-900 Fundamentals]
+    Assoc --> AZ104[AZ-104 Administrator]
+    Assoc --> AZ204[AZ-204 Developer]
+    Assoc --> DP203[DP-203 Data Engineer]
+    Assoc --> DP100[DP-100 Data Scientist]
+    Assoc --> AI102[AI-102 AI Engineer]
+    Assoc --> SC200[SC-200 Security Engineer]
+    Assoc --> AZ700[AZ-700 Network Engineer]
+    Expert --> AZ305[AZ-305 Solutions Architect]
+    Expert --> AZ400[AZ-400 DevOps Engineer]
+    Expert --> DP300[DP-300 Database Admin]
+    AZ104 -->|Recommended| AZ305
+    AZ204 --> AZ400
+```
+
 ### Foundational
 | Certification | Code | Duration | Cost | Target |
 |--------------|------|----------|------|--------|

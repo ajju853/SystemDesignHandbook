@@ -2,6 +2,19 @@
 
 > Protect your systems from threats, vulnerabilities, and unauthorized access.
 
+```mermaid
+graph TD
+    subgraph Security Layers
+        AUTH[Authentication<br/>JWT, OAuth, OIDC]
+        AUTHZ[Authorization<br/>RBAC, ABAC]
+        PROT[Data Protection<br/>Encryption, Hashing]
+        INFRA[Infrastructure Security<br/>Rate Limiting, WAF, DDoS]
+    end
+    AUTH --> AUTHZ
+    AUTHZ --> PROT
+    PROT --> INFRA
+```
+
 ## Topics
 
 | # | Topic | Description |

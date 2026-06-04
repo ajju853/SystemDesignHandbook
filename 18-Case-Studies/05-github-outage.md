@@ -3,6 +3,26 @@
 ## Event
 On October 21, 2018, GitHub experienced a 24-hour, 11-minute service degradation affecting all GitHub services including repositories, issues, and GitHub Pages. The root cause was a database infrastructure failure with a cascading impact.
 
+```mermaid
+sequenceDiagram
+    participant Admin
+    participant Switch as Network Switch
+    participant Primary as Primary MySQL
+    participant Replica1 as Replica 1
+    participant Replica2 as Replica 2
+    
+    Admin->>Switch: Planned replacement
+    Switch->>Primary: Cable disconnect during switchover
+    Primary->>Replica1: Replication lag grows (30-60s behind)
+    Primary->>Replica2: Replication lag grows
+    Admin->>Replica1: Auto-failover triggered
+    Replica1-->>Admin: Too far behind - abort
+    Admin->>Replica2: Manual failover initiated
+    Replica2->>Replica2: Data inconsistency detected
+    Admin->>Replica2: pt-table-sync repair
+    Replica2->>Primary: Eventually consistent (next day)
+```
+
 ## Timeline
 - **22:15 UTC (Oct 20)**: Planned maintenance to replace a failing network switch
 - **22:30 UTC**: Network connectivity to primary database was lost

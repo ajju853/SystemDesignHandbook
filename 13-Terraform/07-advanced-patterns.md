@@ -8,6 +8,17 @@ Beyond basic resources and modules, Terraform offers a set of powerful metalingu
 
 Real-world infrastructure is rarely static. You need to create variable numbers of resources, conditionally include features, iterate over complex data structures, and safely refactor configurations over time. These patterns make your code DRY, flexible, and production-ready.
 
+```mermaid
+graph TD
+    Q{Need multiple<br/>resources?} -->|Yes| C{Choose pattern}
+    C -->|Identical,<br/>indexed by number| COUNT[Use count]
+    C -->|Keyed by unique ID,<br/>stable addressing| FOREACH[Use for_each]
+    C -->|Nested blocks from<br/>variable list| DYNAMIC[Use dynamic blocks]
+    COUNT --> D[Optional: local values<br/>for computed expressions]
+    FOREACH --> D
+    D --> E[Refactor with moved blocks]
+```
+
 ## `count` vs `for_each`
 
 ### `count` — Create N resources

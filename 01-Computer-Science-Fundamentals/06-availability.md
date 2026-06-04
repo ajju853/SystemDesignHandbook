@@ -3,6 +3,19 @@
 ## Definition
 Availability is the proportion of time a system is functional and accessible, typically measured as a percentage of uptime over a period. It's a measure of a system's resilience to failure.
 
+```mermaid
+flowchart TB
+    DNS[DNS Route 53] --> R1[Region 1]
+    DNS --> R2[Region 2]
+    DNS --> R3[Region 3]
+    R1 --> AZ1a[AZ 1] --> LB1[Load Balancer] --> ASG1[Auto Scaling Group]
+    R1 --> AZ1b[AZ 2] --> LB1
+    R2 --> AZ2a[AZ 1] --> LB2[Load Balancer] --> ASG2[Auto Scaling Group]
+    R2 --> AZ2b[AZ 2] --> LB2
+    R3 --> AZ3a[AZ 1] --> LB3[Load Balancer] --> ASG3[Auto Scaling Group]
+    R3 --> AZ3b[AZ 2] --> LB3
+```
+
 ## Real-World Example
 **Google Search**: Targets 99.99% availability (four nines). This means less than 53 minutes of downtime per year. Any downtime directly impacts revenue, user trust, and the company's reputation.
 

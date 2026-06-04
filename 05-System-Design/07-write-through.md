@@ -3,6 +3,18 @@
 ## Definition
 Write Through writes data to both the cache and the database synchronously. The write is not considered successful until both writes complete.
 
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Cache
+    participant DB as Database
+    App->>Cache: SET key = data
+    Cache-->>App: OK
+    App->>DB: UPDATE table
+    DB-->>App: OK
+    App-->>Client: Return Success
+```
+
 ## Flow Diagram
 
 ```

@@ -3,6 +3,25 @@
 ## Definition
 Apache Pulsar is a cloud-native, multi-tenant pub/sub messaging system with built-in storage separation. Unlike Kafka, Pulsar separates compute (brokers) from storage (BookKeeper bookies), enabling elastic scaling without data rebalancing.
 
+```mermaid
+graph TD
+    subgraph "Compute Layer (Stateless Brokers)"
+        B1[Broker 1]
+        B2[Broker 2]
+    end
+    subgraph "Storage Layer (BookKeeper Bookies)"
+        BK1[Bookie 1]
+        BK2[Bookie 2]
+        BK3[Bookie 3]
+    end
+    P[Producer] --> B1
+    B1 --> BK1
+    B1 --> BK2
+    C[Consumer] --> B2
+    B2 --> BK2
+    B2 --> BK3
+```
+
 ## Real-World Example
 **Yahoo Mail**: Processes billions of events daily with Pulsar. Yahoo chose Pulsar because it can handle both real-time streaming and queue-style workloads with a single infrastructure.
 

@@ -128,6 +128,30 @@ Merchant App                                 Card Networks
 
 ## Low-Level Design: Charge Flow
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant GW as API Gateway
+    participant PS as Payment Service
+    participant FS as Fraud Service
+    participant Card as Card Processor
+    participant Ledger
+    Client->>GW: POST /v1/charges (idempotency_key)
+    GW->>PS: Process charge
+    PS->>PS: Check idempotency
+    PS->>FS: Risk scoring (async)
+    alt High risk
+        FS-->>PS: Block
+        PS-->>Client: 402 Payment Required
+    else Low risk
+        FS-->>PS: Approve
+        PS->>Card: Authorize (ISO 8583)
+        Card-->>PS: Auth code
+        PS->>Ledger: Double-entry update
+        PS-->>Client: charge.succeeded
+    end
+```
+
 ```
 1. Client POST /v1/charges with idempotency_key
 2. API Gateway checks rate limit (per merchant)

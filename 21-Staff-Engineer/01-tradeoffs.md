@@ -3,6 +3,16 @@
 ## Definition
 Tradeoffs are the essence of system design. Every decision involves balancing competing concerns — there are no "silver bullets."
 
+```mermaid
+graph TB
+    subgraph "Tradeoff Analysis Framework"
+        Req["1. Identify Requirements<br/>(functional + non-functional)"] --> Options["2. List Options (3+)"]
+        Options --> Eval["3. For Each Option:<br/>Optimizes? Sacrifices? Cost?"]
+        Eval --> Rec["4. Recommend & Justify"]
+        Rec --> Rev["5. Define Criteria to Revisit"]
+    end
+```
+
 ## Common Tradeoffs
 
 | Tradeoff | Consideration |

@@ -3,6 +3,24 @@
 ## Definition
 Elasticsearch is a distributed, RESTful search and analytics engine built on Apache Lucene. It provides near real-time full-text search, structured search, analytics, and visualization through Kibana.
 
+```mermaid
+sequenceDiagram
+    participant App
+    participant ES as Elasticsearch
+    participant Lucene
+    participant Shard
+    App->>ES: PUT /index/_doc/1 (JSON doc)
+    ES->>Lucene: Analyze & Index
+    Lucene->>Lucene: Build Inverted Index
+    Lucene->>Shard: Store Document
+    ES-->>App: 201 Created
+    App->>ES: GET /index/_search (query)
+    ES->>Lucene: Search Inverted Index
+    Lucene-->>ES: Matching Docs + Scores
+    ES->>ES: Aggregate & Rank
+    ES-->>App: Search Results
+```
+
 ## Real-World Example
 **GitHub**: Uses Elasticsearch to power code search across 200M+ repositories. When you search for a function name, Elasticsearch returns relevant results in milliseconds by indexing source code content and metadata.
 

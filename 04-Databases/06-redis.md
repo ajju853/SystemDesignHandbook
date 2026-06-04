@@ -3,6 +3,22 @@
 ## Definition
 Redis (Remote Dictionary Server) is an open-source, in-memory data structure store used as a database, cache, message broker, and streaming engine. It supports strings, hashes, lists, sets, sorted sets, bitmaps, hyperloglogs, geospatial indexes, and streams.
 
+```mermaid
+flowchart TD
+    Q[What do you need?] --> Cache{Cache data?}
+    Cache -->|Yes| Str[String / Hash]
+    Cache -->|No| Queue{Message Queue?}
+    Queue -->|Yes| List[List / Stream]
+    Queue -->|No| Rank{Rankings?}
+    Rank -->|Yes| SS[Sorted Set]
+    Rank -->|No| Unique{Unique Items?}
+    Unique -->|Yes| Set[Set]
+    Unique -->|No| Geo{Geospatial?}
+    Geo -->|Yes| GEO[Geospatial]
+    Geo -->|No| Obj{Store Object?}
+    Obj -->|Yes| Hash[Hash]
+```
+
 ## Real-World Example
 **Twitter**: Uses Redis for caching user timelines, rate limiting, and real-time analytics. Redis handles millions of operations per second to serve tweets to 500M+ users with sub-millisecond latency.
 

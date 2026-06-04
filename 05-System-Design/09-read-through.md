@@ -3,6 +3,22 @@
 ## Definition
 Read Through is similar to Cache Aside, but the cache itself is responsible for loading data from the database on a miss. The application code only talks to the cache.
 
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Cache
+    participant DB as Database
+    App->>Cache: GET(key)
+    alt Cache Hit
+        Cache-->>App: Value
+    else Cache Miss
+        Cache->>DB: Load data
+        DB-->>Cache: Data
+        Cache->>Cache: Store & set TTL
+        Cache-->>App: Value
+    end
+```
+
 ## Flow Diagram
 
 ```

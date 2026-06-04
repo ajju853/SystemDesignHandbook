@@ -2,6 +2,25 @@
 
 ## Core Services
 
+```mermaid
+graph TD
+    Azure[Azure Cloud] --> Compute[Compute]
+    Azure --> Storage[Storage]
+    Azure --> Database[Database]
+    Azure --> Networking[Networking]
+    Azure --> AI[AI & ML]
+    Compute --> VM[Virtual Machines]
+    Compute --> AKS[AKS]
+    Compute --> Functions[Functions]
+    Compute --> AppSvc[App Service]
+    Storage --> Blob[Blob Storage]
+    Storage --> AzureSQL[Azure SQL]
+    Database --> CosmosDB[Cosmos DB]
+    Database --> Redis[Cache for Redis]
+    Networking --> VNet[Virtual Network]
+    AI --> OpenAI[Azure OpenAI]
+```
+
 | Category | Service | Description |
 |----------|---------|-------------|
 | Compute | Virtual Machines | VMs |

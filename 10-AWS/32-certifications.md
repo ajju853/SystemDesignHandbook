@@ -2,6 +2,27 @@
 
 ## Learning Paths
 
+```mermaid
+graph TD
+    AWS[AWS Certifications] --> Found[Foundational]
+    AWS --> Assoc[Associate]
+    AWS --> Prof[Professional]
+    AWS --> Spec[Specialty]
+    Found --> CLF[Cloud Practitioner]
+    Assoc --> SAA[Solutions Architect]
+    Assoc --> DVA[Developer]
+    Assoc --> SOA[SysOps Admin]
+    Prof --> SAP[Solutions Architect Pro]
+    Prof --> DOP[DevOps Engineer Pro]
+    SAA -->|Recommended| SAP
+    DVA --> DOP
+    Spec --> Net[Advanced Networking]
+    Spec --> Sec[Security]
+    Spec --> ML[Machine Learning]
+    Spec --> DA[Data Analytics]
+    Spec --> DB[Database]
+```
+
 ### Foundational
 | Certification | Code | Duration | Cost | Target |
 |--------------|------|----------|------|--------|

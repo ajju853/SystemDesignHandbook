@@ -3,6 +3,19 @@
 ## Definition
 Service discovery is the process of automatically detecting network locations of service instances. It enables services to find and communicate with each other without hard-coded addresses.
 
+```mermaid
+sequenceDiagram
+    participant ServiceA as Service A
+    participant Registry as Service Registry
+    participant ServiceB as Service B
+    ServiceB->>Registry: Register: 10.0.0.1:8080
+    Registry-->>ServiceB: OK
+    ServiceA->>Registry: Discover "Service B"
+    Registry-->>ServiceA: 10.0.0.1:8080
+    ServiceA->>ServiceB: Direct request
+    ServiceB-->>ServiceA: Response
+```
+
 ## Patterns
 
 ### Client-Side Discovery

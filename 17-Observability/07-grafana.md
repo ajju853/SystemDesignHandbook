@@ -3,6 +3,42 @@
 ## Definition
 Grafana is an open-source observability platform for visualizing metrics, logs, and traces. It connects to data sources (Prometheus, Elasticsearch, InfluxDB, etc.) and provides dashboards, alerts, and explore functionality.
 
+```mermaid
+graph LR
+    subgraph "Data Sources"
+        PRO[Prometheus<br/>Metrics]
+        ES[Elasticsearch<br/>Logs]
+        LOK[Loki<br/>Logs]
+        TEM[Tempo<br/>Traces]
+        INF[InfluxDB<br/>Metrics]
+    end
+    subgraph "Grafana"
+        DB[Dashboards]
+        AL[Unified Alerting]
+        EX[Explore]
+        AN[Annotations]
+    end
+    subgraph "Outputs"
+        PG[PagerDuty]
+        SL[Slack]
+        EM[Email]
+        WH[Webhook]
+    end
+    PRO --> DB
+    ES --> DB
+    LOK --> DB
+    TEM --> DB
+    INF --> DB
+    PRO --> EX
+    LOK --> EX
+    TEM --> EX
+    DB --> AL
+    AL --> PG
+    AL --> SL
+    AL --> EM
+    AL --> WH
+```
+
 ## Key Features
 
 | Feature | Description |

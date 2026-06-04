@@ -3,6 +3,18 @@
 ## Definition
 Durability is the guarantee that once a transaction is committed, it will remain committed even in the event of power loss, crashes, or errors. The data is permanently stored and recoverable.
 
+```mermaid
+flowchart TB
+    W[Write Request] --> AM[Application Memory - Volatile]
+    AM -->|fsync| OS[OS Page Cache - Still Volatile]
+    OS -->|fsync| DB[Disk Write Buffer - Battery Backed]
+    DB --> MP[Magnetic Platter / Flash - Durable]
+    style AM fill:#e74c3c,color:#fff
+    style OS fill:#e67e22,color:#fff
+    style DB fill:#f1c40f,color:#000
+    style MP fill:#2ecc71,color:#fff
+```
+
 ## Real-World Example
 **AWS S3**: Designed for 99.999999999% durability (11 nines). If you store 10 billion objects, you can expect to lose one object every 10,000 years. This is achieved through automatic replication across multiple facilities.
 

@@ -3,6 +3,29 @@
 ## Definition
 The Open Systems Interconnection (OSI) model is a conceptual framework that standardizes the functions of a communication system into seven abstraction layers. Each layer serves its upper layer and is served by its lower layer.
 
+```mermaid
+flowchart TB
+    L7["L7 - Application (HTTP, FTP, SMTP, DNS)"] --> L6["L6 - Presentation (Encryption, Compression)"]
+    L6 --> L5["L5 - Session (Auth, Checkpoints)"]
+    L5 --> L4["L4 - Transport (TCP, UDP)"]
+    L4 --> L3["L3 - Network (IP, Routing)"]
+    L3 --> L2["L2 - Data Link (Ethernet, WiFi)"]
+    L2 --> L1["L1 - Physical (Cables, Radio)"]
+    subgraph Sender
+        L7
+        L6
+        L5
+    end
+    subgraph Transport
+        L4
+        L3
+    end
+    subgraph Physical
+        L2
+        L1
+    end
+```
+
 ## The 7 Layers
 
 ```

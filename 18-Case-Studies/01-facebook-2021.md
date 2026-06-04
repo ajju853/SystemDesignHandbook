@@ -1,5 +1,17 @@
 # Facebook 2021 Outage
 
+```mermaid
+timeline
+    title Facebook 2021 Outage – BGP Cascade
+    15:40 UTC : BGP routes withdrawn for Facebook prefixes
+    15:45 : DNS resolvers worldwide can&#39;t resolve facebook.com
+    15:50 : Internal traffic to data centers fails
+    16:00 : Engineers locked out (VPN, DNS broken)
+    16:30 : Physical data center access required
+    21:00 : BGP routes restored
+    22:45 : Full recovery
+```
+
 ## Timeline (Oct 4, 2021)
 - **15:40 UTC**: BGP routes withdrawn for Facebook prefixes
 - **15:45**: DNS resolvers worldwide can't resolve facebook.com

@@ -3,6 +3,27 @@
 ## Event
 On June 8, 2021, Fastly's CDN experienced a 59-minute global outage, taking down major websites including Amazon, Reddit, Twitch, The Guardian, The New York Times, Spotify, Pinterest, and dozens of other major services. It was one of the largest CDN outages in history.
 
+```mermaid
+sequenceDiagram
+    participant Customer
+    participant Config as Config System
+    participant VCL as VCL Interpreter
+    participant Edge as Edge Servers (80+ PoPs)
+    participant LB as Load Balancers
+    
+    Customer->>Config: Push valid-but-edge-case config
+    Config->>VCL: Deploy config to all servers
+    VCL->>Edge: Process config - latent bug triggered
+    Edge->>Edge: Segmentation fault - crash
+    LB->>Edge: Server removed from pool
+    LB->>Edge: Traffic redistributed to healthy servers
+    Edge->>Edge: Healthy servers process same config - also crash
+    Note over Edge,LB: All PoPs crash within minutes
+    Customer->>Config: Disable problematic code path (10:17 UTC)
+    Config->>Edge: Servers restart with fix
+    Edge->>Edge: Gradual recovery (10:46 UTC)
+```
+
 ## Timeline
 - **09:47 UTC**: A customer pushed a valid-but-edge-case configuration change
 - **09:48 UTC**: The configuration triggered a previously undiscovered software bug

@@ -146,6 +146,26 @@ CREATE TABLE permissions (
 
 ## Low-Level Design: Operational Transformation
 
+```mermaid
+sequenceDiagram
+    participant A as Client A
+    participant Server as OT Service
+    participant Log as Op Log (Kafka)
+    participant B as Client B
+    A->>Server: insert "H" at pos 0 (rev 1)
+    Server->>Log: Append operation
+    Server->>Server: Apply op, server rev=2
+    Server-->>A: ACK
+    Server-->>B: Broadcast: insert "H" at 0
+    B->>Server: insert "I" at pos 0 (rev 1)
+    Server->>Server: Transform B's op: pos 0 → pos 1
+    Server->>Log: Append transformed op
+    Server->>Server: Apply, server rev=3
+    Server-->>B: ACK
+    Server-->>A: Broadcast: insert "I" at 1
+    Note over A,B: Result: "HI" (no conflict)
+```
+
 ```
 Two users edit the same document:
 

@@ -113,6 +113,25 @@ CREATE TABLE comments (
 
 ## Low-Level Design: Video Processing
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant US as Upload Service
+    participant GCS as GCS Storage
+    participant PubSub
+    participant TC as Transcoder
+    participant CDN
+    participant Search as Elasticsearch
+    Client->>US: Resumable upload
+    US->>GCS: Store raw video
+    US->>PubSub: Upload complete event
+    PubSub->>TC: Trigger transcoding
+    TC->>GCS: Transcode to 6 qualities
+    TC->>CDN: Update origin
+    TC->>Search: Update search index
+    TC-->>Client: Processing complete
+```
+
 ```
 1. Client uploads via resumable upload API
 2. Raw video stored in GCS (multi-region)

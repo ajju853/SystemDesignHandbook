@@ -10,6 +10,18 @@ Consistent naming conventions for Terraform resources, variables, outputs, files
 
 At scale, ambiguous names cause confusion, merge conflicts, and accidental destruction. A team standard eliminates guesswork and makes code reviews faster.
 
+```mermaid
+graph LR
+    V[terraform validate] --> F[terraform fmt -check]
+    F --> P[terraform plan]
+    P --> R[Review Plan]
+    R -->|Approve| A[terraform apply]
+    A --> M[Monitor & Verify]
+    P -->|Cost Estimate| C[Infracost]
+    P -->|Policy Check| S[Sentinel/OPA]
+    S -->|Pass| R
+```
+
 ### Implementation
 
 ```hcl

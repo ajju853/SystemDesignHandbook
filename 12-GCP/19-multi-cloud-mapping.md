@@ -3,6 +3,36 @@
 ## Overview
 A comprehensive mapping of equivalent services across AWS, Azure, and GCP. Essential for multi-cloud strategies, migrations, and certification studies.
 
+```mermaid
+graph LR
+    subgraph AWS
+        EC2[EC2]
+        S3[S3]
+        RDS[RDS]
+        Lambda
+        EKS[EKS]
+    end
+    subgraph Azure
+        VM[Virtual Machines]
+        Blob[Blob Storage]
+        SQL[Azure SQL]
+        AFunc[Functions]
+        AKS
+    end
+    subgraph GCP
+        CE[Compute Engine]
+        CStore[Cloud Storage]
+        CSQL[Cloud SQL]
+        CFunc[Cloud Functions]
+        GKE
+    end
+    EC2 --- VM --- CE
+    S3 --- Blob --- CStore
+    RDS --- SQL --- CSQL
+    Lambda --- AFunc --- CFunc
+    EKS --- AKS --- GKE
+```
+
 ## Compute
 
 | Service | AWS | Azure | GCP |

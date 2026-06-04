@@ -16,6 +16,22 @@ Linux is the backbone of modern cloud infrastructure. This module covers everyth
 | 8 | **Security Hardening** — sudoers, SSH, SELinux, auditd | [08-security-hardening.md](./08-security-hardening.md) |
 | 9 | **Containerization** — cgroups, namespaces, OverlayFS, seccomp | [09-containerization.md](./09-containerization.md) |
 
+```mermaid
+graph TD
+    LB[Linux Basics] --> PM[Process Management]
+    LB --> MM[Memory Management]
+    LB --> FS[File Systems]
+    LB --> NW[Networking]
+    PM --> SS[Shell Scripting]
+    MM --> PT[Performance Tuning]
+    FS --> PT
+    NW --> PT
+    NW --> SH[Security Hardening]
+    SS --> CT[Containerization]
+    PT --> CT
+    SH --> CT
+```
+
 ## Prerequisites
 
 - Basic familiarity with the command line

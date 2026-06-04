@@ -3,6 +3,19 @@
 ## Definition
 Vertical scaling (scaling up/down) means increasing the capacity of a single machine by adding more resources — CPU, RAM, storage, or network bandwidth.
 
+```mermaid
+flowchart LR
+    subgraph Before
+        B[4 Cores / 16 GB RAM]
+    end
+    subgraph After
+        A[32 Cores / 128 GB RAM]
+    end
+    B --> A
+    A --> C[Handles 100K users]
+    B --> D[Handles 8K users]
+```
+
 ## Real-World Example
 **Database Servers**: Many production PostgreSQL deployments run on a single powerful machine with 64+ cores, 512GB+ RAM, and NVMe SSDs. Companies often start with vertical scaling before adding read replicas.
 

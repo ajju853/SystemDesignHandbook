@@ -2,6 +2,18 @@
 
 > Master the system design interview with structured practice across difficulty levels.
 
+```mermaid
+graph TB
+    subgraph "Interview Problem Solving Framework"
+        R["1. Requirements<br/>(3 min)"] --> C["2. Capacity Estimation<br/>(5 min)"]
+        C --> A["3. API Design<br/>(5 min)"]
+        A --> D["4. Database Design<br/>(5 min)"]
+        D --> H["5. High-Level Design<br/>(10 min)"]
+        H --> L["6. Low-Level Design<br/>(10 min)"]
+        L --> S["7. Scaling & Bottlenecks<br/>(5 min)"]
+    end
+```
+
 ## Track by Difficulty
 
 ### 🟢 Beginner

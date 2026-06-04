@@ -12,6 +12,22 @@ Linux networking provides the TCP/IP stack, routing, firewalling, and virtualiza
 - Network namespaces are the foundation of container networking (Docker, Kubernetes pods)
 - Load balancers, service meshes, and SDN all extend Linux networking primitives
 
+```mermaid
+sequenceDiagram
+    participant Host
+    participant NS_Red as netns red
+    participant NS_Blue as netns blue
+    Host->>Host: ip netns add red
+    Host->>Host: ip netns add blue
+    Host->>Host: ip link add veth-red ... veth-blue
+    Host->>NS_Red: ip link set veth-red netns red
+    Host->>NS_Blue: ip link set veth-blue netns blue
+    Host->>NS_Red: ip addr add 10.0.0.1/24 dev veth-red
+    Host->>NS_Blue: ip addr add 10.0.0.2/24 dev veth-blue
+    NS_Red->>NS_Blue: ping 10.0.0.2
+    NS_Blue-->>NS_Red: pong
+```
+
 ## Key Concepts
 
 ### Interface Configuration

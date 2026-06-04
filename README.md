@@ -6,9 +6,64 @@
 
 ## The Learning Path
 
+```mermaid
+graph TB
+    subgraph "Foundations"
+        L1[03-Linux: Processes, Memory, Networking]
+        CS[01-CS Fundamentals: CAP, Scalability]
+        NET[02-Networking: TCP/IP, HTTP, DNS]
+        DB[04-Databases: SQL, NoSQL, Sharding]
+    end
+    
+    subgraph "Core Concepts"
+        SD[05-System Design: Caching, Queues]
+        DS[06-Distributed Systems: Consensus]
+        MS[07-Microservices: DDD, Circuit Breaker]
+    end
+    
+    subgraph "Cloud & DevOps"
+        AWS[10-AWS: 28+ Services]
+        AZ[11-Azure: 18+ Services]
+        GCP[12-GCP: 17+ Services]
+        TF[13-Terraform: IaC]
+        DOCKER[08-Docker]
+        K8S[09-Kubernetes]
+        DEV[14-DevOps: CI/CD]
+        SRE[15-SRE: Reliability]
+    end
+    
+    subgraph "Advanced"
+        SEC[16-Security]
+        OBS[17-Observability]
+    end
+    
+    subgraph "Application"
+        CASE[18-Case Studies]
+        PROJ[19-Projects: Hands-On]
+        INT[20-Interview Prep]
+        STAFF[21-Staff Engineer: Tradeoffs, RFCs]
+    end
+    
+    L1 --> CS --> NET --> DB
+    CS --> SD --> DS --> MS
+    DB --> SD
+    SD --> AWS --> TF --> DEV
+    SD --> AZ
+    SD --> GCP
+    MS --> DOCKER --> K8S --> DEV
+    DEV --> SRE
+    AWS --> SEC --> OBS
+    AZ --> SEC
+    GCP --> SEC
+    OBS --> CASE --> INT
+    SRE --> CASE
+    SEC --> CASE
+    CASE --> PROJ --> INT --> STAFF
 ```
-                       ┌─────────────────────────────────────┐
-                       │   21-Staff Engineer                 │
+
+```
+                        ┌─────────────────────────────────────┐
+                        │   21-Staff Engineer                 │
                        │   Tradeoffs, RFCs, Chaos Engineering │
                        └─────────────────────────────────────┘
                                        │

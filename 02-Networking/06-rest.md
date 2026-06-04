@@ -3,6 +3,20 @@
 ## Definition
 REST is an architectural style for designing networked applications. It uses HTTP methods to perform CRUD operations on resources identified by URLs, with representations (JSON/XML) returned in responses.
 
+```mermaid
+flowchart LR
+    subgraph CRUD[CRUD Operations]
+        C[Create] --> POST[POST /users - 201]
+        R[Read] --> GET[GET /users/id - 200]
+        U[Update] --> PUT[PUT /users/id - 200]
+        D[Delete] --> DEL[DELETE /users/id - 204]
+    end
+    POST --> Res[User Resource JSON]
+    GET --> Res
+    PUT --> Res
+    DEL --> Res
+```
+
 ## Real-World Example
 **Twitter API**: Resources like tweets, users, timelines are exposed as RESTful endpoints. `GET /users/{id}` returns a user, `POST /tweets` creates a tweet, `DELETE /tweets/{id}` deletes one.
 

@@ -3,6 +3,16 @@
 ## Definition
 Amazon S3 (Simple Storage Service) is an object storage service offering industry-leading scalability, data availability, security, and performance. It's designed for 99.999999999% durability (11 nines).
 
+```mermaid
+graph TD
+    Object[Object Uploaded] --> Split[Split into Chunks]
+    Split --> Replicate[Replicate Across 3+ AZs]
+    Replicate --> Parity[Compute Parity for Reconstruction]
+    Parity --> Verify[Background Integrity Check CRC]
+    Verify --> Repair[Auto-repair from Redundant Copy]
+    Repair --> Durable[99.999999999% Durability]
+```
+
 ## Key Features
 
 - **11 nines durability** — Automatically replicates across >= 3 AZs

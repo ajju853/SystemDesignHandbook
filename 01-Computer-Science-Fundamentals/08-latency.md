@@ -3,6 +3,19 @@
 ## Definition
 Latency is the time taken for a request to travel from the sender to the receiver and back (round-trip time), or the time taken to process a single operation. In system design, it's usually measured as the delay between initiating an operation and seeing the result.
 
+```mermaid
+flowchart LR
+    C[Client] --> DNS[DNS Resolution 10-50ms]
+    DNS --> TCP[TCP Handshake 10-30ms]
+    TCP --> TLS[TLS Negotiation 20-50ms]
+    TLS --> LB[Load Balancer 1-5ms]
+    LB --> APP[App Processing 20-100ms]
+    APP --> DB[Database Query 5-50ms]
+    DB --> SR[Serialize Response 1-5ms]
+    SR --> RT[Response Transfer 10-30ms]
+    RT --> C
+```
+
 ## Real-World Example
 **Google Search**: Aims for sub-100ms search results. Every 100ms of latency costs 1% in user engagement. Amazon found that every 100ms of latency costs 1% in sales.
 

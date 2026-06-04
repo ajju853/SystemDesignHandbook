@@ -9,6 +9,20 @@
 | **MTBF** (Mean Time Between Failures) | Average time between failures |
 | **MTTR** (Mean Time To Recover) | Average recovery time |
 
+```mermaid
+graph TB
+    subgraph "DR Tier Selection"
+        RTO["RTO Requirement"] --> Tier
+        RPO["RPO Requirement"] --> Tier
+        Cost["Budget"] --> Tier
+        Tier["Choose DR Tier"] --> Tier1["Tier 1: Active-Active<br/>RTO <1 min, RPO Zero"]
+        Tier --> Tier2["Tier 2: Active-Passive Sync<br/>RTO <15 min, RPO <5 min"]
+        Tier --> Tier3["Tier 3: Warm Standby<br/>RTO <1 hr, RPO <1 hr"]
+        Tier --> Tier4["Tier 4: Cold Standby<br/>RTO <1 day, RPO <1 day"]
+        Tier --> Tier5["Tier 5: Backup Only<br/>RTO >1 day, RPO >1 day"]
+    end
+```
+
 ## DR Tiers
 
 | Tier | RTO | RPO | Cost | Strategy |

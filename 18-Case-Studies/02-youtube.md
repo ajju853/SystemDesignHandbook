@@ -3,6 +3,17 @@
 ## Overview
 YouTube serves 2B+ monthly active users, processing 500+ hours of video uploaded every minute.
 
+```mermaid
+graph LR
+    Upload[Video Upload] --> Transcode[Transcoding Pipeline<br/>Chunked Parallel]
+    Transcode --> Storage[(Google Cloud Storage)]
+    Storage --> CDN[Google Global Cache CDN]
+    CDN --> Client[Client Device<br/>HLS/DASH Adaptive Bitrate]
+    Storage --> Meta[(Bigtable<br/>Video Metadata)]
+    Meta --> Rec[Recommendation Engine<br/>Deep Neural Networks]
+    Rec --> Client
+```
+
 ## Architecture
 
 ```

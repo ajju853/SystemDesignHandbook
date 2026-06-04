@@ -12,6 +12,23 @@ Shell scripting (primarily Bash) is the art of automating command-line tasks by 
 - Emergency incident response demands quick ad-hoc scripting
 - Understanding shell scripting is prerequisite for understanding tools like `~/.bashrc`, init scripts, and cron jobs
 
+```mermaid
+flowchart TD
+    Start[Script Start] --> Args[Parse Arguments]
+    Args --> Cond{Condition?}
+    Cond -->|match| Action[Execute Action]
+    Cond -->|no match| Error[Print Usage]
+    Action --> Loop{Loop?}
+    Loop -->|yes| Process[Process Items]
+    Process --> Loop
+    Loop -->|no| Func[Call Functions]
+    Func --> Status{Exit Status}
+    Status -->|0| End[Script End]
+    Status -->|non-zero| Trap{Trap Handler}
+    Trap --> Cleanup[Cleanup]
+    Cleanup --> End
+```
+
 ## Key Concepts
 
 ### Variables and Parameter Expansion

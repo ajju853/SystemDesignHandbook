@@ -12,6 +12,22 @@ Terraform state is a JSON file that maps your configuration to real-world infras
 - **Disaster recovery**: Lost state = orphaned resources
 - **CI/CD**: Automated pipelines need reliable state access
 
+```mermaid
+graph TD
+    subgraph Local
+        L[terraform.tfstate<br/>on disk]
+    end
+    subgraph Remote with Locking
+        S3[S3 Bucket] --> DDB[DynamoDB<br/>Lock Table]
+    end
+    TF[Terraform CLI] --> L
+    TF --> S3
+    Team1[Team Member 1] --> S3
+    Team2[Team Member 2] --> S3
+    DDB -.->|prevents concurrent writes| Team1
+    DDB -.->|prevents concurrent writes| Team2
+```
+
 ## Local State
 
 ```bash

@@ -121,6 +121,32 @@ CREATE TABLE shares (
 
 ## Low-Level Design: File Sync (Delta Protocol)
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Sync as Sync Service
+    participant Meta as Metadata Service
+    participant Chunk as Chunk Service
+    participant S3
+    Client->>Sync: Delta request (cursor)
+    Sync->>Meta: Get changed files
+    Meta-->>Sync: Delta list
+    Sync-->>Client: Changes
+    alt File changed locally
+        Client->>Sync: Upload file
+        Sync->>Chunk: Split into 4MB blocks
+        Chunk->>Chunk: Compute SHA256 per block
+        Chunk->>S3: Upload only new blocks
+        Chunk-->>Sync: Block references
+        Sync->>Meta: Update metadata
+    else File changed on server
+        Sync->>Client: Changed files list
+        Client->>Chunk: Fetch blocks
+        Chunk->>S3: Get block data
+        S3-->>Client: File reconstructed
+    end
+```
+
 ```
 1. Client sends cursor (last sync token)
 2. Server returns delta: files changed since cursor

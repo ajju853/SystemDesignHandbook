@@ -3,6 +3,21 @@
 ## Definition
 OpenID Connect (OIDC) is an identity layer on top of OAuth 2.0 that allows clients to verify user identity. OAuth 2.0 provides authorization; OIDC adds authentication.
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant App as Client App
+    participant IdP as Identity Provider
+    User->>App: Login request
+    App->>IdP: Authorization request + scope=openid
+    IdP->>User: Authenticate
+    User->>IdP: Credentials
+    IdP->>App: ID Token + Access Token
+    App->>IdP: /userinfo endpoint
+    IdP->>App: User claims
+    App->>User: Authenticated session
+```
+
 ## Key Addition: ID Token
 
 JWT containing user identity claims:

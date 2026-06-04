@@ -3,6 +3,21 @@
 ## Definition
 AWS Lambda runs code without provisioning servers. You pay only for compute time (per-millisecond).
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant APIGW as API Gateway
+    participant Lambda
+    participant DynamoDB
+    participant S3
+    Client->>APIGW: HTTP Request
+    APIGW->>Lambda: Invoke Function
+    Lambda->>DynamoDB: Query / Write Data
+    Lambda->>S3: Store Object
+    Lambda-->>APIGW: Return Response
+    APIGW-->>Client: HTTP Response
+```
+
 ## Lambda Anatomy
 
 ```

@@ -17,6 +17,26 @@
 - High toil leads to burnout, pager fatigue, and turnover
 - Every manual step is a potential failure point and delay in incident response
 
+```mermaid
+graph TD
+    Identify[Identify Toil] --> Measure[Measure Hours / Week]
+    Measure --> Budget{Exceeds 50%<br/>of SRE time?}
+    Budget -->|Yes| Prioritize[Prioritize Automation]
+    Budget -->|No| Monitor[Monitor Weekly Trend]
+    Prioritize --> Automate[Automate Top 3 Items]
+    Automate --> Level[Automation Maturity<br/>L0 Manual → L5 Predictive]
+    Level --> Eliminate[Eliminate Toil]
+    Eliminate --> Measure
+    subgraph Automation Examples
+        Certs[Cert Rotation<br/>cert-manager]
+        Deploy[Code Deploy<br/>CI/CD Pipeline]
+        Patch[Server Patching<br/>Ansible]
+    end
+    Automate --> Certs
+    Automate --> Deploy
+    Automate --> Patch
+```
+
 ## Implementation
 
 ### Measuring Toil

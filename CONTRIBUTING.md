@@ -9,6 +9,18 @@ Thank you for contributing to System Design Mastery!
 - Link between related topics using relative paths
 - Keep the learning path in mind — beginners should be able to follow sequentially
 
+## Contribution Workflow
+
+```mermaid
+graph LR
+    Fork[Fork Repository] --> Branch[Create Feature Branch]
+    Branch --> Edit[Edit / Add Content]
+    Edit --> Review[Self-Review: Format, Links, Diagrams]
+    Review --> PR[Open Pull Request]
+    PR --> CI[CI Checks: Format Validation]
+    CI --> Merge[Merge to Main]
+```
+
 ## Adding a Topic
 1. Create a new markdown file in the appropriate module folder
 2. Update the module's README.md to include the new topic

@@ -2,6 +2,18 @@
 
 > Advanced concepts for building systems that span multiple machines.
 
+```mermaid
+graph TD
+    Consensus[Consensus Protocols] --> PAXOS[Paxos]
+    Consensus --> RAFT[Raft]
+    Coordination[Coordination Services] --> ZK[ZooKeeper]
+    Coordination --> ETCD[etcd]
+    LE[Leader Election] --> ZK
+    DL[Distributed Locking] --> ZK
+    SD[Service Discovery] --> ETCD
+    SD --> CONSUL[Consul]
+```
+
 ## Topics
 
 | # | Topic | Description |

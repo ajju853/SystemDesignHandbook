@@ -11,6 +11,18 @@ A postmortem is a written record of an incident that details what happened, why 
 - Written postmortems are searchable knowledge bases for future responders
 - Google's data shows most outages are caused by system complexity, not individual negligence
 
+```mermaid
+graph LR
+    Incident[Incident Occurs] --> Mitigate[Mitigate & Restore]
+    Mitigate --> Timeline[Timeline Reconstruction]
+    Timeline --> RCA[Root Cause Analysis<br/>5 Whys]
+    RCA --> Factors[Contributing Factors]
+    Factors --> Actions[Action Items<br/>Owner + Due Date]
+    Actions --> Learn[Organizational Learning]
+    Learn -->|Prevent Recurrence| Incident
+    Actions -->|Track to Completion| Ticket[Jira / Linear]
+```
+
 ## Implementation
 
 ### Google's Postmortem Philosophy

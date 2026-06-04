@@ -3,6 +3,15 @@
 ## Definition
 Browser caching stores web resources (HTML, CSS, JS, images) locally on the user's device. When a user revisits a page, resources can be loaded from the local cache instead of re-downloading.
 
+```mermaid
+graph TD
+    Request --> SW[Service Worker Cache<br/>Persistent, programmable]
+    SW --> MEM[Memory Cache<br/>Fast, cleared on tab close]
+    MEM --> DISK[Disk Cache<br/>Slower, persists between sessions]
+    DISK --> PUSH[Push Cache<br/>HTTP/2, very short-lived]
+    PUSH --> Network
+```
+
 ## Real-World Example
 **Google Chrome**: Caches 80%+ of resources locally. A returning visit to a news site loads ~100KB over network instead of 2MB — the rest comes from cache.
 

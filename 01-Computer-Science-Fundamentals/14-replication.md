@@ -3,6 +3,26 @@
 ## Definition
 Replication is the process of copying and maintaining data across multiple nodes (servers) to ensure redundancy, fault tolerance, and high availability. Replicated data can be used for read scaling, disaster recovery, and geographic distribution.
 
+```mermaid
+flowchart TB
+    subgraph SL[Single-Leader]
+        C1[Client] --> P[Primary Write]
+        P --> R1[Replica Read]
+        P --> R2[Replica Read]
+    end
+    subgraph ML[Multi-Leader]
+        L1[Leader A US] <--> L2[Leader B EU]
+        L1 --> RL1[Replicas]
+        L2 --> RL2[Replicas]
+    end
+    subgraph LL[Leaderless]
+        C3[Client] --> N1[Node A]
+        C3 --> N2[Node B]
+        C3 --> N3[Node C]
+        N1 <--> N2 <--> N3
+    end
+```
+
 ## Real-World Example
 **Google Docs**: Uses operational transformation (OT) for real-time collaborative replication. When you type, your changes are replicated to Google's servers and then to all other collaborators' devices within milliseconds, with conflict resolution handled automatically.
 

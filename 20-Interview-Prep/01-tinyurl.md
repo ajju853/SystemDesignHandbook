@@ -12,6 +12,17 @@ Design a URL shortening service like TinyURL.
 
 ## Solution Framework
 
+```mermaid
+graph TB
+    Client["User/Client"] -->|POST /shorten| WriteAPI["Write API"]
+    Client -->|GET /{code}| ReadAPI["Read API"]
+    WriteAPI --> Gen["Short Code Generator<br/>(Base62 + Snowflake)"]
+    Gen --> DB[("PostgreSQL")]
+    ReadAPI --> Cache[("Redis Cache")]
+    Cache -->|Miss| DB
+    DB -->|"301 Redirect"| Client
+```
+
 ### Capacity
 ```
 Writes: 100M/month = ~38/s

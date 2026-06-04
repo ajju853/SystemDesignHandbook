@@ -3,6 +3,29 @@
 ## Definition
 A Distributed Denial-of-Service (DDoS) attack overwhelms a target with traffic from multiple sources, making it unavailable to legitimate users.
 
+```mermaid
+graph TD
+    subgraph "Attack Types"
+        L3[L3/L4 Volumetric<br/>UDP Flood, SYN Flood]
+        L7[L7 Application<br/>HTTP Flood, Slowloris]
+        PROTO[Protocol Exhaustion<br/>TCP State Table]
+    end
+    subgraph "Defense Layers"
+        AB[1. Absorb<br/>Large capacity, Anycast]
+        DET[2. Detect<br/>Anomaly detection]
+        FIL[3. Filter<br/>WAF, Rate limiting]
+        SCR[4. Scrub<br/>Scrubbing centers]
+        MIG[5. Migrate<br/>CDN, Change IP]
+    end
+    L3 --> AB
+    L7 --> FIL
+    PROTO --> DET
+    AB --> DET
+    DET --> FIL
+    FIL --> SCR
+    SCR --> MIG
+```
+
 ## Attack Types
 
 | Layer | Attack Type | Example |

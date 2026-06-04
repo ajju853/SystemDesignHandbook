@@ -12,6 +12,17 @@ Modules are the primary mechanism for:
 - **Consistency** — Standard VPC, database, or Kubernetes module used everywhere
 - **Versioning** — Pin to specific module versions for stability
 
+```mermaid
+graph TD
+    Root[Root Module] --> VPC[VPC Module]
+    Root --> EC2[EC2 Module]
+    Root --> RDS[RDS Module]
+    VPC -->|subnet_ids| EC2
+    VPC -->|subnet_ids| RDS
+    VPC -->|vpc_id| EC2
+    VPC -->|vpc_id| RDS
+```
+
 ## Module Structure
 
 ```

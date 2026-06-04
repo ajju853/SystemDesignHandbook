@@ -3,6 +3,24 @@
 ## Definition
 Distributed locking ensures mutual exclusion across multiple processes running on different machines. Only one process can hold the lock at any time.
 
+```mermaid
+sequenceDiagram
+    participant LS as Lock Service
+    participant CA as Client A
+    participant CB as Client B
+    participant RS as Resource Store
+    CA->>LS: Acquire lock
+    LS-->>CA: Token: 5 (granted)
+    Note over CA: Client A delayed (GC pause)
+    CB->>LS: Acquire lock
+    LS-->>CB: Token: 6 (granted)
+    CB->>RS: Write with token 6
+    RS-->>CB: Accepted
+    Note over CA: Client A wakes up
+    CA->>RS: Write with token 5
+    RS-->>CA: Rejected (token 5 < 6)
+```
+
 ## Why Redlock Fails
 Martin Kleppmann's analysis: Redlock has no fencing mechanism. A delayed lock holder can corrupt shared state.
 

@@ -3,6 +3,25 @@
 ## Overview
 Spotify serves 500M+ users with a backend composed of 1200+ microservices, emphasizing squad autonomy and event-driven communication.
 
+```mermaid
+graph LR
+    Client[Client App<br/>Most logic on client] --> Apollo[Apollo API Gateway]
+    Apollo --> Playlist[Playlist Service<br/>CRDT-based offline sync]
+    Apollo --> Discovery[Discovery Service<br/>ML Recommendations]
+    Apollo --> Social[Social Service]
+    Apollo --> Search[Search Service]
+    Apollo --> Ads[Ads Service]
+    Apollo --> Podcast[Podcast Service<br/>Anchor/Megaphone]
+    Playlist --> DB[(Cassandra + PostgreSQL)]
+    Discovery --> DB
+    Social --> DB
+    subgraph EventBus[Event Bus]
+        Kafka[Apache Kafka<br/>Pub/Sub]
+    end
+    Playlist -.->|events| Kafka
+    Discovery -.->|events| Kafka
+```
+
 ## Architecture
 
 ```

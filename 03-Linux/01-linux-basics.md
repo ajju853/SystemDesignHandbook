@@ -11,6 +11,21 @@ Linux is a Unix-like open-source operating system kernel. Its user-space tools (
 - Configuration management (Ansible, Puppet), CI/CD agents, and monitoring agents all execute Linux commands
 - Understanding the filesystem and basic commands is the foundation for debugging any production issue
 
+```mermaid
+graph TD
+    Root[/] --> bin[/bin]
+    Root --> etc[/etc]
+    Root --> home[/home]
+    Root --> proc[/proc]
+    Root --> tmp[/tmp]
+    Root --> usr[/usr]
+    Root --> var[/var]
+    var --> log[/var/log]
+    var --> spool[/var/spool]
+    usr --> usrbin[/usr/bin]
+    usr --> usrlib[/usr/lib]
+```
+
 ## Key Concepts
 
 ### File System Hierarchy Standard (FHS)

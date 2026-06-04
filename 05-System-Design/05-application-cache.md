@@ -3,6 +3,22 @@
 ## Definition
 Application-level caching stores data in the application's memory space, avoiding network calls and database queries for frequently accessed data.
 
+```mermaid
+graph TD
+    subgraph "Application Instance"
+        L1["L1: In-Process Cache<br/>Guava, Caffeine<br/>~20-50ns access"]
+    end
+    subgraph "Distributed Layer"
+        L2["L2: Distributed Cache<br/>Redis, Memcached<br/>~1-5ms access"]
+    end
+    subgraph "Database Layer"
+        L3["L3: Database<br/>PostgreSQL, MySQL<br/>~10-100ms"]
+    end
+    Request --> L1
+    L1 --> L2
+    L2 --> L3
+```
+
 ## Real-World Example
 **Google Search**: Caches search result snippets and autocomplete suggestions in memory. The in-memory cache handles 80%+ of queries with sub-millisecond latency before hitting the search index.
 

@@ -3,6 +3,27 @@
 ## Definition
 gRPC is a high-performance, open-source RPC (Remote Procedure Call) framework developed by Google. It uses Protocol Buffers for serialization and HTTP/2 for transport, enabling efficient communication between services.
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    C->>S: Unary: GetUser(Request)
+    S-->>C: Response(User)
+    C->>S: Server Streaming: ListUsers(Request)
+    S-->>C: Stream User 1
+    S-->>C: Stream User 2
+    S-->>C: Stream User 3
+    C->>S: Client Streaming: UpdateUser(Stream)
+    C->>S: Update 1
+    C->>S: Update 2
+    S-->>C: Response(User)
+    C->>S: Bidirectional: Chat(Stream)
+    C->>S: Message 1
+    S-->>C: Message 2
+    C->>S: Message 3
+    S-->>C: Message 4
+```
+
 ## Real-World Example
 **Netflix**: Uses gRPC for internal microservices communication. Over 500+ services communicate via gRPC, handling billions of requests per day with low latency and high throughput.
 

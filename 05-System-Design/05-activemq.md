@@ -3,6 +3,22 @@
 ## Definition
 Apache ActiveMQ is a popular open-source message broker written in Java that fully supports the Java Message Service (JMS) specification. It provides reliable, asynchronous messaging between distributed applications with support for both point-to-point and publish-subscribe models.
 
+```mermaid
+graph TD
+    subgraph "Region 1"
+        P1[Producer] --> BA[Broker A]
+    end
+    subgraph "Hub"
+        BB[Broker B]
+    end
+    subgraph "Region 2"
+        P2[Producer] --> BC[Broker C]
+    end
+    BA --> BB
+    BC --> BB
+    BB --> C[Consumer]
+```
+
 ## Key Features
 - **JMS 1.1 and 2.0 compliance** — Full JMS API support for Java applications
 - **Multi-protocol** — AMQP, MQTT, STOMP, OpenWire, and WebSocket

@@ -3,6 +3,17 @@
 ## Definition
 Fault tolerance is the ability of a system to continue operating properly in the event of a failure of some of its components. A fault-tolerant system can detect failures and gracefully handle them without complete system outage.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Closed: Normal operation
+    Closed --> Open: Failure threshold exceeded
+    Open --> HalfOpen: Timeout expires
+    HalfOpen --> Closed: Test request succeeds
+    HalfOpen --> Open: Test request fails
+    note right of Open: Requests fail fast
+    note right of HalfOpen: Limited test requests
+```
+
 ## Real-World Example
 **AWS S3**: Designed for 99.999999999% (11 nines) durability. Data is automatically replicated across multiple availability zones. If one AZ fails, S3 continues serving from another AZ without data loss.
 

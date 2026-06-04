@@ -3,6 +3,25 @@
 ## Event
 On June 21, 2022, Cloudflare experienced a 2-hour outage that affected approximately 15-20% of global internet traffic. Major sites including Discord, Feedly, NordVPN, and multiple cryptocurrency exchanges were impacted.
 
+```mermaid
+sequenceDiagram
+    participant Admin
+    participant Config as WAF Config
+    participant Edge as Edge Servers
+    participant LB as Load Balancers
+    participant Traffic as User Traffic
+    
+    Admin->>Config: Deploy WAF rule with exponential regex
+    Config->>Edge: Push to ALL servers simultaneously
+    Traffic->>Edge: Requests trigger pathological regex
+    Edge->>Edge: CPU 100% - crash
+    LB->>Edge: Health check fails
+    LB->>Edge: Traffic shifted to remaining servers
+    Edge->>Edge: Remaining servers also crash
+    Admin->>Edge: Rollback initiated - servers crash before processing
+    Edge->>Edge: Gradual recovery in waves (08:44 UTC)
+```
+
 ## Timeline
 - **06:44 UTC**: A core WAF rule deployment consumed excessive CPU on edge servers
 - **06:46 UTC**: All globally distributed servers began crashing simultaneously

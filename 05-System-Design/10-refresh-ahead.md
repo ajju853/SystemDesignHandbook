@@ -3,6 +3,22 @@
 ## Definition
 Refresh Ahead (also called Write Around) proactively refreshes cache entries before they expire, based on predicted access patterns or configurable thresholds.
 
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Cache
+    participant DB as Database
+    App->>Cache: GET(key)
+    Cache-->>App: Value (serving)
+    Note over Cache: TTL > 80% expired
+    Cache->>Cache: Trigger async refresh
+    par Async Refresh
+        Cache->>DB: Fetch fresh data
+        DB-->>Cache: New data
+        Cache->>Cache: Update cache, reset TTL
+    end
+```
+
 ## Flow Diagram
 
 ```

@@ -3,6 +3,18 @@
 ## Definition
 UDP is a connectionless, lightweight transport protocol that provides minimal, unreliable data transfer between applications. It has no handshake, no ordering guarantees, and no retransmission — just fire and forget.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Server
+    Client->>Server: Datagram 1
+    Client->>Server: Datagram 2
+    Client->>Server: Datagram 3 (LOST)
+    Client->>Server: Datagram 4
+    Note over Server: Processes: 1, 2, 4<br/>No retransmit of 3
+    Server-->>Client: Response Datagram
+```
+
 ## Real-World Example
 **Live video streaming (YouTube Live)**: Uses UDP to deliver video frames. If a frame is lost, there's no retransmission — the next frame arrives milliseconds later. A brief glitch is far better than buffering while TCP retransmits.
 

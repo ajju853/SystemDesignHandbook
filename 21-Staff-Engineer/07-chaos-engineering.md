@@ -3,6 +3,17 @@
 ## Definition
 Chaos engineering is the discipline of experimenting on a system to build confidence in its capability to withstand turbulent conditions in production.
 
+```mermaid
+graph TB
+    subgraph "Game Day Process"
+        Plan["1. Plan<br/>Define scenario, hypothesis, metrics"] --> Prep["2. Prepare<br/>Alert stakeholders, pause automation"]
+        Prep --> Exec["3. Execute<br/>Run the experiment"]
+        Exec --> Obs["4. Observe<br/>Monitor metrics, observe behavior"]
+        Obs --> Debrief["5. Debrief<br/>What worked? What broke?"]
+        Debrief --> Follow["6. Follow-up<br/>Create tickets for issues found"]
+    end
+```
+
 ## Principles
 
 | Principle | Description |

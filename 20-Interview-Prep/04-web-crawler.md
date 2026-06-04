@@ -84,6 +84,27 @@ CREATE TABLE domain_policy (
 
 ## High-Level Design
 
+```mermaid
+sequenceDiagram
+    participant Frontier as URL Frontier
+    participant DL as Downloader
+    participant DD as Duplicate Detector
+    participant Parser
+    participant Storage as S3/HDFS
+    participant Indexer as Elasticsearch
+    Frontier->>DL: Next URL (highest priority)
+    DL->>DL: Fetch page (respect robots.txt)
+    DL->>DD: Check duplicate (Bloom filter)
+    alt Duplicate
+        DD-->>Frontier: Skip
+    else New page
+        DD->>Parser: Extract text + links
+        Parser->>Storage: Store raw HTML
+        Parser->>Indexer: Index content
+        Parser->>Frontier: New URLs (after politeness delay)
+    end
+```
+
 ```
                       ┌──────────────┐
                       │ URL Frontier │

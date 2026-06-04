@@ -3,6 +3,21 @@
 ## Definition
 Partitioning (sharding) is the process of splitting a large dataset or system workload across multiple nodes, each responsible for a subset of the data. This enables horizontal scaling by distributing data and load.
 
+```mermaid
+flowchart TB
+    APP[Application] --> RL[Routing Layer]
+    RL --> S0[Shard 0 - ids 1-1000]
+    RL --> S1[Shard 1 - ids 1001-2000]
+    RL --> S2[Shard 2 - ids 2001-3000]
+    RL --> S3[Shard 3 - ids 3001-4000]
+    subgraph Strategies
+        R[Range-Based]
+        H[Hash-Based]
+        CH[Consistent Hashing]
+        G[Geographic]
+    end
+```
+
 ## Real-World Example
 **Instagram**: Uses database sharding to distribute user data across thousands of PostgreSQL instances. Each shard contains a range of user IDs, allowing the platform to scale to billions of users.
 

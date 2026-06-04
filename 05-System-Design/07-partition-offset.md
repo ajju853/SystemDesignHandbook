@@ -19,6 +19,27 @@ Topic: "orders"
 ## Offset
 An offset is a unique sequential ID for each message within a partition.
 
+```mermaid
+graph LR
+    subgraph Topic[Topic: orders]
+        subgraph P0[Partition 0]
+            direction LR
+            M00[msg0] --> M01[msg1] --> M02[msg2]
+        end
+        subgraph P1[Partition 1]
+            direction LR
+            M10[msg0] --> M11[msg1] --> M12[msg2]
+        end
+        subgraph P2[Partition 2]
+            direction LR
+            M20[msg0] --> M21[msg1] --> M22[msg2]
+        end
+    end
+    Producer -.-> P0
+    Producer -.-> P1
+    Producer -.-> P2
+```
+
 ```
 Partition 0 (offsets):
 ┌──────┬──────┬──────┬──────┬──────┐

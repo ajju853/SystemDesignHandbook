@@ -3,6 +3,21 @@
 ## Definition
 Hashing is a one-way function that converts data to a fixed-size value (hash/digest). Unlike encryption, hashing cannot be reversed.
 
+```mermaid
+flowchart LR
+    subgraph "Encryption (Reversible)"
+        PT[Plaintext] -->|Encrypt Key| CT[Ciphertext]
+        CT -->|Decrypt Key| PT
+    end
+    subgraph "Hashing (One-Way)"
+        PW[Password] -->|Hash Function| H1[Hash Digest<br/>e.g. Argon2]
+        PW2[Same Password] -->|Hash Function + Salt| H2[Different Hash]
+    end
+    style CT fill:#f96
+    style H1 fill:#6c9
+    style H2 fill:#6c9
+```
+
 ## Hashing vs Encryption
 
 ```

@@ -6,6 +6,16 @@
 - Ensure consistency with organizational standards
 - Challenge assumptions and validate tradeoffs
 
+```mermaid
+graph TB
+    subgraph "Architecture Review Process"
+        Send["Author sends RFC<br/>1 week in advance"] --> Async["Reviewers read and<br/>comment async"]
+        Async --> Meet["Review meeting<br/>(discussion, not first read)"]
+        Meet --> Capture["Capture decisions<br/>and action items"]
+        Capture --> Follow["Follow up on<br/>unresolved issues"]
+    end
+```
+
 ## Review Checklist
 
 ### Requirements

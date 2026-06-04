@@ -3,6 +3,26 @@
 ## Event
 On April 2, 2019, Google Cloud Platform experienced a multi-hour outage affecting GCP services globally. Services impacted included GKE (Kubernetes Engine), Cloud Functions, Cloud Storage, and App Engine. The outage started in us-central1 and cascaded to other regions.
 
+```mermaid
+sequenceDiagram
+    participant Admin
+    participant Config as Config System
+    participant GKE as GKE Control Plane
+    participant Rem as Remediation
+    participant Other as Other Regions
+    
+    Admin->>Config: Deploy mistyped config flag
+    Config->>GKE: Invalid mTLS config applied
+    GKE->>GKE: Nodes can&#39;t establish TLS
+    GKE->>Rem: Health checks fail
+    Rem->>GKE: Auto-remediation: restart nodes
+    GKE->>GKE: Same bad config loaded again
+    GKE->>Other: Impact cascades to europe-west1, asia-east1
+    Admin->>Config: Root cause identified at 17:00
+    Config->>GKE: Config reverted
+    GKE->>GKE: Gradual recovery (19:30 UTC)
+```
+
 ## Timeline
 - **14:09 UTC**: Mistyped configuration flag deployed during routine maintenance
 - **14:15 UTC**: GKE control plane becomes unresponsive in us-central1

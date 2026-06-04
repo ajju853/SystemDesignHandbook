@@ -3,6 +3,21 @@
 ## Definition
 A WAF filters, monitors, and blocks HTTP traffic to and from web applications. It protects against common web exploits like SQL injection, XSS, and CSRF.
 
+```mermaid
+flowchart LR
+    C[Client] -->|HTTP Request| W[WAF]
+    W -->|Inspect| R{WAF Rules Engine}
+    R -->|Analyze| H[Headers]
+    R -->|Analyze| BD[Body]
+    R -->|Analyze| URL[URL Patterns]
+    R -->|Analyze| IP[IP Reputation]
+    R -->|Analyze| RATE[Rate Limits]
+    R -->|Block| BLK[Block Request]
+    R -->|Pass| LB[Load Balancer]
+    LB --> APP[Application Server]
+    BLK --> RES[403 Forbidden]
+```
+
 ## Attack Types Blocked
 
 | Attack | Description | WAF Rule |

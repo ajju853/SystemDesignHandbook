@@ -12,6 +12,24 @@ GitHub Actions is a CI/CD platform that automates software workflows directly fr
 - Matrix builds across OS, language versions
 - Environments with approval gates and secrets scoping
 
+```mermaid
+graph TD
+    Event[Push / PR] --> WF[GitHub Workflow YAML]
+    WF --> J1[Job: Lint]
+    WF --> J2[Job: Test]
+    J1 --> J2
+    J2 --> J3[Job: Build]
+    J2 --> J4[Job: Security Scan]
+    J3 --> J5{Environment?}
+    J5 -->|Staging| S[Deploy to Staging]
+    J5 -->|Production| P[Deploy to Production<br/>with Approval Gate]
+    subgraph Runner[GitHub Hosted Runner]
+        J1
+        J2
+        J3
+    end
+```
+
 ## Implementation
 
 ### Workflow Syntax

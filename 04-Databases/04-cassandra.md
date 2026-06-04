@@ -3,6 +3,24 @@
 ## Definition
 Apache Cassandra is a distributed, wide-column NoSQL database designed for handling large amounts of data across many commodity servers with high availability and no single point of failure. It's built on Amazon's DynamoDB paper and Google's Bigtable.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Coordinator
+    participant NodeA as Replica A
+    participant NodeB as Replica B
+    participant NodeC as Replica C
+    Client->>Coordinator: Write Request
+    Coordinator->>Coordinator: hash(partition_key)
+    Coordinator->>NodeA: Write
+    Coordinator->>NodeB: Write
+    Coordinator->>NodeC: Write
+    NodeA-->>Coordinator: Ack
+    NodeB-->>Coordinator: Ack
+    Note over Coordinator: QUORUM = 2/3 acks
+    Coordinator-->>Client: Success
+```
+
 ## Real-World Example
 **Apple**: Deploys over 100,000 Cassandra nodes for iCloud, handling billions of writes per day across multiple data centers with zero downtime during software upgrades.
 

@@ -3,6 +3,24 @@
 ## Definition
 HTTP/3 is the third major version of HTTP, built on QUIC (Quick UDP Internet Connections) instead of TCP. It eliminates head-of-line blocking, reduces connection establishment latency, and improves performance on lossy networks.
 
+```mermaid
+flowchart TB
+    subgraph H2[HTTP/2 Stack]
+        A1[HTTP]
+        B1[TLS]
+        C1[TCP]
+        D1[IP]
+    end
+    subgraph H3[HTTP/3 Stack]
+        A2[HTTP]
+        B2[QUIC - TLS 1.3 built-in]
+        C2[UDP]
+        D2[IP]
+    end
+    H2 -->|2+ RTT setup, TCP HOL blocking| P1[Higher latency on lossy networks]
+    H3 -->|0-1 RTT setup, No HOL blocking| P2[Better performance on lossy networks]
+```
+
 ## Real-World Example
 **Google YouTube**: Uses QUIC/HTTP/3 for video streaming. On lossy networks (mobile, WiFi), QUIC provides 20-30% better video quality by avoiding TCP's head-of-line blocking and faster recovery from packet loss.
 

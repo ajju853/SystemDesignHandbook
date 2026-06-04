@@ -3,6 +3,21 @@
 ## Definition
 Write Back (also called Write Behind) writes data to the cache and immediately acknowledges success. The write to the database happens asynchronously in the background.
 
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Cache
+    participant Queue as Write Queue
+    participant DB as Database
+    App->>Cache: SET key = data
+    Cache-->>App: OK (immediate)
+    App-->>Client: Return Success
+    Note over Cache,DB: Async background
+    Cache->>Queue: Enqueue write
+    Queue->>DB: Batch UPDATE
+    DB-->>Queue: OK
+```
+
 ## Flow Diagram
 
 ```

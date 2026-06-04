@@ -13,6 +13,23 @@ Helm is the package manager for Kubernetes. It uses **charts** (bundles of pre-c
 - Supports CI/CD integration for templated deployments
 - Hook system for lifecycle actions (pre/post install/upgrade)
 
+```mermaid
+graph TD
+    Chart[Helm Chart] --> Values[values.yaml]
+    Chart --> Templates[Go Templates]
+    Values --> Templates
+    Templates --> Manifest[Rendered Kubernetes Manifests]
+    Manifest --> Install[helm install / upgrade]
+    Install --> Release[Helm Release]
+    subgraph Chart Structure
+        ChartYAML[Chart.yaml]
+        Templates
+        Values
+        Helpers[_helpers.tpl]
+    end
+    Release --> K8s[Kubernetes Cluster]
+```
+
 ## Implementation
 
 ### Chart Structure

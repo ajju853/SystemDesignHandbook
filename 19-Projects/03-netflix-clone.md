@@ -106,6 +106,24 @@ CREATE TABLE watch_history (
 
 ## Low-Level Design: Transcoding Pipeline
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant S3
+    participant SQS
+    participant TS as Transcoder Service
+    participant Lambda as FFmpeg Lambda
+    participant CDN
+    Client->>S3: Upload raw video (presigned URL)
+    S3->>SQS: Put event
+    SQS->>TS: Trigger
+    TS->>Lambda: Split into chunks + transcode
+    Lambda-->>TS: Transcoded segments
+    TS->>CDN: Upload manifests + segments
+    TS->>S3: Generate thumbnails
+    S3-->>Client: Video ready
+```
+
 ```
 1. Client uploads raw video to S3 (presigned URL)
 2. S3 put event → SQS → Transcoder Service

@@ -14,6 +14,16 @@
 | 08 | `08-terraform-cloud.md` | Terraform Cloud/Enterprise: workspaces, remote runs, Sentinel, cost estimation, VCS, teams |
 | 09 | `09-best-practices.md` | Naming, file structure, env separation, secrets, CI/CD (GitLab/GitHub Actions), Terragrunt |
 
+```mermaid
+graph LR
+    A[Write HCL Config] --> B[terraform init]
+    B --> C[terraform plan]
+    C --> D[terraform apply]
+    D --> E[Infrastructure Running]
+    E --> F[terraform destroy]
+    F --> G[Cleanup]
+```
+
 ## Cross-References
 
 - **[10-AWS](../10-AWS)** — AWS services provisioned by Terraform

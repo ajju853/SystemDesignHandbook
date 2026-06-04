@@ -22,6 +22,27 @@ Service    Service    Service
          └─────────┘
 ```
 
+```mermaid
+sequenceDiagram
+    participant P as Prometheus Server
+    participant SD as Service Discovery
+    participant S1 as Service A
+    participant S2 as Service B
+    participant AM as Alertmanager
+    P->>SD: Discover scrape targets
+    SD->>P: Endpoint list
+    loop Scrape interval (default 15s)
+        P->>S1: GET /metrics
+        S1-->>P: Metrics response
+        P->>S2: GET /metrics
+        S2-->>P: Metrics response
+    end
+    P->>P: Evaluate recording & alerting rules
+    P->>AM: Push firing alerts
+    AM->>AM: Dedup, group, silence
+    AM->>PagerDuty: Notify on-call
+```
+
 ## Key Features
 - **Pull-based metrics** — Scrapes targets at intervals
 - **Multi-dimensional** — Labels enable flexible queries

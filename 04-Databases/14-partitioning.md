@@ -3,6 +3,21 @@
 ## Definition
 Database partitioning divides a large table into smaller, more manageable pieces (partitions) while still treating it as a single logical table. Unlike sharding (distribution across servers), partitioning can happen within a single database instance.
 
+```mermaid
+flowchart TD
+    Q[Query with WHERE clause] --> PK{Partition Key in WHERE?}
+    PK -->|Yes| P{Partition Type}
+    P -->|Range| Range[Identify Range]
+    P -->|List| List[Match List Value]
+    P -->|Hash| Hash[Compute Hash Modulus]
+    Range --> Scan[Scan Matching Partitions Only]
+    List --> Scan
+    Hash --> Scan
+    Scan --> Result[Return Results - Fast]
+    PK -->|No| FullScan[Scan All Partitions - Slow]
+    FullScan --> ResultSlow[Return Results]
+```
+
 ## Real-World Example
 **PostgreSQL time-series data**: A table storing 5 years of logs is partitioned by month. Queries for "last month's data" only scan one partition instead of the full table, improving query speed 10-100x.
 

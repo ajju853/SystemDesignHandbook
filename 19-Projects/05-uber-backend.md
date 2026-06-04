@@ -110,6 +110,27 @@ Rider App              Driver App
 
 ## Low-Level Design: Ride Matching
 
+```mermaid
+sequenceDiagram
+    participant Rider
+    participant RS as Ride Service
+    participant DS as Dispatch Service
+    participant Geo as Geospatial Index (H3/Redis)
+    participant Driver
+    Rider->>RS: Request ride (pickup lat/lng)
+    RS->>DS: Find match
+    DS->>Geo: Query nearby drivers
+    Geo-->>DS: Online drivers in H3 cells
+    DS->>Driver: Send ride offer (WebSocket)
+    Driver-->>DS: Accept
+    DS->>RS: Update ride status
+    RS->>Rider: Driver info + ETA
+    loop Real-time tracking
+        Driver->>Geo: GPS updates (Kafka)
+        Geo->>Rider: Location update
+    end
+```
+
 ```
 1. Rider requests ride (pickup lat/lng)
 2. Ride Service creates ride (status=requested)

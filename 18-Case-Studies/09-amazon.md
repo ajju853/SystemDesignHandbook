@@ -3,6 +3,32 @@
 ## Overview
 Amazon's architecture is legendary for its "two-pizza team" model, API-first design, and cell-based architecture.
 
+```mermaid
+graph LR
+    Client[User] --> CF[CloudFront CDN]
+    CF --> ELB[Elastic Load Balancer]
+    ELB --> App[Application Tier]
+    subgraph Cell[Cell-Based Architecture]
+        Product[Product Service]
+        Order[Order Service]
+        Payment[Payment Service]
+        Cart[Cart Service]
+    end
+    App --> Cell
+    Product --> Dyn[(DynamoDB)]
+    Order --> Dyn
+    Payment --> Aurora[(Aurora)]
+    Cart --> Dyn
+    subgraph Team[Two-Pizza Teams]
+        T1[Team: Catalog]
+        T2[Team: Checkout]
+        T3[Team: Payments]
+    end
+    Product -.->|owned by| T1
+    Order -.->|owned by| T2
+    Payment -.->|owned by| T3
+```
+
 ## Key Principles
 
 | Principle | Impact |

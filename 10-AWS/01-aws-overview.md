@@ -14,6 +14,22 @@ Compute           Storage         Database        Networking
 
 ## Well-Architected Framework
 
+```mermaid
+graph TD
+    A[AWS Well-Architected Framework] --> B[Operational Excellence]
+    A --> C[Security]
+    A --> D[Reliability]
+    A --> E[Performance Efficiency]
+    A --> F[Cost Optimization]
+    A --> G[Sustainability]
+    B --> B1[Monitor & Automate]
+    C --> C1[IAM & Encryption]
+    D --> D1[Recovery & Scaling]
+    E --> E1[Right-sizing & Serverless]
+    F --> F1[Reserved & Spot Instances]
+    G --> G1[Carbon Footprint Reduction]
+```
+
 1. **Operational Excellence** — Monitor, automate, improve
 2. **Security** — IAM, encryption, compliance
 3. **Reliability** — Recovery, scaling, backups

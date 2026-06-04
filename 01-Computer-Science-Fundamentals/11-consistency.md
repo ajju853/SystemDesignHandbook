@@ -3,6 +3,22 @@
 ## Definition
 Consistency in distributed systems means that all nodes see the same data at the same time. When a write is made to one node, all subsequent reads from any node should return that value.
 
+```mermaid
+flowchart LR
+    subgraph Strong[Strong Consistency]
+        W1[Write x=5] --> N1a[Node A x=5]
+        W1 --> N1b[Node B x=5]
+        W1 --> N1c[Node C x=5]
+        R1[Read] -->|Always 5| N1a
+    end
+    subgraph Eventual[Eventual Consistency]
+        W2[Write x=5] --> N2a[Node A x=5]
+        W2 -.->|async replication| N2b[Node B x=3]
+        W2 -.->|async replication| N2c[Node C x=3]
+        R2[Read] -->|May get 3| N2b
+    end
+```
+
 ## Real-World Example
 **Google Spanner**: Provides external consistency (strongest form) using TrueTime and the Paxos consensus algorithm. This is why Spanner can power Google's global advertising system where financial accuracy is critical.
 

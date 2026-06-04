@@ -4,6 +4,27 @@
 
 ## Overview
 
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant DNS as DNS Resolver
+    participant G as Google Server
+    B->>DNS: 1. URL Entry & Parsing
+    B->>DNS: 2. DNS Lookup for google.com
+    DNS-->>B: IP: 142.250.190.46
+    B->>G: 3. TCP Handshake (SYN, SYN-ACK, ACK)
+    B->>G: 4. TLS Handshake (1.3 - 1 RTT)
+    B->>G: 5. HTTP GET / HTTP/2
+    G-->>B: 200 OK + HTML (~200KB)
+    B->>B: 6. Parse HTML → DOM Tree
+    B->>G: 7. Fetch subresources (CSS, JS, images)
+    G-->>B: style.css, logo.png, search.js
+    B->>B: 8. Render Page (Layout, Paint, Composite)
+    B->>B: 9. Execute JavaScript (TTI: ~1-2s)
+```
+
+## Step 1: URL Entry & Parsing
+
 ```
 ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐
 │  URL    │──►│  DNS    │──►│  TCP    │──►│  TLS    │──►│  HTTP   │

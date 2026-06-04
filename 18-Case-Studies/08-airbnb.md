@@ -3,6 +3,28 @@
 ## Overview
 Airbnb serves millions of listings and bookings globally with a service-oriented architecture, emphasizing data infrastructure and search.
 
+```mermaid
+graph LR
+    Client[Client App] --> Envoy[API Gateway - Envoy]
+    Envoy --> Search[Search Service]
+    Envoy --> Booking[Booking Service<br/>Concurrency handling]
+    Envoy --> Payment[Payment Service]
+    Envoy --> Msg[Messaging Service]
+    Envoy --> Pricing[Pricing Service<br/>ML-driven]
+    Search --> ES[(Elasticsearch)]
+    Booking --> MySQL[(MySQL)]
+    Payment --> MySQL
+    Msg --> Cass[(Cassandra)]
+    Pricing --> Redis[(Redis)]
+    subgraph DataPlatform[Data Platform]
+        Spark[Apache Spark]
+        Kafka[Apache Kafka]
+        Airflow[Airflow]
+    end
+    Booking -.->|pipeline| Kafka
+    Search -.->|pipeline| Kafka
+```
+
 ## Architecture
 
 ```

@@ -3,6 +3,26 @@
 ## Definition
 Memcached is a simple, high-performance distributed memory object caching system. It's designed for speed and simplicity — a key-value store with minimal features but maximum throughput.
 
+```mermaid
+graph LR
+    subgraph "Clients"
+        C1[Client 1]
+        C2[Client 2]
+        CN[Client N]
+    end
+    subgraph "Memcached Cluster"
+        M1[Memcached Node 1]
+        M2[Memcached Node 2]
+        MN[Memcached Node N]
+    end
+    C1 --> M1
+    C1 --> M2
+    C2 --> M2
+    C2 --> MN
+    CN --> M1
+    CN --> MN
+```
+
 ## Real-World Example
 **Facebook**: Uses Memcached extensively, running thousands of servers with hundreds of TB of cache. They modified Memcached to support their social graph workload, handling billions of requests per second.
 

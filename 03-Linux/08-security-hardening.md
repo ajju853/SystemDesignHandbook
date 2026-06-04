@@ -12,6 +12,28 @@ Linux security hardening is the practice of reducing attack surface by configuri
 - SSH key management is the primary access method to cloud servers
 - Automation (Ansible, Chef, Puppet) enforces hardening at scale across fleets
 
+```mermaid
+flowchart TD
+    subgraph Network_Layer["Network Layer"]
+        FW[Firewall iptables]
+        SSH[SSH Hardening]
+        FB[Fail2ban]
+    end
+    subgraph OS_Layer["OS Layer"]
+        SUDO[Sudoers]
+        SEL[SELinux / AppArmor]
+        AUD[Auditd]
+        KERN[Kernel Hardening]
+    end
+    subgraph App_Layer["Application Layer"]
+        USR[User Management]
+        CAP[Capabilities]
+        UPD[Auto Updates]
+    end
+    Network_Layer --> OS_Layer
+    OS_Layer --> App_Layer
+```
+
 ## Key Concepts
 
 ### User Management

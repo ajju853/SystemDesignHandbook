@@ -101,6 +101,28 @@ ON messages (chat_id, created_at DESC);
 
 ## Low-Level Design: Message Flow
 
+```mermaid
+sequenceDiagram
+    participant Alice as Alice (Sender)
+    participant GW as Connection Gateway
+    participant Kafka
+    participant CS as Chat Service
+    participant DB as PostgreSQL
+    participant DS as Delivery Service
+    participant Bob as Bob (Recipient)
+    Alice->>GW: WebSocket: send message
+    GW->>Kafka: Publish chat.messages
+    Kafka->>CS: Consume
+    CS->>DB: Store message
+    CS->>Kafka: Publish chat.deliver
+    Kafka->>DS: Consume
+    alt Bob Online
+        DS->>Bob: Push via WebSocket
+    else Bob Offline
+        DS->>DB: Store offline notification
+    end
+```
+
 ```
 1. Alice sends message → WebSocket to Connection Gateway
 2. Gateway publishes to Kafka topic "chat.messages"

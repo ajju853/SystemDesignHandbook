@@ -3,6 +3,15 @@
 ## Definition
 Amazon CloudFront is a fast content delivery network (CDN) service that delivers data, video, applications, and APIs to customers globally with low latency and high transfer speeds.
 
+```mermaid
+graph LR
+    User[End User] --> Edge[CloudFront Edge<br/>450+ Locations]
+    Edge --> OriginShield[Origin Shield<br/>Regional Cache]
+    OriginShield --> S3[S3 Bucket<br/>Static Assets]
+    OriginShield --> ALB[ALB / EC2<br/>Dynamic API]
+    OriginShield --> Custom[Custom Origin<br/>On-prem Server]
+```
+
 ## Key Features
 - **450+ edge locations** across 90+ cities in 50+ countries
 - **Origin Shield** — Extra caching layer that reduces load on origin by aggregating requests from all edges in a region

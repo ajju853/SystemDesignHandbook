@@ -147,6 +147,32 @@ CREATE TABLE rider_locations (
 
 ## Low-Level Design: Order Flow
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant OS as Order Service
+    participant Pay as Payment Service
+    participant Rest as Restaurant
+    participant DS as Dispatch Service
+    participant Rider
+    User->>OS: Place order
+    OS->>Pay: Process payment
+    Pay-->>OS: Payment confirmed
+    OS->>Rest: Send order
+    Rest-->>OS: Confirm (preparing)
+    OS->>DS: Find rider
+    DS->>DS: Query geo index (H3)
+    DS->>Rider: Send assignment (top 3)
+    Rider-->>DS: Accept
+    DS->>OS: Update rider_id
+    OS->>User: Rider assigned + ETA
+    Note over Rider,Rest: Rider picks up food
+    Rider->>OS: Picked up
+    OS->>User: Status: en route
+    Rider->>OS: Delivered
+    OS->>User: Delivered + rating prompt
+```
+
 ```
 1. User searches → Search Service (Elasticsearch)
 2. User places order → Order Service:

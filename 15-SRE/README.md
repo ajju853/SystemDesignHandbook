@@ -18,6 +18,21 @@ Site Reliability Engineering (SRE) is a discipline that applies software enginee
 | **Emergency Response** | Runbooks, on-call rotations, incident command system |
 | **Production Readiness** | Reviews, launch checklists, Game Days |
 
+```mermaid
+graph TD
+    SRE[SRE Practices] --> SLO[SLOs & SLIs]
+    SRE --> EB[Error Budgets]
+    SRE --> Toil[Toil Reduction<br/>> 50% cap]
+    SRE --> PM[Blameless Postmortems]
+    SRE --> CP[Capacity Planning]
+    SRE --> CM[Change Management]
+    SRE --> ER[Emergency Response]
+    EB -->|Balance| Velocity[Release Velocity]
+    EB -->|Protect| Reliability[System Reliability]
+    Toil --> Automation[Automation & Tooling]
+    PM --> Learning[Organizational Learning]
+```
+
 ## Topics
 
 | # | Topic | Description |

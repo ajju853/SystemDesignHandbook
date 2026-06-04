@@ -68,6 +68,25 @@ CREATE TABLE clicks (
 
 ## High-Level Design
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API as API Gateway
+    participant Cache as Redis Cache
+    participant DB as PostgreSQL
+    Client->>API: GET /abc123
+    API->>Cache: Get short_code
+    alt Cache hit
+        Cache-->>API: original_url
+    else Cache miss
+        Cache-->>API: miss
+        API->>DB: Query short_code
+        DB-->>API: original_url
+        API->>Cache: Set key-value
+    end
+    API-->>Client: 301 Redirect
+```
+
 ```
 Client ──► API Gateway ──► URL Service ──► PostgreSQL
               │                               │

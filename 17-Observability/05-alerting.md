@@ -3,6 +3,23 @@
 ## Definition
 Alerting notifies operators when system metrics indicate a problem. Good alerting is reliable, actionable, and not noise-producing.
 
+```mermaid
+sequenceDiagram
+    participant M as Metrics System
+    participant AM as Alertmanager
+    participant N as Notification
+    participant OC as On-Call Engineer
+    M->>AM: Metric violates threshold
+    AM->>AM: Deduplicate & group
+    AM->>N: Send notification
+    N->>OC: PagerDuty / Slack
+    OC->>OC: Investigate issue
+    OC->>M: Fix root cause
+    M->>AM: Condition clears
+    AM->>N: Auto-resolve
+    N->>OC: Resolved
+```
+
 ## Alert Severity Levels
 
 | Level | Response Time | Example |

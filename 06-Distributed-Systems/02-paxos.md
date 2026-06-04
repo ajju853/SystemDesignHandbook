@@ -3,6 +3,29 @@
 ## Definition
 Paxos is a family of consensus protocols for reaching agreement in a network of unreliable processors. It's the foundational consensus algorithm in distributed systems.
 
+```mermaid
+sequenceDiagram
+    participant P as Proposer
+    participant A1 as Acceptor 1
+    participant A2 as Acceptor 2
+    participant A3 as Acceptor 3
+    Note over P,A3: Phase 1: Prepare
+    P->>A1: Prepare(n)
+    P->>A2: Prepare(n)
+    P->>A3: Prepare(n)
+    A1-->>P: Promise(n, v0)
+    A2-->>P: Promise(n, v0)
+    A3-->>P: Promise(n, v0)
+    Note over P,A3: Phase 2: Accept
+    P->>A1: Accept(n, v)
+    P->>A2: Accept(n, v)
+    P->>A3: Accept(n, v)
+    A1-->>P: Accepted
+    A2-->>P: Accepted
+    A3-->>P: Accepted
+    Note over P: Value chosen (majority)
+```
+
 ## Basic Paxos (Simplified)
 
 ### Roles

@@ -3,6 +3,17 @@
 ## Definition
 RBAC is an access control model where permissions are assigned to roles, and users are assigned to roles. Instead of managing permissions per-user, you manage them per-role.
 
+```mermaid
+graph LR
+    U[Users] --> R[Roles]
+    R --> P[Permissions]
+    R1[Admin] --> P1[Read, Write, Delete]
+    R2[Editor] --> P2[Read, Write]
+    R3[Viewer] --> P3[Read]
+    U -- Alice --> R1
+    U -- Bob --> R3
+```
+
 ## Core Concepts
 
 ```

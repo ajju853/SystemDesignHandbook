@@ -3,6 +3,25 @@
 ## Definition
 CDN caching stores static and dynamic content at edge locations worldwide, bringing data closer to users and reducing load on origin servers.
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant DNS
+    participant Edge as Edge Server
+    participant Origin as Origin Server
+    User->>DNS: Resolve domain
+    DNS-->>User: Nearest edge IP
+    User->>Edge: GET /resource
+    alt Cache HIT
+        Edge-->>User: Cached resource
+    else Cache MISS
+        Edge->>Origin: GET /resource
+        Origin-->>Edge: Response
+        Edge->>Edge: Store in cache
+        Edge-->>User: Response
+    end
+```
+
 ## Real-World Example
 **Netflix**: Uses Open Connect CDN appliances inside ISP networks. Popular content is cached at ISP-level, eliminating cross-network traffic and providing near-instant startup for 260M+ subscribers.
 

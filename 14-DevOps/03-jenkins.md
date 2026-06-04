@@ -13,6 +13,20 @@ Jenkins is an open-source automation server for building, testing, and deploying
 - Rich API and webhooks for extensibility
 - Blue Ocean modern UI
 
+```mermaid
+graph LR
+    SCM[Git Push] --> Master[Jenkins Master]
+    Master -->|Schedules| Agent[Build Agent Pod]
+    subgraph Pipeline Stages
+        Checkout[Checkout] --> Build[Build & Scan]
+        Build --> Test[Lint & Unit Test]
+        Test --> Staging[Deploy to Staging]
+        Staging --> Integration[Integration Tests]
+        Integration -->|Input Gate| Prod[Deploy to Production]
+    end
+    Agent --> Pipeline Stages
+```
+
 ## Implementation
 
 ### Declarative Pipeline

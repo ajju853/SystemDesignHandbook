@@ -3,6 +3,23 @@
 ## Definition
 MongoDB is a document-oriented NoSQL database that stores data in flexible, JSON-like documents with dynamic schemas. It's designed for high performance, high availability, and horizontal scaling.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Primary
+    participant Secondary1
+    participant Secondary2
+    Client->>Primary: Write
+    Primary->>Secondary1: Replicate
+    Primary->>Secondary2: Replicate
+    Primary-->>Client: Ack
+    Note over Primary: Primary fails
+    Secondary1->>Secondary2: Election
+    Secondary2-->>Secondary1: Vote
+    Secondary1->>Client: New Primary
+    Client->>Secondary1: Write
+```
+
 ## Real-World Example
 **MetLife**: Uses MongoDB to power their customer portal, consolidating data from 70+ legacy systems into a single document model. Reduced development time by 60% and improved customer experience.
 

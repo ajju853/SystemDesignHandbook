@@ -3,6 +3,22 @@
 ## Definition
 HTTP/2 is a major revision of HTTP that improves performance by enabling multiplexed streams, header compression, server push, and binary framing — all over a single TCP connection.
 
+```mermaid
+flowchart TB
+    subgraph H2[HTTP/2 Features]
+        B[Binary Protocol]
+        M[Multiplexing]
+        H[Header Compression HPACK]
+        SP[Server Push]
+    end
+    B --> F[Frames: HEADERS, DATA, SETTINGS]
+    M --> S1[Stream 1]
+    M --> S2[Stream 2]
+    M --> S3[Stream 3]
+    H --> DT[Dynamic Table - ~2-10 bytes per request]
+    SP --> Push[Server sends resources before requested]
+```
+
 ## Real-World Example
 **Google Search**: Was an early adopter. HTTP/2 reduced page load times by 15-50% by eliminating multiple TCP connections and enabling concurrent requests over one connection.
 

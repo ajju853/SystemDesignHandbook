@@ -2,6 +2,29 @@
 
 ## Core Services
 
+```mermaid
+graph TD
+    GCP[GCP Cloud] --> Compute[Compute]
+    GCP --> Storage[Storage]
+    GCP --> Database[Database]
+    GCP --> Networking[Networking]
+    GCP --> BigData[Big Data]
+    Compute --> CE[Compute Engine]
+    Compute --> GKE[GKE]
+    Compute --> CloudRun[Cloud Run]
+    Compute --> CFunc[Cloud Functions]
+    Storage --> CStore[Cloud Storage]
+    Database --> CloudSQL[Cloud SQL]
+    Database --> Spanner[Cloud Spanner]
+    Database --> Firestore[Firestore]
+    Database --> Bigtable[Bigtable]
+    Networking --> VPC[VPC]
+    Networking --> CDN[Cloud CDN]
+    Networking --> GLB[Cloud Load Balancing]
+    BigData --> BQ[BigQuery]
+    BigData --> PubSub[Pub/Sub]
+```
+
 | Category | Service | Description |
 |----------|---------|-------------|
 | Compute | Compute Engine | VMs |

@@ -3,6 +3,24 @@
 ## Definition
 BASE (Basically Available, Soft state, Eventual consistency) is an alternative to ACID for distributed systems that prioritize availability over strong consistency. It's the design philosophy behind many NoSQL databases.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant NodeA
+    participant NodeB
+    participant NodeC
+    Client->>NodeA: Write x = 5
+    NodeA->>NodeB: Replicate
+    NodeA->>NodeC: Replicate
+    Note over NodeA,NodeC: Propagation delay
+    Client->>NodeB: Read x
+    NodeB-->>Client: x = 3 (stale)
+    Note over NodeB: Eventually consistent
+    NodeB-->NodeB: Apply update
+    Client->>NodeB: Read x
+    NodeB-->>Client: x = 5 (consistent)
+```
+
 ## The Three Properties
 
 ### Basically Available

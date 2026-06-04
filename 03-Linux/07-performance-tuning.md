@@ -12,6 +12,22 @@ Linux performance tuning involves adjusting kernel parameters, resource limits, 
 - Database servers, web servers, and load balancers each require different tuning profiles
 - Right-sizing EC2/GCP/Azure instances depends on understanding resource bottlenecks
 
+```mermaid
+flowchart TD
+    Resource[Select Resource] --> U{Utilization High?}
+    U -->|Yes| S{Saturation?}
+    U -->|No| CheckNext[Check Next Resource]
+    S -->|Yes| E{Errors?}
+    S -->|No| CheckNext
+    E -->|Yes| Fix[Investigate and Fix]
+    E -->|No| Tune[Tune Parameters]
+    Fix --> CheckNext
+    Tune --> CheckNext
+    CheckNext --> More{More Resources?}
+    More -->|Yes| Resource
+    More -->|No| Done[Done - System Optimized]
+```
+
 ## Key Concepts
 
 ### ulimit — User Limits

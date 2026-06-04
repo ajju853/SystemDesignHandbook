@@ -108,6 +108,27 @@ CREATE TABLE feed_items (
 
 ## Low-Level Design: Feed Generation
 
+```mermaid
+sequenceDiagram
+    participant User as Creator
+    participant US as Upload Service
+    participant S3
+    participant FW as Fanout Worker
+    participant Cache as Redis
+    participant Follower
+    User->>US: Upload photo
+    US->>S3: Store media
+    US->>FW: New post event
+    FW->>Cache: Get followers
+    alt Active follower (<10K)
+        FW->>Cache: LPUSH feed:follower_id
+    else Influencer (>10K)
+        FW->>Cache: LPUSH timeline:creator_id
+    end
+    Follower->>Cache: GET feed
+    Cache-->>Follower: Merged feed (chronological)
+```
+
 ### Hybrid Approach
 
 ```python

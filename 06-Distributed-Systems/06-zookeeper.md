@@ -3,6 +3,28 @@
 ## Definition
 Apache ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.
 
+```mermaid
+graph TD
+    subgraph "Clients"
+        K1[Kafka Broker]
+        S1[Service A]
+        S2[Service B]
+    end
+    subgraph "ZooKeeper Ensemble"
+        ZL[Leader]
+        ZF1[Follower]
+        ZF2[Follower]
+    end
+    K1 --> ZL
+    K1 --> ZF1
+    S1 --> ZL
+    S1 --> ZF2
+    S2 --> ZF1
+    S2 --> ZF2
+    ZL --> ZF1
+    ZL --> ZF2
+```
+
 ## Real-World Example
 **Apache Kafka**: Uses ZooKeeper for cluster metadata, broker membership, topic configuration, and leader election for partitions (though newer versions are removing this dependency).
 

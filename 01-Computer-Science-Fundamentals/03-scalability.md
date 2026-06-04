@@ -3,6 +3,18 @@
 ## Definition
 Scalability is the ability of a system to handle a growing amount of work by adding resources. A scalable system can accommodate increased load without degrading performance.
 
+```mermaid
+flowchart TD
+    S[Scalability] --> V[Vertical Scaling - Scale Up]
+    S --> H[Horizontal Scaling - Scale Out]
+    V --> V1[Add more CPU, RAM, Storage to existing machine]
+    H --> H1[Add more machines to resource pool]
+    V --> VL[Limited by hardware ceiling]
+    H --> HU[Theoretically unlimited]
+    V --> VS[Simple, no architecture change]
+    H --> HC[Complex, distributed architecture]
+```
+
 ## Real-World Example
 **Netflix**: Grew from 1 million DVD subscribers in 2000 to 260+ million streaming subscribers in 2023. Their architecture evolved from a monolithic application to a microservices-based system running on AWS, handling 1+ billion hours of streaming per month.
 

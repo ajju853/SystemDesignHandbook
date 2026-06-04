@@ -3,6 +3,28 @@
 ## Overview
 Uber's architecture evolved from a monolith to a domain-oriented microservices architecture at massive scale.
 
+```mermaid
+graph LR
+    Client[Client App] --> GW[API Gateway]
+    GW --> Dispatch[Dispatch Service]
+    GW --> Trip[Trip Service]
+    GW --> Payment[Payment Service]
+    GW --> Driver[Driver Service]
+    GW --> User[User Service]
+    GW --> Notif[Notification Service]
+    Dispatch --> Geo[Geospatial Index - H3]
+    Dispatch --> Pricing[Pricing Engine - Surge]
+    Dispatch --> Market[Marketplace Matching]
+    Trip --> DB[(Schemaless<br/>MySQL-based KV)]
+    Payment --> DB
+    Driver --> DB
+    subgraph Event[Event-Driven]
+        Kafka[Apache Kafka]
+    end
+    Trip -.->|events| Kafka
+    Dispatch -.->|events| Kafka
+```
+
 ## Architecture
 
 ```

@@ -2,6 +2,26 @@
 
 ## Learning Paths
 
+```mermaid
+graph TD
+    GCP[GCP Certifications] --> Found[Foundational]
+    GCP --> Assoc[Associate]
+    GCP --> Prof[Professional]
+    Found --> CDL[Cloud Digital Leader]
+    Assoc --> ACE[Associate Cloud Engineer]
+    Prof --> PCA[Cloud Architect]
+    Prof --> PDE[Data Engineer]
+    Prof --> PCD[Cloud Developer]
+    Prof --> PDO[DevOps Engineer]
+    Prof --> PML[Machine Learning Engineer]
+    Prof --> PSE[Cloud Security Engineer]
+    Prof --> PNE[Cloud Network Engineer]
+    ACE -->|Recommended| PCA
+    ACE --> PDE
+    ACE --> PCD
+    ACE --> PDO
+```
+
 ### Foundational
 | Certification | Code | Duration | Cost | Target |
 |--------------|------|----------|------|--------|

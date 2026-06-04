@@ -3,6 +3,25 @@
 ## Definition
 etcd is a strongly consistent, distributed key-value store that provides a reliable way to store data that needs to be accessed by a distributed system or cluster of machines.
 
+```mermaid
+graph TD
+    subgraph "etcd Cluster (Raft)"
+        L[Leader]
+        F1[Follower]
+        F2[Follower]
+    end
+    subgraph "Kubernetes Control Plane"
+        API[API Server]
+        Sched[Scheduler]
+        CM[Controller Manager]
+    end
+    API --> L
+    API --> F1
+    API --> F2
+    Sched --> L
+    CM --> L
+```
+
 ## Real-World Example
 **Kubernetes**: Uses etcd as its primary datastore for all cluster state — configurations, secrets, service discovery, and scheduling information.
 

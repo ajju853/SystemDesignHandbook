@@ -3,6 +3,18 @@
 ## Definition
 Throughput is the rate at which a system processes work, usually measured as operations per second (ops/s), requests per second (RPS), transactions per second (TPS), or data volume per second (MB/s, Gbps).
 
+```mermaid
+flowchart LR
+    C[Clients] --> LB[Load Balancer 50K RPS]
+    LB --> W1[Web Server 5K RPS]
+    LB --> W2[Web Server 5K RPS]
+    LB --> W3[Web Server 5K RPS]
+    W1 --> DB[(Database 1K RPS)]
+    W2 --> DB
+    W3 --> DB
+    DB -->|Bottleneck| B[System Limited to 1K RPS]
+```
+
 ## Real-World Example
 **Twitter**: Processes ~6,000 tweets per second (peak ~150K TPS during major events). The feed delivery system must fan out tweets to millions of followers with low latency.
 
