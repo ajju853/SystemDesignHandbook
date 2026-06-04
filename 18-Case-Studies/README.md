@@ -6,8 +6,9 @@
 graph TB
     subgraph "Case Studies"
         direction TB
-        A[Architecture Deep Dives<br/>17 companies] --> B[Netflix, YouTube, WhatsApp<br/>Instagram, Uber, Twitter/X, Spotify<br/>Airbnb, Amazon, Google Search]
+        A[Architecture Deep Dives<br/>22 companies] --> B[Netflix, YouTube, WhatsApp<br/>Instagram, Uber, Twitter/X, Spotify<br/>Airbnb, Amazon, Google Search]
         A --> C[Slack, Discord, TikTok<br/>Stripe, LinkedIn, Zoom, DoorDash]
+        A --> D[Figma, Notion, Cloudflare<br/>Coinbase, Roblox]
         D[Outage Postmortems<br/>7 incidents] --> E[Facebook BGP, AWS Kinesis<br/>Google Cloud, Cloudflare<br/>GitHub DB, Fastly CDN, GitLab Backup]
     end
 ```
@@ -33,6 +34,11 @@ graph TB
 | 15 | [LinkedIn](15-linkedin-architecture.md) | Feed ranking, Kafka, graph database, 1B members |
 | 16 | [Zoom](16-zoom-architecture.md) | WebRTC, SFU, media routing, 300M daily participants |
 | 17 | [DoorDash](17-door-dash-architecture.md) | Dispatch engine, real-time pricing, 25M orders/mo |
+| 18 | [Figma](18-figma-architecture.md) | CRDT collaboration, WASM rendering, local-first architecture |
+| 19 | [Notion](19-notion-architecture.md) | Block data model, OT/CRDT hybrid, database queries |
+| 20 | [Cloudflare](20-cloudflare-architecture.md) | Anycast edge network, DDoS mitigation, Workers/edge compute |
+| 21 | [Coinbase](21-coinbase-architecture.md) | Crypto wallet HD architecture, order matching engine, blockchain indexer |
+| 22 | [Roblox](22-roblox-architecture.md) | Multiplayer networking, UGC platform, economy system, 70M DAU |
 
 ## Outage Postmortems
 
