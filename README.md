@@ -4,7 +4,7 @@
 
 ### The Ultimate Cloud + System Design + DevOps + Architecture Operating System
 
-**From zero to Staff Engineer — 500+ topics across 25 modules with 678+ Mermaid diagrams**
+**From zero to Staff Engineer — 520+ topics across 26 modules with 700+ Mermaid diagrams**
 
 [![GitHub Stars](https://img.shields.io/github/stars/ajju853/SystemDesignHandbook?style=for-the-badge&logo=github&color=gold)](https://github.com/ajju853/SystemDesignHandbook/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/ajju853/SystemDesignHandbook?style=for-the-badge&logo=github&color=blue)](https://github.com/ajju853/SystemDesignHandbook/network/members)
@@ -22,7 +22,7 @@
 
 ---
 
-*The most comprehensive system design learning resource on GitHub. Covers everything from CAP theorem to Staff Engineer — with AWS, Azure, GCP, Kubernetes, Terraform, DevOps, SRE, Security, Observability, and real-world architectures.*
+*The most comprehensive system design learning resource on GitHub. Covers everything from CAP theorem to Staff Engineer — with AWS, Azure, GCP, Kubernetes, Terraform, DevOps, SRE, Security, Observability, Data Engineering, and real-world architectures.*
 
 </div>
 
@@ -41,7 +41,7 @@
 | **Case Studies** | ✅ 22 real architectures — Netflix, Uber, Stripe, TikTok, Discord, DoorDash, Figma, Notion, Cloudflare, Coinbase, Roblox | Usually 5-10 |
 | **Projects** | ✅ 19 hands-on — URL shortener → healthcare EMR with full end-to-end guide | Usually 3-5 |
 | **Staff Engineer** | ✅ 19 files — mentorship, strategy, migrations, incident leadership, executive comm | Unique to this repo |
-| **Mermaid Diagrams** | ✅ **678+ diagrams across 500+ files** | Usually text-only |
+| **Mermaid Diagrams** | ✅ **700+ diagrams across 520+ files** | Usually text-only |
 | **Interview Prep** | ✅ 26 problems — from Tinder to distributed KV store to recommendation systems | Usually 10-15 |
 | **End-to-End Guide** | ✅ Complete E-Commerce platform from requirements to production SRE | Not offered |
 
@@ -99,6 +99,7 @@ graph TB
         API["23-API Design<br/>REST, GraphQL, gRPC, Security"]:::specialization
         TEST["24-Testing & Quality<br/>Contract, Chaos, Perf, CI"]:::specialization
         ARCH["25-Clean Architecture<br/>DDD, CQRS, ES, ADRs"]:::specialization
+        DE["26-Data Engineering<br/>Lakehouse, Streaming, ETL"]:::specialization
     end
 
     CS --> NET --> LIN --> DB
@@ -108,7 +109,8 @@ graph TB
     AWS & AZ & GCP --> TF --> DEV
     DEV --> SRE & SEC & OBS
     SRE & SEC & OBS --> CASE --> PROJ --> INT --> STAFF
-    STAFF --> AI & API & TEST & ARCH
+    STAFF --> AI & API & TEST & ARCH & DE
+    DE["26-Data Engineering<br/>Lakehouse, Streaming, ETL, Warehousing"]:::specialization
 ```
 
 ---
@@ -142,6 +144,7 @@ graph TB
 | 23 | [API Design](23-API-Design/) | 15 | RESTful API design, OpenAPI 3.1, GraphQL (schema, resolvers, federation, N+1), gRPC (protobuf, 4 streaming modes), API versioning, API security (OAuth2, OIDC, JWT), API gateway patterns, WebSocket/SSE, webhooks, API testing, API documentation, GraphQL federation, API monetization, design-first workflow, BFF patterns |
 | 24 | [Testing & Quality Engineering](24-Testing-Quality-Engineering/) | 15 | Testing strategies, unit/integration testing, contract testing, E2E testing, performance testing (k6, Locust), load testing patterns, chaos engineering, test infra, CI test strategy, quality metrics, visual testing, test data management, flaky test management, accessibility testing, mutation testing |
 | 25 | [Clean Architecture & Design Patterns](25-Clean-Architecture-Design-Patterns/) | 12 | SOLID principles (multi-language), 23 GoF patterns, Clean Architecture, Hexagonal Architecture, Domain-Driven Design, CQRS, Event Sourcing, Saga pattern, Strangler Fig, ADRs, Twelve-Factor App |
+| 26 | [Data Engineering](26-Data-Engineering/) | 15 | Data lakehouse, batch/stream processing, schema registry, data quality, ETL/ELT, warehousing, lake storage, orchestration, data catalog, real-time analytics, reverse ETL, governance, platform architecture |
 
 ---
 
