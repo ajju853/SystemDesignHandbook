@@ -1,4 +1,4 @@
-# 10 — Open Source Architectures
+# 18 — Case Studies
 
 > Learn from the best. Reverse-engineered architectures of the world's largest systems.
 
@@ -31,5 +31,5 @@ graph LR
 
 ---
 
-Previous: [09 — Observability](../09-Observability/README.md)
-Next: [11 — Production Incidents](../11-Production-Incidents/README.md)
+Previous: [17 — Observability](../17-Observability/README.md)
+Next: [19 — Projects](../19-Projects/README.md)

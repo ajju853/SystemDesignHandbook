@@ -29,5 +29,5 @@ graph TD
 
 ---
 
-Previous: [05 — Message Queues](../05-Message-Queues/README.md)
-Next: [07 — Cloud Architecture](../07-Cloud-Architecture/README.md)
+Previous: [05 — System Design](../05-System-Design/README.md)
+Next: [07 — Microservices](../07-Microservices/README.md)

@@ -1,4 +1,4 @@
-# 14 — Staff Engineer Level
+# 21 — Staff Engineer
 
 > Think beyond code. Design systems that span teams, regions, and years.
 
@@ -41,4 +41,4 @@ From:                    To:
 
 ---
 
-Previous: [13 — System Design Interviews](../13-System-Design-Interviews/README.md)
+Previous: [20 — Interview Prep](../20-Interview-Prep/README.md)

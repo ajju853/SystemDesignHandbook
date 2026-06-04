@@ -1,4 +1,4 @@
-# 07 — Cloud Architecture
+# 10 — AWS Cloud
 
 > Master cloud infrastructure across AWS, GCP, and Azure.
 
@@ -46,5 +46,5 @@ graph TD
 
 ---
 
-Previous: [06 — Distributed Systems](../06-Distributed-Systems/README.md)
-Next: [08 — Security](../08-Security/README.md)
+Previous: [09 — Kubernetes](../09-Kubernetes/README.md)
+Next: [11 — Azure](../11-Azure/README.md)

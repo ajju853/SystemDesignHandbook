@@ -36,3 +36,7 @@ graph LR
 - Terraform CLI >= 1.5
 - Cloud provider account (AWS free tier recommended)
 - Basic familiarity with HCL syntax
+
+---
+Previous: [12 — GCP](../12-GCP/README.md)
+Next: [14 — DevOps](../14-DevOps/README.md)

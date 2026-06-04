@@ -81,3 +81,7 @@ az vm create \
 - **Adobe**: Migrated its cloud infrastructure to Azure for enterprise workloads
 - **SAP**: Runs SAP applications on Azure for enterprise customers
 - **GE Healthcare**: Uses Azure for medical imaging and AI diagnostics
+
+---
+Previous: [10 — AWS](../10-AWS/README.md)
+Next: [12 — GCP](../12-GCP/README.md)

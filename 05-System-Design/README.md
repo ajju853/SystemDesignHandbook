@@ -1,20 +1,36 @@
-# 04 — Caching
+# 05 — System Design
 
-> Speed up your systems by storing frequently accessed data closer to where it's needed.
+> Foundations of large-scale system architecture. Caching, messaging, load balancing, and design patterns for building systems that handle millions of users.
 
 ```mermaid
-graph TD
-    subgraph "Caching Layers"
-        L1["L1: CPU Cache<br/>(~1ns, 90%+ hit rate)"]
-        L2["L2: In-Memory Cache<br/>(~1us, ~80% hit rate)"]
-        L3["L3: CDN Cache<br/>(~10ms, ~70% hit rate)"]
-        L4["L4: Disk Cache<br/>(~10ms, ~50% hit rate)"]
+graph TB
+    subgraph "System Design Toolkit"
+        CACHE[Caching] --> CDN[CDN Cache]
+        CACHE --> REDIS[Redis]
+        CACHE --> MC[Memcached]
+        CACHE --> CP[Caching Patterns<br/>Cache-Aside, Write-Through]
+
+        MQ[Messaging] --> KAFKA[Kafka]
+        MQ --> RMQ[RabbitMQ]
+        MQ --> SQS[SQS]
+        MQ --> PULSAR[Pulsar]
+        MQ --> DELIVERY[Delivery Guarantees<br/>At-Most, At-Least, Exactly-Once]
+
+        LB[Load Balancing] --> ALG[Algorithms<br/>Round Robin, Least Connections]
+        LB --> L4[L4 vs L7 Load Balancers]
+        LB --> CH[Consistent Hashing]
+
+        OTHER[Key Patterns] --> BF[Bloom Filters]
+        OTHER --> RL[Rate Limiters]
+        OTHER --> CAP[CAP / PACELC]
+        OTHER --> GW[API Gateway Design]
+        OTHER --> ID[ID Generation<br/>Snowflake, ULID]
     end
-    Request --> L1
-    L1 --> L2
-    L2 --> L3
-    L3 --> L4
-    L4 --> Database
+
+    style CACHE fill:#1a1a2e,stroke:#e94560,color:#fff
+    style MQ fill:#1a1a2e,stroke:#e94560,color:#fff
+    style LB fill:#1a1a2e,stroke:#e94560,color:#fff
+    style OTHER fill:#1a1a2e,stroke:#e94560,color:#fff
 ```
 
 ## Topics
@@ -37,37 +53,30 @@ graph TD
 | 9 | [Read Through](09-read-through.md) | Transparent cache loading |
 | 10 | [Refresh Ahead](10-refresh-ahead.md) | Proactive refresh pattern |
 
-## Quick Reference
+### Message Queues
+| # | Topic | Description |
+|---|-------|-------------|
+| 11 | [Kafka](01-kafka.md) | Distributed event streaming, partitions, replication |
+| 12 | [RabbitMQ](02-rabbitmq.md) | AMQP message broker, exchanges, queues |
+| 13 | [Amazon SQS](03-sqs.md) | Managed queue service, at-least-once delivery |
+| 14 | [Apache Pulsar](04-pulsar.md) | Multi-tenant streaming platform |
+| 15 | [ActiveMQ](05-activemq.md) | JMS-compliant broker |
+| 16 | [Producer-Consumer](06-producer-consumer.md) | Messaging patterns |
+| 17 | [Partition & Offset](07-partition-offset.md) | Kafka partition architecture |
+| 18 | [Delivery Guarantees](08-delivery-guarantees.md) | At-most-once, at-least-once, exactly-once |
 
-```
-Cache Level          Latency    Hit Rate    Use Case
-L1 (CPU)              ~1ns      90%+        CPU caches
-L2 (In-memory)        ~1μs      ~80%        Redis, Memcached
-L3 (CDN)              ~10ms     ~70%        Static assets
-L4 (Disk)             ~10ms     ~50%        Page cache, buffer pool
-
-Eviction Policies:
-  LRU:  Least Recently Used (most common)
-  LFU:  Least Frequently Used
-  FIFO: First In, First Out
-  TTL:  Time-To-Live expiry
-```
-
-## Cache Performance Impact
-
-```
-Without Caching:
-  Request ──► Database ──► 100ms
-
-With Caching (90% hit rate):
-  Request ──► Cache (10ms) ──► 90% hit
-         ──► Cache Miss ──► DB (100ms) ──► 10% miss
-  
-  Average latency: (0.9 × 10ms) + (0.1 × 100ms) = 19ms
-  Improvement: 5x faster
-```
+### Advanced Patterns
+| # | Topic | Description |
+|---|-------|-------------|
+| 19 | [Load Balancers](11-load-balancers.md) | L4 vs L7, algorithms, health checks |
+| 20 | [Consistent Hashing](12-consistent-hashing.md) | Hash ring, virtual nodes, rebalancing |
+| 21 | [Bloom Filters](13-bloom-filters.md) | Probabilistic data structures |
+| 22 | [Rate Limiters](14-rate-limiters.md) | Token bucket, sliding window, GCRA |
+| 23 | [CAP / PACELC](15-cap-pacelc.md) | Tradeoff framework extended |
+| 24 | [API Gateway Design](16-api-gateway-design.md) | Kong, Envoy, AWS, BFF pattern |
+| 25 | [ID Generation](17-id-generation.md) | Snowflake, Instagram, ULID, UUIDv7 |
 
 ---
 
-Previous: [03 — Databases](../03-Databases/README.md)
-Next: [05 — Message Queues](../05-Message-Queues/README.md)
+Previous: [04 — Databases](../04-Databases/README.md)
+Next: [06 — Distributed Systems](../06-Distributed-Systems/README.md)

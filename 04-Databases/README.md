@@ -1,4 +1,4 @@
-# 03 — Databases
+# 04 — Databases
 
 > The heart of every system. Understand how data is stored, queried, and scaled.
 
@@ -81,5 +81,5 @@ graph TD
 
 ---
 
-Previous: [02 — Networking](../02-Networking/README.md)
-Next: [04 — Caching](../04-Caching/README.md)
+Previous: [03 — Linux](../03-Linux/README.md)
+Next: [05 — System Design](../05-System-Design/README.md)

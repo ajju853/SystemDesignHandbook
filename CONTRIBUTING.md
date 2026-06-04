@@ -27,7 +27,7 @@ graph LR
 3. Follow the existing format
 
 ## Adding a Project
-1. Create a new file in `12-Hands-On-Projects/`
+1. Create a new file in `19-Projects/`
 2. Include: Requirements, Capacity Estimation, API Design, DB Design, HLD, LLD, Scaling, Deployment
 
 ## License

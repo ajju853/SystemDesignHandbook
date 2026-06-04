@@ -1,4 +1,4 @@
-# 09 — Observability
+# 17 — Observability
 
 > Understand what your system is doing. Monitor, trace, and log everything.
 
@@ -45,5 +45,5 @@ graph TD
 
 ---
 
-Previous: [08 — Security](../08-Security/README.md)
-Next: [10 — Open Source Architectures](../10-Open-Source-Architectures/README.md)
+Previous: [16 — Security](../16-Security/README.md)
+Next: [18 — Case Studies](../18-Case-Studies/README.md)

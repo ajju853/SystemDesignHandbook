@@ -68,5 +68,5 @@ DNS Record Types: A, AAAA, CNAME, MX, NS, TXT
 
 ---
 
-Previous: [01 — Fundamentals](../01-Fundamentals/README.md)
-Next: [03 — Databases](../03-Databases/README.md)
+Previous: [01 — Computer Science Fundamentals](../01-Computer-Science-Fundamentals/README.md)
+Next: [03 — Linux](../03-Linux/README.md)

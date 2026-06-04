@@ -1,4 +1,4 @@
-# 08 — Security
+# 16 — Security
 
 > Protect your systems from threats, vulnerabilities, and unauthorized access.
 
@@ -34,5 +34,5 @@ graph TD
 
 ---
 
-Previous: [07 — Cloud Architecture](../07-Cloud-Architecture/README.md)
-Next: [09 — Observability](../09-Observability/README.md)
+Previous: [15 — SRE](../15-SRE/README.md)
+Next: [17 — Observability](../17-Observability/README.md)

@@ -1,4 +1,4 @@
-# 13 — System Design Interviews
+# 20 — Interview Prep
 
 > Master the system design interview with structured practice across difficulty levels.
 
@@ -107,5 +107,5 @@ Multi-region, cross-functional, cost-aware designs.
 
 ---
 
-Previous: [12 — Hands-On Projects](../12-Hands-On-Projects/README.md)
-Next: [14 — Staff Engineer Level](../14-Staff-Engineer-Level/README.md)
+Previous: [19 — Projects](../19-Projects/README.md)
+Next: [21 — Staff Engineer](../21-Staff-Engineer/README.md)

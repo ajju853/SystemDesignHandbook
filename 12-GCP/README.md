@@ -123,3 +123,7 @@ gcloud container clusters list
 - **PayPal**: Uses GKE and Cloud SQL for payment processing infrastructure
 - **HSBC**: Runs global banking applications on GCP with multi-region Spanner
 - **eBay**: Migrated to GCP for data warehousing and ML workloads
+
+---
+Previous: [11 — Azure](../11-Azure/README.md)
+Next: [13 — Terraform](../13-Terraform/README.md)
