@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="System Design Mastery — The ultimate cloud + system design + DevOps + architecture resource. 25 modules, 450+ topics, 550+ Mermaid diagrams.">
+    <title>System Design Mastery</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        window.$docsify = {
+            name: 'System Design Mastery',
+            repo: 'ajju853/SystemDesignHandbook',
+            basePath: '/',
+            loadSidebar: true,
+            subMaxLevel: 2,
+            autoHeader: true,
+            search: {
+                maxAge: 86400000,
+                paths: 'auto',
+                placeholder: 'Search 450+ topics...',
+                noData: 'No results!',
+                depth: 3
+            },
+            mergeNavbar: true,
+            formatUpdated: '{YYYY-MM-DD}',
+            plugins: [
+                function(hook, vm) {
+                    hook.afterEach(function(html, next) {
+                        next(html
+                            .replace(/```mermaid\s*\n([\s\S]*?)```/g, function(match, p1) {
+                                return '<pre class="mermaid">' + p1.trim() + '</pre>';
+                            })
+                        );
+                    });
+                }
+            ],
+            markdown: {
+                renderer: {
+                    code: function(code, lang) {
+                        if (lang === 'mermaid') {
+                            return '<pre class="mermaid">' + code + '</pre>';
+                        }
+                        return this.origin.code.apply(this, arguments);
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true, htmlLabels: true },
+            sequence: { useMaxWidth: true }
+        });
+    </script>
+    <style>
+        :root {
+            --theme-color: #4caf50;
+            --loading-color: #4caf50;
+        }
+        .sidebar {
+            background: #1a1a2e;
+        }
+        .sidebar ul li a {
+            color: #ccc;
+        }
+        .sidebar ul li a:hover {
+            color: #4caf50;
+        }
+        .sidebar .search input {
+            background: #16213e;
+            border-color: #0f3460;
+            color: #fff;
+        }
+        .app-name-link {
+            color: #4caf50 !important;
+        }
+        .markdown-section h1 { color: #e94560; }
+        .markdown-section h2 { color: #4caf50; }
+        .markdown-section h3 { color: #4361ee; }
+        .markdown-section h4 { color: #9b59b6; }
+        .mermaid {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .cover {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+        }
+        .cover-label {
+            display: none;
+        }
+    </style>
+</head>
+</html>
