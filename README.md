@@ -1,97 +1,126 @@
 # System Design Mastery
 
-> From zero to staff engineer — a complete learning operating system for system design.
+> From zero to staff engineer — a complete Cloud + System Design + DevOps + Architecture learning operating system.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-## The Roadmap
+## The Learning Path
 
 ```
-Level 1 ──▶ Fundamentals ──────────▶ CAP, Scalability, Latency
-Level 2 ──▶ Networking ────────────▶ TCP/IP, HTTP, DNS, CDN
-Level 3 ──▶ Databases ─────────────▶ SQL, NoSQL, Sharding, Indexing
-Level 4 ──▶ Caching ───────────────▶ Redis, CDN, Cache Patterns
-Level 5 ──▶ Message Queues ────────▶ Kafka, RabbitMQ, SQS
-Level 6 ──▶ Distributed Systems ───▶ Raft, Paxos, Consensus
-Level 7 ──▶ Cloud Architecture ────▶ AWS, GCP, Azure, K8s
-Level 8 ──▶ Real Architectures ────▶ Netflix, Uber, YouTube
-Level 9 ──▶ Staff Engineer ────────▶ Tradeoffs, RFCs, Chaos
+                       ┌─────────────────────────────────────┐
+                       │   21-Staff Engineer                 │
+                       │   Tradeoffs, RFCs, Chaos Engineering │
+                       └─────────────────────────────────────┘
+                                       │
+                 ┌─────────────────────┼─────────────────────┐
+                 ▼                     ▼                     ▼
+     ┌──────────────────────┐ ┌──────────────────┐ ┌──────────────────┐
+     │ 20-Interview Prep    │ │ 19-Projects       │ │ 18-Case Studies  │
+     │ 17 Interview Problems│ │ 11 Hands-On Labs  │ │ Architectures +  │
+     │ + Interactive Tools  │ │ + Cloud Deployments│ │ Incidents         │
+     └──────────────────────┘ └──────────────────┘ └──────────────────┘
+                                       │
+        ┌──────┬──────┬──────┬──────┬──┴──┬──────┬──────┬──────┬──────┐
+        ▼      ▼      ▼      ▼      ▼      ▼      ▼      ▼      ▼      ▼
+    ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐
+    │ 10 │ │ 11 │ │ 12 │ │ 13 │ │ 14 │ │ 15 │ │ 16 │ │ 17 │ │ 08 │ │ 09 │
+    │AWS │ │Az. │ │GCP │ │TF  │ │Dev │ │SRE │ │Sec.│ │Obs.│ │Dkr │ │K8s │
+    └────┘ └────┘ └────┘ └────┘ └────┘ └────┘ └────┘ └────┘ └────┘ └────┘
+                                       │
+                    ┌──────────────────┼──────────────────┐
+                    ▼                  ▼                  ▼
+          ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
+          │ 05-System Design │ │ 06-Dist. Systems │ │ 07-Microservices │
+          │ Caching, Queues, │ │ Consensus, Raft, │ │ DDD, Circuit     │
+          │ Patterns         │ │ ZooKeeper, Lock  │ │ Breaker, Sagas   │
+          └──────────────────┘ └──────────────────┘ └──────────────────┘
+                                       │
+        ┌──────────────────────────────┼──────────────────────────────┐
+        ▼                              ▼                              ▼
+┌──────────────────┐          ┌──────────────────┐          ┌──────────────────┐
+│ 01-CS Fund.      │          │ 02-Networking     │          │ 04-Databases     │
+│ CAP, Scalability,│          │ HTTP, TCP/IP, DNS,│          │ SQL, NoSQL,      │
+│ Consistency      │          │ CDN, WebSocket    │          │ Sharding, ACID   │
+└──────────────────┘          └──────────────────┘          └──────────────────┘
+        │                              │                              │
+        └──────────────────────────────┼──────────────────────────────┘
+                                       ▼
+                               ┌──────────────────┐
+                               │ 03-Linux          │
+                               │ Processes, Memory,│
+                               │ Networking, Shell │
+                               └──────────────────┘
 ```
 
-## What Makes This Different
+## Module Index
 
-| Feature | This Repo | Others |
-|---------|-----------|--------|
-| Structured learning path | ✅ | ❌ |
-| Hands-on projects with code | ✅ | ❌ |
-| Production incident analysis | ✅ | ❌ |
-| Staff engineer content | ✅ | ❌ |
-| Open-source architecture teardowns | ✅ | ❌ |
-| Interview difficulty tiers | ✅ | ❌ |
-| Interactive diagrams | ✅ | ❌ |
-| Capacity calculators | ✅ | ❌ |
+| # | Module | Topics | Files |
+|---|--------|--------|-------|
+| 01 | [Computer Science Fundamentals](01-Computer-Science-Fundamentals/) | CAP, Scalability, H/V Scaling, Latency, Throughput, Consistency | 15 |
+| 02 | [Networking](02-Networking/) | OSI, TCP, UDP, HTTP, HTTPS, REST, GraphQL, gRPC, DNS, CDN | 15 |
+| 03 | [Linux](03-Linux/) | Processes, Memory, FS, Networking, Shell Scripting, Performance | 10 |
+| 04 | [Databases](04-Databases/) | PostgreSQL, MySQL, MongoDB, Cassandra, DynamoDB, Redis, Elasticsearch, Indexing | 16 |
+| 05 | [System Design](05-System-Design/) | Caching Patterns, Message Queues, Kafka, RabbitMQ, SQS, Pulsar | 19 |
+| 06 | [Distributed Systems](06-Distributed-Systems/) | Consensus, Paxos, Raft, Leader Election, ZooKeeper, etcd | 9 |
+| 07 | [Microservices](07-Microservices/) | DDD, Service Mesh, API Gateway, Circuit Breaker, Sagas, CQRS | 11 |
+| 08 | [Docker](08-Docker/) | Containers, Images, Dockerfile, Compose, Networking, Volumes | 2 |
+| 09 | [Kubernetes](09-Kubernetes/) | Pods, Deployments, Services, EKS/GKE/AKS Comparison | 3 |
+| 10 | [AWS](10-AWS/) | 28 services: EC2, Lambda, S3, VPC, RDS, DynamoDB, EKS, IAM, etc. | 33 |
+| 11 | [Azure](11-Azure/) | 18 services: VMs, Functions, AKS, Cosmos DB, Blob, Entra ID | 20 |
+| 12 | [GCP](12-GCP/) | 17 services: GKE, Compute Engine, BigQuery, Spanner, Cloud Run | 21 |
+| 13 | [Terraform](13-Terraform/) | IaC, Providers, Modules, State, AWS Provisioning, Best Practices | 10 |
+| 14 | [DevOps](14-DevOps/) | Git Workflows, GitHub Actions, Jenkins, ArgoCD, Helm, Ansible, CI/CD | 11 |
+| 15 | [SRE](15-SRE/) | SLO/SLI/Error Budgets, Incident Mgmt, Postmortems, Capacity Planning | 10 |
+| 16 | [Security](16-Security/) | Auth, JWT, OAuth, RBAC, ABAC, Encryption, WAF, DDoS | 13 |
+| 17 | [Observability](17-Observability/) | Logging, Monitoring, Tracing, Metrics, Prometheus, Grafana, ELK | 11 |
+| 18 | [Case Studies](18-Case-Studies/) | Netflix, YouTube, Uber, WhatsApp, Instagram, Twitter, Spotify + 7 Production Incidents | 18 |
+| 19 | [Projects](19-Projects/) | URL Shortener, Chat System, Netflix Clone, Uber, Payment Gateway, + more | 12 |
+| 20 | [Interview Prep](20-Interview-Prep/) | 17 System Design Interview Solutions + Interactive Quiz/Tools | 21 |
+| 21 | [Staff Engineer](21-Staff-Engineer/) | Tradeoffs, RFC Writing, Cost Optimization, Multi-Region, DR | 10 |
 
-## Modules
+## Multi-Cloud Mapping
 
-| Module | Topics | Level |
-|--------|--------|-------|
-| [01 — Fundamentals](01-Fundamentals/README.md) | CAP, Scalability, Consistency, Latency | Beginner |
-| [02 — Networking](02-Networking/README.md) | OSI, TCP, HTTP/2/3, DNS, CDN, gRPC | Beginner |
-| [03 — Databases](03-Databases/README.md) | PostgreSQL, MongoDB, Cassandra, Sharding | Intermediate |
-| [04 — Caching](04-Caching/README.md) | Redis, Memcached, Cache Patterns | Intermediate |
-| [05 — Message Queues](05-Message-Queues/README.md) | Kafka, RabbitMQ, SQS, Delivery Guarantees | Intermediate |
-| [06 — Distributed Systems](06-Distributed-Systems/README.md) | Raft, Paxos, ZooKeeper, Consensus | Advanced |
-| [07 — Cloud Architecture](07-Cloud-Architecture/README.md) | AWS, GCP, Azure, K8s, Docker | Intermediate |
-| [08 — Security](08-Security/README.md) | JWT, OAuth, RBAC, Encryption, WAF | Intermediate |
-| [09 — Observability](09-Observability/README.md) | Prometheus, Grafana, ELK, Tracing | Intermediate |
-| [10 — Open Source Architectures](10-Open-Source-Architectures/README.md) | Netflix, Uber, YouTube, Instagram | Advanced |
-| [11 — Production Incidents](11-Production-Incidents/README.md) | Facebook 2021, AWS outages, postmortems | All Levels |
-| [12 — Hands-On Projects](12-Hands-On-Projects/README.md) | URL Shortener, Chat, Uber Backend | All Levels |
-| [13 — System Design Interviews](13-System-Design-Interviews/README.md) | Tracks from beginner to staff level | All Levels |
-| [14 — Staff Engineer Level](14-Staff-Engineer-Level/README.md) | Tradeoffs, RFCs, Chaos Engineering | Staff+ |
-| [15 — Interactive Tools](15-Tools/README.md) | Quiz Generator, Capacity Calc, Failure Sim | All Levels |
+| Category | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Compute | EC2 | VMs | Compute Engine |
+| Serverless | Lambda | Functions | Cloud Functions |
+| Containers | EKS | AKS | GKE |
+| Object Storage | S3 | Blob Storage | Cloud Storage |
+| Relational DB | RDS | Azure SQL | Cloud SQL |
+| NoSQL | DynamoDB | Cosmos DB | Bigtable/Firestore |
+| Warehouse | Redshift | Synapse | BigQuery |
+| Queue | SQS | Service Bus | Pub/Sub |
+| Monitoring | CloudWatch | Azure Monitor | Operations Suite |
+
+[Full Multi-Cloud Mapping →](12-GCP/19-multi-cloud-mapping.md)
+
+## Certifications
+
+| Cloud | Foundational | Associate | Professional |
+|-------|-------------|-----------|-------------|
+| **AWS** | Cloud Practitioner | Solutions Architect Associate | Solutions Architect Professional |
+| **Azure** | AZ-900 | AZ-104 Administrator | AZ-305 Architect Expert |
+| **GCP** | Cloud Digital Leader | Associate Cloud Engineer | Professional Cloud Architect |
+
+- [AWS Certifications](10-AWS/32-certifications.md)
+- [Azure Certifications](11-Azure/19-certifications.md)
+- [GCP Certifications](12-GCP/20-certifications.md)
 
 ## How to Use This Repository
 
 ```
-1. Start with Module 01 — no skipping
-2. Build the hands-on projects as you go
-3. Attempt interview questions after each module
-4. Study real architectures after fundamentals are solid
-5. Level up to staff engineer content last
+# Clone
+git clone https://github.com/ajju853/SystemDesignHandbook.git
+
+# Start from the beginning
+01-Computer-Science-Fundamentals/01-what-is-system-design.md
+
+# Or jump to your level
+# Beginner: Modules 01-05
+# Intermediate: Modules 06-12
+# Advanced: Modules 13-17
+# Staff Engineer: Module 21
 ```
-
-## Prerequisites
-
-- Basic programming knowledge (any language)
-- Understanding of basic data structures (hash maps, trees, queues)
-- Familiarity with basic operating system concepts
-
-## Learning Path by Role
-
-### 🟢 Backend Engineer
-`01 → 02 → 03 → 04 → 05 → 06 → 07 → 09 → 10 → 15`
-
-### 🟢 Full Stack Engineer  
-`01 → 02 → 03 → 04 → 07 → 08 → 09 → 12 → 15`
-
-### 🟢 DevOps / SRE
-`01 → 02 → 03 → 05 → 06 → 07 → 09 → 11 → 14 → 15`
-
-### 🟢 Engineering Manager
-`01 → 02 → 03 → 07 → 10 → 11 → 13 → 14 → 15`
-
-### 🟢 Staff+ Aspirant
-`01 → 02 → 03 → 04 → 05 → 06 → 07 → 09 → 10 → 11 → 14 → 15`
-
-## Interactive Tools
-
-| Tool | Description |
-|------|-------------|
-| [Quiz Generator](15-Tools/quiz-generator.html) | 40+ questions across 9 modules with difficulty tiers |
-| [Capacity Calculator](15-Tools/capacity-calculator.html) | Estimate traffic, storage, bandwidth, compute, costs |
-| [Failure Simulator](15-Tools/failure-simulator.html) | Visual architecture with cascading failure simulation |
 
 ## Contributing
 
