@@ -4,7 +4,7 @@
 
 ### The Ultimate Cloud + System Design + DevOps + Architecture Operating System
 
-**From zero to Staff Engineer — 400+ topics across 21 modules with 502 Mermaid diagrams**
+**From zero to Staff Engineer — 450+ topics across 25 modules with 550+ Mermaid diagrams**
 
 [![GitHub Stars](https://img.shields.io/github/stars/ajju853/SystemDesignHandbook?style=for-the-badge&logo=github&color=gold)](https://github.com/ajju853/SystemDesignHandbook/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/ajju853/SystemDesignHandbook?style=for-the-badge&logo=github&color=blue)](https://github.com/ajju853/SystemDesignHandbook/network/members)
@@ -40,7 +40,7 @@
 | **Case Studies** | ✅ 25 real architectures — Netflix, Uber, Stripe, TikTok, Discord, DoorDash | Usually 5-10 |
 | **Projects** | ✅ 19 hands-on — URL shortener → healthcare EMR with full end-to-end guide | Usually 3-5 |
 | **Staff Engineer** | ✅ 19 files — mentorship, strategy, migrations, incident leadership, executive comm | Unique to this repo |
-| **Mermaid Diagrams** | ✅ **502 diagrams across 400 files** | Usually text-only |
+| **Mermaid Diagrams** | ✅ **550+ diagrams across 448 files** | Usually text-only |
 | **Interview Prep** | ✅ 26 problems — from Tinder to distributed KV store to recommendation systems | Usually 10-15 |
 | **End-to-End Guide** | ✅ Complete E-Commerce platform from requirements to production SRE | Not offered |
 
@@ -55,6 +55,7 @@ graph TB
     classDef cloud fill:#1a1a4e,stroke:#4361ee,color:#fff
     classDef advanced fill:#2d1a2e,stroke:#e94560,color:#fff
     classDef capstone fill:#1a2d1e,stroke:#4caf50,color:#fff
+    classDef specialization fill:#1a1a3e,stroke:#9b59b6,color:#fff
 
     subgraph "Foundations"
         CS["01-CS Fundamentals<br/>CAP, Scalability, Latency"]:::foundation
@@ -92,6 +93,13 @@ graph TB
         STAFF["21-Staff Engineer<br/>Strategy, Mentorship, RFCs"]:::capstone
     end
 
+    subgraph "Specialization"
+        AI["22-AI/ML System Design<br/>LLMs, RAG, Vector DBs, Agents"]:::specialization
+        API["23-API Design<br/>REST, GraphQL, gRPC, Security"]:::specialization
+        TEST["24-Testing & Quality<br/>Contract, Chaos, Perf, CI"]:::specialization
+        ARCH["25-Clean Architecture<br/>DDD, CQRS, ES, ADRs"]:::specialization
+    end
+
     CS --> NET --> LIN --> DB
     DB --> SD --> DS --> MS
     MS --> DOCK --> K8S
@@ -99,6 +107,7 @@ graph TB
     AWS & AZ & GCP --> TF --> DEV
     DEV --> SRE & SEC & OBS
     SRE & SEC & OBS --> CASE --> PROJ --> INT --> STAFF
+    STAFF --> AI & API & TEST & ARCH
 ```
 
 ---
@@ -128,6 +137,10 @@ graph TB
 | 19 | [Projects](19-Projects/) | 20 | End-to-End Implementation Guide + URL Shortener, Chat System, Netflix Clone, YouTube, Uber, Payment Gateway, Instagram, Twitter, Dropbox, Google Drive, Food Delivery, Video Conferencing, Event Booking, Airline Reservation, Banking Ledger, Healthcare EMR, Java Full Stack Roadmap |
 | 20 | [Interview Prep](20-Interview-Prep/) | 26 | TinyURL, Parking Lot, Rate Limiter, Web Crawler, Instagram, WhatsApp, Twitter, Uber, Dropbox, Netflix, YouTube, Google Search, Amazon, Multi-Region Banking, Global CDN, Analytics, Event-Driven, Tinder, Distributed KV Store, Notification System, Collaborative Editor, Elevator OOD, Distributed Cache, Job Scheduler, Recommendation System |
 | 21 | [Staff Engineer](21-Staff-Engineer/) | 19 | Tradeoffs, architecture reviews, RFC writing, cost optimization, multi-region design, disaster recovery, chaos engineering, capacity planning, mentorship vs sponsorship, technical strategy, migration strategies, API versioning, executive communication, interviewing/hiring, technical debt management, incident leadership, engineering culture (DORA/SPACE), growth paths |
+| 22 | [AI & ML System Design](22-AI-ML-System-Design/) | 12 | Transformer architecture, RAG, vector databases, model serving (vLLM, TGI, Triton), prompt engineering, AI agent architectures, ML pipeline infra, model evaluation/monitoring, GPU optimization, cost optimization, AI system design examples |
+| 23 | [API Design](23-API-Design/) | 11 | RESTful API design, OpenAPI 3.1, GraphQL (schema, resolvers, federation, N+1), gRPC (protobuf, 4 streaming modes), API versioning, API security (OAuth2, OIDC, JWT), API gateway patterns, WebSocket/SSE, webhooks, API testing |
+| 24 | [Testing & Quality Engineering](24-Testing-Quality-Engineering/) | 11 | Testing strategies (pyramid, shift-left), unit/integration testing (mocking, test doubles, Testcontainers), contract testing (Pact CDC), E2E testing (Cypress, Playwright), performance testing (k6, Locust), load testing patterns, chaos engineering, test infra, CI test strategy, quality metrics |
+| 25 | [Clean Architecture & Design Patterns](25-Clean-Architecture-Design-Patterns/) | 12 | SOLID principles (multi-language), 23 GoF patterns, Clean Architecture, Hexagonal Architecture, Domain-Driven Design, CQRS, Event Sourcing, Saga pattern, Strangler Fig, ADRs, Twelve-Factor App |
 
 ---
 
@@ -187,10 +200,11 @@ git clone https://github.com/ajju853/SystemDesignHandbook.git
 01-Computer-Science-Fundamentals/01-what-is-system-design.md
 
 # Jump to your level:
-#   🟢 Beginner:     Modules 01-05 (CS → Networking → Linux → DB → System Design)
+# 🟢 Beginner:     Modules 01-05 (CS → Networking → Linux → DB → System Design)
 #   🟡 Intermediate: Modules 06-12 (Dist Sys → Microservices → Docker → K8s → Cloud)
 #   🔴 Advanced:     Modules 13-17 (Terraform → DevOps → SRE → Security → Observability)
 #   🔵 Staff:        Module 21 (Staff Engineer: tradeoffs, strategy, leadership)
+#   🟣 Specialization: Modules 22-25 (AI/ML, API Design, Testing, Clean Architecture)
 
 # Build a real project:
 19-Projects/12-end-to-end-implementation-guide.md
@@ -323,6 +337,76 @@ git clone https://github.com/ajju853/SystemDesignHandbook.git
 | [Incident Leadership (IC Role)](21-Staff-Engineer/16-incident-leadership.md) | Incident command, communication, post-incident action items |
 | [Engineering Culture (DORA/SPACE)](21-Staff-Engineer/17-engineering-culture.md) | DORA metrics, SPACE framework, developer experience |
 | [Growth Paths](21-Staff-Engineer/18-growth-paths.md) | Staff → Principal → Distinguished → Fellow: skills and expectations |
+</details>
+
+<details>
+<summary><b>🤖 22-AI & ML System Design (12 files)</b> — Transformer Architecture → RAG → Vector DBs → Model Serving → Prompt Engineering → AI Agents → ML Pipeline → Evaluation/Monitoring → GPU Optimization → Cost Optimization → System Design Examples</summary>
+
+| File | Topic |
+|------|-------|
+| [Transformer Architecture](22-AI-ML-System-Design/01-transformer-architecture.md) | Attention mechanism, multi-head attention, KV cache, RoPE, GQA |
+| [RAG Architecture](22-AI-ML-System-Design/02-rag-architecture.md) | Chunking, embeddings, hybrid search, reranking, RAG fusion, multi-modal RAG |
+| [Vector Databases](22-AI-ML-System-Design/03-vector-databases.md) | Pinecone, Weaviate, Milvus, FAISS, HNSW, IVF, PQ, hybrid search |
+| [Model Serving](22-AI-ML-System-Design/04-model-serving.md) | vLLM (PagedAttention), TGI, Triton, TensorRT-LLM, continuous batching, quantization |
+| [Prompt Engineering](22-AI-ML-System-Design/05-prompt-engineering-patterns.md) | Few-shot, CoT, ReAct, ToT, DSPy, guardrails, injection prevention |
+| [AI Agent Architectures](22-AI-ML-System-Design/06-ai-agent-architectures.md) | Agent loops, tool use, function calling, multi-agent, memory, planning |
+| [ML Pipeline Infra](22-AI-ML-System-Design/07-ml-pipeline-infra.md) | Feature stores (Feast), data versioning (DVC), experiment tracking (MLflow, W&B) |
+| [Model Evaluation & Monitoring](22-AI-ML-System-Design/08-model-evaluation-monitoring.md) | LLM evals, hallucination detection, drift, LangSmith, Weave |
+| [GPU Optimization](22-AI-ML-System-Design/09-gpu-optimization.md) | CUDA, Flash Attention, PagedAttention, speculative decoding, parallelism |
+| [Cost Optimization](22-AI-ML-System-Design/10-cost-optimization.md) | Caching, distillation, pruning, LoRA vs full fine-tune, spot instances |
+| [AI System Design Examples](22-AI-ML-System-Design/11-ai-system-design-examples.md) | Chatbot, RAG pipeline, code assistant, recommendation, moderation |
+</details>
+
+<details>
+<summary><b>🔌 23-API Design (11 files)</b> — RESTful Design → OpenAPI → GraphQL → gRPC → Versioning → Security → Gateway Patterns → WebSocket/SSE → Webhooks → API Testing</summary>
+
+| File | Topic |
+|------|-------|
+| [RESTful API Design](23-API-Design/01-rest-api-design.md) | Resource modeling, HTTP methods, status codes, HATEOAS, pagination, idempotency |
+| [OpenAPI Spec](23-API-Design/02-openapi-spec.md) | OpenAPI 3.1, code generation, Swagger UI, Redoc, Spectral validation |
+| [GraphQL Deep-Dive](23-API-Design/03-graphql-deep-dive.md) | Schema, resolvers, N+1 (DataLoader), federation, security (depth, complexity) |
+| [gRPC Deep-Dive](23-API-Design/04-grpc-deep-dive.md) | Protobuf, 4 streaming modes, interceptors, deadlines, REST/GraphQL comparison |
+| [API Versioning](23-API-Design/05-api-versioning.md) | URI vs header vs query, semver, breaking change detection, sunset policies |
+| [API Security](23-API-Design/06-api-security.md) | OAuth2 flows, OIDC, JWT, rate limiting algos, OWASP API Top 10 |
+| [API Gateway Patterns](23-API-Design/07-api-gateway-patterns.md) | BFF, aggregation, circuit breaking, Kong, Apigee, gateway vs service mesh |
+| [WebSocket & SSE](23-API-Design/08-websocket-sse.md) | WebSocket protocol, SSE, long polling, Redis pub/sub, reconnection |
+| [Webhook Patterns](23-API-Design/09-webhook-patterns.md) | Retry/backoff, HMAC signing, filtering, batching, DLQ, verification |
+| [API Testing](23-API-Design/10-api-testing.md) | Contract testing (Pact), fuzzing, property-based, Testcontainers, k6 |
+</details>
+
+<details>
+<summary><b>🧪 24-Testing & Quality Engineering (11 files)</b> — Strategies → Unit/Integration → Contract → E2E → Performance → Load Patterns → Chaos → Test Infra → CI Strategy → Quality Metrics</summary>
+
+| File | Topic |
+|------|-------|
+| [Testing Strategies](24-Testing-Quality-Engineering/01-testing-strategies.md) | Test pyramid, shift-left, risk-based, test environments strategy |
+| [Unit & Integration Testing](24-Testing-Quality-Engineering/02-unit-integration-testing.md) | Mocking, test doubles, DI, Testcontainers, DB testing |
+| [Contract Testing](24-Testing-Quality-Engineering/03-contract-testing.md) | Pact CDC, provider verification, Broker, can-i-deploy |
+| [E2E Testing](24-Testing-Quality-Engineering/04-end-to-end-testing.md) | Cypress, Playwright, Selenium, visual regression (Percy) |
+| [Performance Testing](24-Testing-Quality-Engineering/05-performance-testing.md) | k6, Locust, Gatling, JMeter, metrics (latency, throughput, p99) |
+| [Load Testing Patterns](24-Testing-Quality-Engineering/06-load-testing-patterns.md) | Ramp-up, spike, soak, breakpoint, closed vs open model |
+| [Chaos Engineering](24-Testing-Quality-Engineering/07-chaos-engineering.md) | Principles, GameDays, Chaos Mesh, Litmus, Gremlin |
+| [Test Infrastructure](24-Testing-Quality-Engineering/08-test-infrastructure.md) | Testcontainers, ephemeral envs, preview deploys, DB seeding |
+| [CI Test Strategy](24-Testing-Quality-Engineering/09-ci-test-strategy.md) | Test selection, impact analysis, flaky detection, quality gates |
+| [Quality Metrics](24-Testing-Quality-Engineering/10-quality-metrics.md) | Coverage (line/branch/mutation), DORA metrics, SLI/SLO for quality |
+</details>
+
+<details>
+<summary><b>🏛️ 25-Clean Architecture & Design Patterns (12 files)</b> — SOLID → GoF → Clean → Hexagonal → DDD → CQRS → Event Sourcing → Saga → Strangler Fig → ADRs → Twelve-Factor</summary>
+
+| File | Topic |
+|------|-------|
+| [SOLID Principles](25-Clean-Architecture-Design-Patterns/01-solid-principles.md) | SRP, OCP, LSP, ISP, DIP with Go/TS/Python/Rust examples |
+| [GoF Design Patterns](25-Clean-Architecture-Design-Patterns/02-gof-patterns.md) | All 23 patterns — creational, structural, behavioral (multi-language) |
+| [Clean Architecture](25-Clean-Architecture-Design-Patterns/03-clean-architecture.md) | Dependency rule, entities/use cases/adapters, screaming architecture |
+| [Hexagonal Architecture](25-Clean-Architecture-Design-Patterns/04-hexagonal-architecture.md) | Ports & adapters, driving/driven adapters, Clean vs Onion comparison |
+| [Domain-Driven Design](25-Clean-Architecture-Design-Patterns/05-domain-driven-design.md) | Ubiquitous language, bounded contexts, aggregates, domain events |
+| [CQRS Pattern](25-Clean-Architecture-Design-Patterns/06-cqrs-pattern.md) | Command/query separation, separate DBs, event-driven CQRS |
+| [Event Sourcing](25-Clean-Architecture-Design-Patterns/07-event-sourcing.md) | Event store (PostgreSQL), snapshots, replay, projections, versioning |
+| [Saga Pattern](25-Clean-Architecture-Design-Patterns/08-saga-pattern.md) | Choreography vs orchestration, compensation, Kafka/Temporal |
+| [Strangler Fig Pattern](25-Clean-Architecture-Design-Patterns/09-strangler-fig-pattern.md) | Incremental migration, feature flags, database decomposition |
+| [Architecture Decision Records](25-Clean-Architecture-Design-Patterns/10-architecture-decision-records.md) | ADR format, lifecycle, tools, Netflix/Spotify practices |
+| [Twelve-Factor App](25-Clean-Architecture-Design-Patterns/11-twelve-factor-app.md) | All 12 factors with code/config, serverless & K8s interpretations |
 </details>
 
 ---

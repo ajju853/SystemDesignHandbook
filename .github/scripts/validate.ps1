@@ -31,14 +31,14 @@ Get-ChildItem "$ROOT" -Recurse -Filter "*.md" -File | Where-Object {
 Pass "All content files follow NN-description.md naming"
 
 Hdr "2. Module Numbering Completeness"
-$expected = 1..21 | ForEach-Object { "{0:D2}" -f $_ }
+$expected = 1..25 | ForEach-Object { "{0:D2}" -f $_ }; $lastModule = "25"
 $actual = Get-ChildItem "$ROOT" -Directory | Where-Object { $_.Name -match '^\d{2}-' } | ForEach-Object { $_.Name.Substring(0,2) } | Sort-Object
 foreach ($num in $expected) {
     if ($num -notin $actual) {
         Fail "Missing module directory: $num-*"
     }
 }
-Pass "All 21 modules (01-21) present"
+Pass "All 25 modules (01-25) present"
 
 Hdr "3. Module README Navigation"
 $modules = Get-ChildItem "$ROOT" -Directory | Where-Object { $_.Name -match '^\d{2}-' } | Sort-Object Name
@@ -53,7 +53,7 @@ foreach ($m in $modules) {
     if ($num -ne "01" -and $content -notmatch 'Previous:') {
         Fail "$name/README.md missing Previous: link"
     }
-    if ($num -ne "21" -and $content -notmatch 'Next:') {
+    if ($num -ne $lastModule -and $content -notmatch 'Next:') {
         Fail "$name/README.md missing Next: link"
     }
 }

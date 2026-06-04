@@ -57,7 +57,7 @@ done < <(find "$ROOT" -maxdepth 3 -name '*.md' -not -path '*/.git/*' -not -path 
 pass "All content files follow NN-description.md naming"
 
 header "2. Module Numbering Completeness"
-EXPECTED_MODULES=$(seq -w 1 21)
+EXPECTED_MODULES=$(seq -w 1 25)
 ACTUAL_MODULES=""
 while IFS= read -r dir; do
     d=$(basename "$dir")
@@ -74,7 +74,7 @@ for num in $EXPECTED_MODULES; do
         fail "Missing module directory: $num-*"
     fi
 done
-pass "All 21 modules (01-21) present"
+pass "All 25 modules (01-25) present"
 
 header "3. Module README Navigation"
 while IFS= read -r dir; do
@@ -89,7 +89,7 @@ while IFS= read -r dir; do
     if [[ "$num" != "01" ]] && ! echo "$content" | grep -q 'Previous:'; then
         fail "$d/README.md missing Previous: link"
     fi
-    if [[ "$num" != "21" ]] && ! echo "$content" | grep -q 'Next:'; then
+    if [[ "$num" != "25" ]] && ! echo "$content" | grep -q 'Next:'; then
         fail "$d/README.md missing Next: link"
     fi
 done < <(find "$ROOT" -maxdepth 1 -type d -name '[0-9][0-9]-*' | sort)
