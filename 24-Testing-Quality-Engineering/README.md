@@ -1,4 +1,4 @@
-# Module 24: Testing & Quality Engineering
+# 24 — Testing & Quality Engineering
 
 ## Module Architecture
 

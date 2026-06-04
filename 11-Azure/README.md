@@ -1,4 +1,4 @@
-# Azure Module Overview
+# 11 — Azure
 
 ## What is it?
 Microsoft Azure is a cloud computing platform offering IaaS, PaaS, and SaaS solutions across 60+ regions worldwide, with deep integration with Microsoft's enterprise ecosystem (Microsoft 365, Dynamics, Power Platform).

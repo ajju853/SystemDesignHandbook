@@ -1413,12 +1413,12 @@ A: It allows any 2.x version where `x >= 1` (e.g., 2.1, 2.2, up to 2.999...). It
 
 ## Cross-References
 
-- **[10-AWS/02-iam.md](../10-AWS/02-iam.md)** — IAM roles and policies commonly provisioned via Terraform
-- **[10-AWS/05-s3.md](../10-AWS/05-s3.md)** — S3 buckets as Terraform backends
-- **[11-Azure/02-identity.md](../11-Azure/02-identity.md)** — Azure AD authentication for Terraform
-- **[12-GCP/02-iam.md](../12-GCP/02-iam.md)** — GCP service accounts for Terraform
-- **[14-DevOps/03-devops-practices.md](../14-DevOps/03-devops-practices.md)** — CI/CD pipeline patterns that integrate Terraform
-- **[14-DevOps/07-security.md](../14-DevOps/07-security.md)** — Secrets management and security scanning in pipelines
+- **[10-AWS/02-iam-detailed.md](../10-AWS/02-iam-detailed.md)** — IAM roles and policies commonly provisioned via Terraform
+- **[10-AWS/09-s3-storage.md](../10-AWS/09-s3-storage.md)** — S3 buckets as Terraform backends
+- **[11-Azure/16-entra-id.md](../11-Azure/16-entra-id.md)** — Azure AD authentication for Terraform
+- **[12-GCP/21-iam-resource-hierarchy.md](../12-GCP/21-iam-resource-hierarchy.md)** — GCP service accounts for Terraform
+- **[14-DevOps/07-ci-cd-pipeline-design.md](../14-DevOps/07-ci-cd-pipeline-design.md)** — CI/CD pipeline patterns that integrate Terraform
+- **[14-DevOps/09-devops-security.md](../14-DevOps/09-devops-security.md)** — Secrets management and security scanning in pipelines
 - **[01-iac-basics.md](./01-iac-basics.md)** — Foundational IaC concepts
 - **[05-state-management.md](./05-state-management.md)** — Deep dive into state backends and migration
 - **[08-terraform-cloud.md](./08-terraform-cloud.md)** — Terraform Cloud workspaces, Sentinel, and remote runs

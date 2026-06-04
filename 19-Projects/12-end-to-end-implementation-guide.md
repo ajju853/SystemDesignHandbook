@@ -1601,9 +1601,9 @@ We exceeded Stripe's API rate limit (100 req/s) during a flash sale. The service
 This was a capacity planning failure — we estimated for 2x traffic but got 3x. The system should have handled 429s gracefully regardless. Moving forward, all third-party API calls will have circuit breakers, and flash sales will include dependency capacity validation.
 
 ## Related Resources
-- [Circuit Breaker Pattern](../../07-Microservices/06-circuit-breaker.md)
-- [Resilience Patterns](../../15-SRE/06-reliability-patterns.md)
-- [Capacity Planning](../../15-SRE/05-capacity-planning.md)
+- [Circuit Breaker Pattern](../07-Microservices/06-circuit-breaker.md)
+- [Resilience Patterns](../15-SRE/06-reliability-patterns.md)
+- [Capacity Planning](../15-SRE/05-capacity-planning.md)
 ```
 
 Reference: [15-SRE (Postmortem Culture)](../15-SRE/03-postmortem-culture.md)

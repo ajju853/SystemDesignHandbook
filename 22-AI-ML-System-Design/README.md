@@ -1,4 +1,4 @@
-# 22 - AI/ML System Design
+# 22 — AI/ML System Design
 
 > Master the architecture, infrastructure, and patterns for building production-grade AI and machine learning systems — from transformer internals to cost-optimized serving at scale.
 

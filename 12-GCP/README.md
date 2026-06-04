@@ -1,4 +1,4 @@
-# GCP Module Overview
+# 12 — GCP
 
 ## What is it?
 Google Cloud Platform (GCP) is a cloud computing platform offering IaaS, PaaS, and SaaS solutions built on the same infrastructure that powers Google's own products (Search, YouTube, Gmail). GCP excels in data analytics, machine learning, and container-native services.

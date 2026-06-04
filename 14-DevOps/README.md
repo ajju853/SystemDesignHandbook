@@ -1,4 +1,4 @@
-# 14 - DevOps
+# 14 — DevOps
 
 ## What is it?
 

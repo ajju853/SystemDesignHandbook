@@ -1,4 +1,4 @@
-# 03-Linux: Linux Fundamentals for System Design & Cloud Engineering
+# 03 — Linux
 
 Linux is the backbone of modern cloud infrastructure. This module covers everything from basic commands to kernel-level features that power containers, performance tuning, and production operations.
 

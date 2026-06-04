@@ -1,4 +1,4 @@
-# 13 - Terraform & Infrastructure as Code
+# 13 — Terraform & Infrastructure as Code
 
 ## Module Overview
 

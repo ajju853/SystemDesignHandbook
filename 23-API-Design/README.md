@@ -1,4 +1,4 @@
-# Module 23: API Design
+# 23 — API Design
 
 > Master the art and science of designing, building, documenting, securing, and evolving APIs at scale.
 

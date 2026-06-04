@@ -1,4 +1,4 @@
-# 25 - Clean Architecture & Design Patterns
+# 25 — Clean Architecture & Design Patterns
 
 > A comprehensive guide to software architecture patterns, design principles, and structural paradigms that underpin modern, maintainable, and scalable systems.
 
