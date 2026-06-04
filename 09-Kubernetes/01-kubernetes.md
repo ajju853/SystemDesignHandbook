@@ -65,7 +65,7 @@ graph TB
 | **Namespace** | Virtual cluster isolation |
 
 ## Related Topics
-- [Docker](../08-Docker/07-docker.md) — Container runtime foundation
+- [Docker](../08-Docker/01-docker-basics.md) — Container runtime foundation
 - [EKS/GKE/AKS](13-eks-gke-aks.md) — Managed Kubernetes comparison (within K8s module)
 - [AWS Overview](../10-AWS/01-aws-overview.md) — Major cloud provider
 - [Service Discovery](../06-Distributed-Systems/08-service-discovery.md) — How services find each other
