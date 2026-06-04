@@ -15,21 +15,34 @@ Linux is the backbone of modern cloud infrastructure. This module covers everyth
 | 7 | **Performance Tuning** — sysctl, ulimit, perf, strace, sar | [07-performance-tuning.md](./07-performance-tuning.md) |
 | 8 | **Security Hardening** — sudoers, SSH, SELinux, auditd | [08-security-hardening.md](./08-security-hardening.md) |
 | 9 | **Containerization** — cgroups, namespaces, OverlayFS, seccomp | [09-containerization.md](./09-containerization.md) |
+| 10 | **Storage Management** — LVM, RAID, iSCSI, device-mapper, partitioning | [10-storage-management.md](./10-storage-management.md) |
+| 11 | **Namespaces & Cgroups** — PID/NET/MNT/UTS network isolation, cgroup v1/v2, resource limiting | [11-namespaces-cgroups.md](./11-namespaces-cgroups.md) |
+| 12 | **I/O & Scheduling** — I/O schedulers, io_uring, CFS, NUMA, CPU pinning | [12-io-scheduling.md](./12-io-scheduling.md) |
+| 13 | **Troubleshooting & Debugging** — strace, perf, ftrace, eBPF/bcc, kdump | [13-troubleshooting-debugging.md](./13-troubleshooting-debugging.md) |
+| 14 | **Filesystem Internals** — VFS, inodes, ext4/XFS/Btrfs internals, overlayfs | [14-filesystem-internals.md](./14-filesystem-internals.md) |
 
 ```mermaid
 graph TD
     LB[Linux Basics] --> PM[Process Management]
     LB --> MM[Memory Management]
-    LB --> FS[File Systems]
     LB --> NW[Networking]
+    LB --> FSI[Filesystem Internals]
     PM --> SS[Shell Scripting]
     MM --> PT[Performance Tuning]
-    FS --> PT
     NW --> PT
     NW --> SH[Security Hardening]
+    FSI --> FS[File Systems]
+    FS --> SM[Storage Management]
+    SM --> PT
+    FS --> PT
     SS --> CT[Containerization]
     PT --> CT
     SH --> CT
+    CT --> NC[Namespaces & Cgroups]
+    NC --> IO[I/O & Scheduling]
+    PT --> TD[Troubleshooting & Debugging]
+    IO --> TD
+    SM --> TD
 ```
 
 ## Prerequisites

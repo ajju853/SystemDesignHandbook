@@ -1,6 +1,6 @@
 # 07 — Microservices
 
-> From monoliths to distributed microservice architectures — decomposition, communication, resilience, and production-readiness.
+> From monoliths to distributed microservice architectures — decomposition, communication, resilience, API composition, service mesh, security, and production-readiness.
 
 ## Prerequisites
 
@@ -40,6 +40,10 @@ graph TD
 | 8 | [Database Per Service](08-database-per-service.md) | Database-per-service pattern, polyglot persistence, distributed transactions, eventual consistency |
 | 9 | [Testing Strategies](09-testing-strategies.md) | Test pyramid, contract testing (Pact), consumer-driven contracts, canary & blue-green |
 | 10 | [Observability](10-observability.md) | Centralized logging, distributed tracing, metrics, health check APIs |
+| 11 | [API Composition & BFF](11-api-composition-bff.md) | Backend for Frontend pattern, API composition, aggregation vs orchestration, GraphQL federation, N+1 prevention |
+| 12 | [Service Mesh Deep-Dive](12-service-mesh-deep-dive.md) | Istio (Pilot, Citadel, Envoy), Linkerd, traffic management, mTLS, observability, canary deployments, gateways |
+| 13 | [Resilience Patterns](13-resilience-patterns.md) | Bulkhead, retry with exponential backoff + jitter, timeout propagation, circuit breaker deep-dive, rate limiting, health check APIs, graceful degradation |
+| 14 | [Microservices Security](14-microservices-security.md) | Service-to-service auth (mTLS, JWT), SPIFFE/SPIRE, OAuth2, RBAC/ABAC, Vault, container security, network policies, OWASP |
 
 ## Related Modules
 
