@@ -1,0 +1,51 @@
+name: Topic Request
+description: Suggest a new topic to add to the repository
+title: "[Topic Request]: "
+labels: ["topic-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new topic! Please fill out the details below.
+  - type: input
+    id: module
+    attributes:
+      label: Target Module
+      description: Which module should this topic go in?
+      placeholder: e.g., 05-System-Design, 22-AI-ML-System-Design
+    validations:
+      required: true
+  - type: input
+    id: topic
+    attributes:
+      label: Topic Name
+      description: What's the topic?
+      placeholder: e.g., Distributed Locking with Redis
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What should this topic cover?
+      placeholder: Key concepts, sub-topics, real-world examples...
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - High (interview hotspot)
+        - Medium (useful but not urgent)
+        - Low (nice to have)
+    validations:
+      required: true
+  - type: checkboxes
+    id: format
+    attributes:
+      label: Content Format
+      options:
+        - label: Include Mermaid diagram
+        - label: Include hands-on example
+        - label: Include interview questions

@@ -12,6 +12,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-red?style=for-the-badge)](LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ajju853/SystemDesignHandbook?style=for-the-badge&color=purple)](https://github.com/ajju853/SystemDesignHandbook/commits/main)
 [![Conventional Commits](https://img.shields.io/badge/Commits-Conventional-orange?style=for-the-badge)](https://www.conventionalcommits.org/)
+[![Validate](https://github.com/ajju853/SystemDesignHandbook/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/ajju853/SystemDesignHandbook/actions/workflows/validate.yml)
 
 <br/>
 
