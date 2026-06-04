@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Failure Simulator - System Design</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+h1 { text-align: center; margin: 30px 0; font-size: 2rem; color: #f8fafc; }
+h1 small { display: block; font-size: 0.9rem; color: #64748b; font-weight: 400; margin-top: 4px; }
+.main-layout { display: grid; grid-template-columns: 1fr 350px; gap: 20px; }
+@media (max-width: 800px) { .main-layout { grid-template-columns: 1fr; } }
+.control-panel { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
+.control-panel h2 { font-size: 1rem; color: #94a3b8; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+.system-category { margin-bottom: 16px; }
+.system-category h3 { font-size: 0.85rem; color: #64748b; margin-bottom: 8px; }
+.fault-toggle { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: #0f172a; border-radius: 6px; margin-bottom: 6px; cursor: pointer; transition: all 0.2s; border: 1px solid #334155; }
+.fault-toggle:hover { border-color: #4a90d9; }
+.fault-toggle .switch { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
+.fault-toggle .switch input { opacity: 0; width: 0; height: 0; }
+.fault-toggle .slider { position: absolute; cursor: pointer; inset: 0; background: #475569; border-radius: 20px; transition: 0.3s; }
+.fault-toggle .slider::before { content: ''; position: absolute; height: 14px; width: 14px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
+.fault-toggle input:checked + .slider { background: #ef4444; }
+.fault-toggle input:checked + .slider::before { transform: translateX(16px); }
+.fault-toggle .label { font-size: 13px; flex: 1; }
+.fault-toggle .desc { font-size: 11px; color: #64748b; display: block; }
+.scenario-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.scenario-presets button { padding: 5px 12px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #94a3b8; cursor: pointer; font-size: 12px; transition: all 0.2s; }
+.scenario-presets button:hover { background: #4a90d9; color: white; border-color: #4a90d9; }
+#run-btn { width: 100%; padding: 12px; border-radius: 8px; border: none; background: #ef4444; color: white; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 12px; }
+#run-btn:hover { background: #dc2626; transform: translateY(-1px); }
+#run-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.result-panel { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; min-height: 500px; }
+.result-panel h2 { font-size: 1rem; color: #94a3b8; margin-bottom: 16px; }
+.arch-diagram { background: #0f172a; border-radius: 8px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; min-height: 250px; position: relative; overflow: hidden; }
+.service-node { position: absolute; border-radius: 8px; padding: 8px 12px; text-align: center; font-size: 11px; transition: all 0.5s; border: 2px solid #334155; background: #1e293b; cursor: default; }
+.service-node.up { border-color: #10b981; background: #064e3b; }
+.service-node.down { border-color: #ef4444; background: #450a0a; animation: pulse 1s infinite; }
+.service-node.degraded { border-color: #f59e0b; background: #451a03; }
+.service-node .name { font-weight: 600; font-size: 12px; }
+.service-node .status-icon { font-size: 18px; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.log-area { background: #0f172a; border-radius: 8px; padding: 12px; font-family: 'Courier New', monospace; font-size: 12px; max-height: 200px; overflow-y: auto; border: 1px solid #334155; }
+.log-entry { padding: 2px 0; border-bottom: 1px solid #1e293b; }
+.log-entry:last-child { border-bottom: none; }
+.log-entry .time { color: #64748b; }
+.log-entry.critical { color: #ef4444; }
+.log-entry.warning { color: #f59e0b; }
+.log-entry.info { color: #4a90d9; }
+.log-entry.success { color: #10b981; }
+.impact-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.metric-box { background: #0f172a; border-radius: 6px; padding: 10px; text-align: center; border: 1px solid #334155; }
+.metric-box .m-value { font-size: 1.3rem; font-weight: 700; }
+.metric-box .m-label { font-size: 11px; color: #64748b; }
+.metric-box.bad .m-value { color: #ef4444; }
+.metric-box.ok .m-value { color: #f59e0b; }
+.metric-box.good .m-value { color: #10b981; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Failure Simulator <small>Toggle faults to see how your system reacts</small></h1>
+<div class="main-layout">
+  <div class="control-panel">
+    <h2>Scenarios</h2>
+    <div class="scenario-presets">
+      <button onclick="loadScenario('single-db')">Database Failure</button>
+      <button onclick="loadScenario('cache-down')">Cache Down</button>
+      <button onclick="loadScenario('network-slow')">Network Slowdown</button>
+      <button onclick="loadScenario('regional')">Region Outage</button>
+      <button onclick="loadScenario('cascading')">Cascading Failure</button>
+      <button onclick="loadScenario('chaos')">Chaos Mode</button>
+      <button onclick="loadScenario('all-up')">All Healthy</button>
+    </div>
+    <h2>System Components</h2>
+    <div class="system-category">
+      <h3>Frontend</h3>
+      <div class="fault-toggle" data-id="cdn"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">CDN<span class="desc">Content Delivery Network</span></div></div>
+      <div class="fault-toggle" data-id="lb"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Load Balancer<span class="desc">Traffic distribution</span></div></div>
+    </div>
+    <div class="system-category">
+      <h3>Services</h3>
+      <div class="fault-toggle" data-id="api"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">API Gateway<span class="desc">Request routing & auth</span></div></div>
+      <div class="fault-toggle" data-id="web"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Web Servers<span class="desc">Application logic</span></div></div>
+      <div class="fault-toggle" data-id="queue"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Message Queue<span class="desc">Async processing</span></div></div>
+      <div class="fault-toggle" data-id="worker"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Background Workers<span class="desc">Offline processing</span></div></div>
+    </div>
+    <div class="system-category">
+      <h3>Data</h3>
+      <div class="fault-toggle" data-id="cache"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Cache (Redis)<span class="desc">In-memory cache</span></div></div>
+      <div class="fault-toggle" data-id="primary-db"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Primary Database<span class="desc">Main write DB</span></div></div>
+      <div class="fault-toggle" data-id="replica"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Read Replica<span class="desc">Read-only copy</span></div></div>
+    </div>
+    <div class="system-category">
+      <h3>Infrastructure</h3>
+      <div class="fault-toggle" data-id="dns"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">DNS<span class="desc">Domain resolution</span></div></div>
+      <div class="fault-toggle" data-id="region"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Region A (Primary)<span class="desc">Primary data center</span></div></div>
+      <div class="fault-toggle" data-id="region-b"><div class="switch"><input type="checkbox"><span class="slider"></span></div><div class="label">Region B (DR)<span class="desc">Disaster recovery</span></div></div>
+    </div>
+    <button id="run-btn">Simulate Failure</button>
+  </div>
+  <div class="result-panel" id="result">
+    <div class="impact-summary" id="metrics">
+      <div class="metric-box good"><div class="m-value">100%</div><div class="m-label">Uptime</div></div>
+      <div class="metric-box good"><div class="m-value">0%</div><div class="m-label">Data Loss</div></div>
+      <div class="metric-box good"><div class="m-value">0</div><div class="m-label">Services Down</div></div>
+    </div>
+    <div class="arch-diagram" id="arch-diagram"></div>
+    <div class="log-area" id="log-area"><div class="log-entry info"><span class="time">[T+0s]</span> System healthy</div></div>
+  </div>
+</div>
+</div>
+<script>
+const SERVICES = {
+  'cdn': { x: 10, y: 10, name: 'CDN', upstream: ['lb'] },
+  'lb': { x: 30, y: 10, name: 'Load Balancer', upstream: ['api'] },
+  'api': { x: 50, y: 10, name: 'API Gateway', upstream: ['web'] },
+  'web': { x: 50, y: 30, name: 'Web Servers', upstream: ['cache', 'queue'] },
+  'queue': { x: 70, y: 30, name: 'Message Queue', upstream: ['worker'] },
+  'worker': { x: 85, y: 30, name: 'Background Workers', upstream: ['primary-db'] },
+  'cache': { x: 30, y: 50, name: 'Cache (Redis)', upstream: ['primary-db'] },
+  'primary-db': { x: 50, y: 60, name: 'Primary Database', upstream: ['replica'] },
+  'replica': { x: 70, y: 60, name: 'Read Replica', upstream: [] },
+  'dns': { x: 10, y: 30, name: 'DNS', upstream: ['cdn'] },
+  'region': { x: 30, y: 80, name: 'Region A (Primary)', upstream: ['primary-db'] },
+  'region-b': { x: 70, y: 80, name: 'Region B (DR)', upstream: ['replica'] }
+};
+
+const SCENARIOS = {
+  'single-db': { 'primary-db': true, 'replica': false, 'cache': false },
+  'cache-down': { 'cache': true },
+  'network-slow': { 'api': true, 'web': true },
+  'regional': { 'region': true, 'primary-db': true, 'web': true },
+  'cascading': { 'primary-db': true, 'cache': true, 'web': true, 'api': true },
+  'chaos': { 'cdn': true, 'lb': true, 'api': true, 'web': true, 'cache': true, 'primary-db': true, 'queue': true, 'worker': true },
+  'all-up': {}
+};
+
+let state = {};
+
+function loadScenario(name) {
+  const toggles = document.querySelectorAll('.fault-toggle input');
+  toggles.forEach(t => t.checked = false);
+  const faults = SCENARIOS[name];
+  if (faults) {
+    Object.entries(faults).forEach(([id, val]) => {
+      const input = document.querySelector(`.fault-toggle[data-id="${id}"] input`);
+      if (input) input.checked = val;
+    });
+  }
+}
+
+document.querySelectorAll('.fault-toggle input').forEach(input => {
+  input.addEventListener('change', () => {
+    state = getState();
+  });
+});
+
+function getState() {
+  const s = {};
+  document.querySelectorAll('.fault-toggle').forEach(el => {
+    const id = el.dataset.id;
+    const checked = el.querySelector('input').checked;
+    s[id] = checked;
+  });
+  return s;
+}
+
+function simulate() {
+  const faults = getState();
+  const log = document.getElementById('log-area');
+  const diagram = document.getElementById('arch-diagram');
+  const metricsDiv = document.getElementById('metrics');
+  let logs = [];
+  let t = 0;
+  const logEvent = (msg, type = 'info') => { logs.push({ msg, type, t: t += (type === 'info' ? 1 : 2) }); };
+  
+  log(`Simulation started: ${new Date().toLocaleTimeString()}`, 'info');
+  
+  // Determine which services are down
+  const down = {};
+  
+  // Direct failures
+  Object.entries(faults).forEach(([id, failed]) => { if (failed) down[id] = 'down'; });
+  
+  // Cascade logic
+  function cascade() {
+    let changed = true;
+    while (changed) {
+      changed = false;
+      Object.entries(SERVICES).forEach(([id, svc]) => {
+        if (down[id]) return;
+        if (svc.upstream && svc.upstream.length > 0 && svc.upstream.some(u => down[u] === 'down')) {
+          // Check if any upstream is healthy
+          const allUpstreamHealthy = svc.upstream.every(u => !down[u]);
+          if (!allUpstreamHealthy) {
+            // At least one upstream is down - this service may be degraded or down
+            if (svc.upstream.every(u => down[u] === 'down')) {
+              down[id] = 'down';
+              logEvent(`${SERVICES[id].name} DOWN (all upstreams failed)`, 'critical');
+              changed = true;
+            } else {
+              down[id] = 'degraded';
+              logEvent(`${SERVICES[id].name} DEGRADED (partial upstream failure)`, 'warning');
+              changed = true;
+            }
+          }
+        }
+      });
+    }
+  }
+  
+  // Log initial failures
+  Object.entries(faults).forEach(([id, failed]) => {
+    if (failed) {
+      logEvent(`${SERVICES[id].name} FAILURE`, 'critical');
+    }
+  });
+  
+  cascade();
+  
+  // Generate impact analysis
+  const servicesDown = Object.values(down).filter(s => s === 'down').length;
+  const servicesDegraded = Object.values(down).filter(s => s === 'degraded').length;
+  const totalServices = Object.keys(SERVICES).length;
+  const uptime = ((totalServices - servicesDown) / totalServices * 100).toFixed(1);
+  
+  // Data loss potential
+  let dataLossRisk = 0;
+  let dataLossLabel = 'None';
+  if (down['primary-db'] && down['region-b']) { dataLossRisk = 100; dataLossLabel = 'High'; }
+  else if (down['primary-db']) { dataLossRisk = 5; dataLossLabel = 'Low (failover possible)'; }
+  
+  // Detailed assessment
+  logEvent('--- Impact Assessment ---', 'info');
+  
+  if (down['cdn']) logEvent('Users cannot access cached content. Slower load times.', 'warning');
+  if (down['lb']) logEvent('Traffic cannot be distributed. Site unreachable.', 'critical');
+  if (down['dns']) logEvent('Domain cannot be resolved. Site unreachable by name.', 'critical');
+  if (down['api']) logEvent('All API requests fail. App non-functional.', 'critical');
+  if (down['web']) logEvent('Application server down. Request processing fails.', 'critical');
+  if (down['primary-db']) {
+    if (down['region-b']) logEvent('CATASTROPHIC: Both primary and DR region down. Data loss likely.', 'critical');
+    else if (!down['replica']) logEvent('Primary DB down. Read replica available for reads. Writes blocked.', 'warning');
+    else logEvent('Primary DB down. No replicas available. Complete data outage.', 'critical');
+  }
+  if (down['cache']) {
+    if (!down['primary-db']) logEvent('Cache down. Traffic hitting DB directly. Risk of overload.', 'warning');
+    else logEvent('Cache down AND DB down. Complete data access failure.', 'critical');
+  }
+  if (down['queue']) logEvent('Async processing blocked. Inventory, notifications delayed.', 'warning');
+  if (down['worker']) logEvent('Background jobs paused. Will resume when workers recover.', 'warning');
+  if (down['replica'] && !down['primary-db']) logEvent('Read replica down. Reads redirect to primary. Increased latency.', 'warning');
+  
+  logEvent('--- Recommendations ---', 'info');
+  if (down['primary-db'] && !down['region-b']) logEvent('FAILOVER: Promote read replica to primary.', 'success');
+  if (down['cache']) logEvent('MITIGATION: Circuit breaker active. DB should handle reads.', 'success');
+  if (down['cdn']) logEvent('MITIGATION: Traffic routed directly to origin.', 'success');
+  if (servicesDown === 0 && servicesDegraded === 0) logEvent('System fully operational.', 'success');
+  
+  logEvent(`Simulation complete. ${servicesDown} down, ${servicesDegraded} degraded.`, 'info');
+  
+  // Render diagram
+  renderArchDiagram(down);
+  
+  // Render logs
+  log.innerHTML = logs.map(l => `<div class="log-entry ${l.type}"><span class="time">[T+${l.t}s]</span> ${l.msg}</div>`).join('');
+  log.scrollTop = log.scrollHeight;
+  
+  // Update metrics
+  const uptimeClass = uptime > 99 ? 'good' : (uptime > 90 ? 'ok' : 'bad');
+  const dataLossClass = dataLossRisk === 0 ? 'good' : (dataLossRisk < 50 ? 'ok' : 'bad');
+  metricsDiv.innerHTML = `
+    <div class="metric-box ${uptimeClass}"><div class="m-value">${uptime}%</div><div class="m-label">Uptime</div></div>
+    <div class="metric-box ${dataLossClass}"><div class="m-value">${dataLossLabel}</div><div class="m-label">Data Loss Risk</div></div>
+    <div class="metric-box ${servicesDown > 0 ? 'bad' : 'good'}"><div class="m-value">${servicesDown + servicesDegraded}</div><div class="m-label">Services Affected</div></div>
+  `;
+}
+
+function renderArchDiagram(down) {
+  const diagram = document.getElementById('arch-diagram');
+  const containerW = diagram.offsetWidth || 500;
+  const containerH = diagram.offsetHeight || 300;
+  
+  diagram.innerHTML = Object.entries(SERVICES).map(([id, svc]) => {
+    const status = down[id] || 'up';
+    const statusIcon = status === 'down' ? '✕' : (status === 'degraded' ? '⚠' : '✓');
+    return `<div class="service-node ${status}" style="left:${svc.x}%;top:${svc.y}%;width:auto">
+      <div class="status-icon">${statusIcon}</div>
+      <div class="name">${svc.name}</div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('run-btn').addEventListener('click', simulate);
+document.querySelectorAll('.fault-toggle input').forEach(input => {
+  input.addEventListener('change', simulate);
+});
+
+// Init
+simulate();
+</script>
+</body>
+</html>

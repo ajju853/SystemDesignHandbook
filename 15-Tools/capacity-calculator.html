@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capacity Calculator - System Design</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+h1 { text-align: center; margin: 30px 0; font-size: 2rem; }
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.07); }
+.card h2 { font-size: 1rem; color: #4a90d9; margin-bottom: 12px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 4px; }
+.form-group input { width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; }
+.form-group input:focus { outline: none; border-color: #4a90d9; box-shadow: 0 0 0 3px rgba(74,144,217,0.1); }
+.form-group select { width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; }
+.preset-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
+.preset-bar button { padding: 6px 14px; border-radius: 6px; border: 1px solid #d1d5db; background: white; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+.preset-bar button:hover { background: #4a90d9; color: white; border-color: #4a90d9; }
+.results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.result-card { background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #4a90d9; text-align: center; }
+.result-card .label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; }
+.result-card .value { font-size: 1.5rem; font-weight: 700; margin-top: 4px; }
+.result-card .unit { font-size: 12px; color: #9ca3af; }
+.result-card.green { border-left-color: #10b981; }
+.result-card.orange { border-left-color: #f59e0b; }
+.result-card.red { border-left-color: #ef4444; }
+.cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+.cost-table th { background: #4a90d9; color: white; padding: 10px 14px; text-align: left; font-size: 13px; }
+.cost-table td { padding: 10px 14px; border-bottom: 1px solid #e5e7eb; font-size: 14px; }
+.cost-table tr:last-child td { border-bottom: none; }
+.total-row td { font-weight: 700; background: #f0f7ff; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Capacity & Cost Calculator</h1>
+<div class="preset-bar">
+  <button onclick="loadPreset('tiny')">Tiny App (1K users)</button>
+  <button onclick="loadPreset('medium')">Startup (100K users)</button>
+  <button onclick="loadPreset('large')">Growth (10M users)</button>
+  <button onclick="loadPreset('massive')">Scale (100M users)</button>
+</div>
+<div class="input-grid">
+  <div class="card">
+    <h2>Traffic</h2>
+    <div class="form-group">
+      <label>Daily Active Users (DAU)</label>
+      <input type="number" id="dau" value="1000000">
+    </div>
+    <div class="form-group">
+      <label>Requests per User per Day</label>
+      <input type="number" id="reqs-per-user" value="50">
+    </div>
+    <div class="form-group">
+      <label>Peak-to-Average Ratio</label>
+      <input type="number" id="peak-ratio" value="3" step="0.1">
+    </div>
+    <div class="form-group">
+      <label>Avg Request Size (KB)</label>
+      <input type="number" id="req-size" value="2" step="0.1">
+    </div>
+  </div>
+  <div class="card">
+    <h2>Data</h2>
+    <div class="form-group">
+      <label>Avg Write Payload (KB)</label>
+      <input type="number" id="write-size" value="1" step="0.1">
+    </div>
+    <div class="form-group">
+      <label>Daily Data per User (MB)</label>
+      <input type="number" id="data-per-user" value="0.5" step="0.1">
+    </div>
+    <div class="form-group">
+      <label>Retention Period (years)</label>
+      <input type="number" id="retention" value="3">
+    </div>
+    <div class="form-group">
+      <label>Replication Factor</label>
+      <select id="replication">
+        <option value="1">None (1x)</option>
+        <option value="2" selected>Single Replica (2x)</option>
+        <option value="3">Multi-Region (3x)</option>
+        <option value="5">Heavy Protection (5x)</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="input-grid">
+  <div class="card">
+    <h2>Infrastructure</h2>
+    <div class="form-group">
+      <label>Request Size (KB)</label>
+      <input type="number" id="infra-req-size" value="2" step="0.1">
+    </div>
+    <div class="form-group">
+      <label>Avg Response Size (KB)</label>
+      <input type="number" id="resp-size" value="50" step="1">
+    </div>
+    <div class="form-group">
+      <label>Cache Hit Rate (%)</label>
+      <input type="number" id="cache-rate" value="80" min="0" max="100">
+    </div>
+  </div>
+  <div class="card">
+    <h2>System Profile</h2>
+    <div class="form-group">
+      <label>Read/Write Ratio</label>
+      <select id="rw-ratio">
+        <option value="90-10">Read-Heavy (90/10)</option>
+        <option value="80-20" selected>Typical (80/20)</option>
+        <option value="50-50">Balanced (50/50)</option>
+        <option value="20-80">Write-Heavy (20/80)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Avg CPU Time per Request (ms)</label>
+      <input type="number" id="cpu-time" value="50">
+    </div>
+  </div>
+</div>
+<div style="text-align: center; margin-bottom: 24px;">
+  <button onclick="calculate()" style="padding: 12px 40px; border-radius: 8px; border: none; background: #4a90d9; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Calculate</button>
+  <button onclick="exportResults()" style="padding: 12px 24px; border-radius: 8px; border: 1px solid #d1d5db; background: white; font-size: 14px; cursor: pointer; margin-left: 8px;">Export</button>
+</div>
+<h2 style="margin-bottom: 12px;">Capacity Estimates</h2>
+<div class="results-grid" id="results"></div>
+<h2 style="margin: 24px 0 12px;">Estimated Monthly Cloud Cost</h2>
+<table class="cost-table" id="cost-table">
+  <thead><tr><th>Service</th><th>Tier</th><th>Monthly Cost</th></tr></thead>
+  <tbody id="cost-body"></tbody>
+</table>
+</div>
+<script>
+function loadPreset(type) {
+  const presets = {
+    tiny: { dau: 1000, reqs: 10, peak: 2, reqSize: 1, writeSize: 0.5, dataPerUser: 0.1, retention: 1, replication: 1 },
+    medium: { dau: 100000, reqs: 30, peak: 3, reqSize: 2, writeSize: 1, dataPerUser: 0.3, retention: 2, replication: 2 },
+    large: { dau: 10000000, reqs: 50, peak: 4, reqSize: 2, writeSize: 1, dataPerUser: 0.5, retention: 3, replication: 2 },
+    massive: { dau: 100000000, reqs: 100, peak: 5, reqSize: 3, writeSize: 2, dataPerUser: 1, retention: 5, replication: 3 }
+  };
+  const p = presets[type];
+  document.getElementById('dau').value = p.dau;
+  document.getElementById('reqs-per-user').value = p.reqs;
+  document.getElementById('peak-ratio').value = p.peak;
+  document.getElementById('req-size').value = p.reqSize;
+  document.getElementById('write-size').value = p.writeSize;
+  document.getElementById('data-per-user').value = p.dataPerUser;
+  document.getElementById('retention').value = p.retention;
+  document.getElementById('replication').value = p.replication;
+  calculate();
+}
+
+function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+function getSelect(id) { return document.getElementById(id).value; }
+
+function calculate() {
+  const dau = getVal('dau');
+  const reqsPerUser = getVal('reqs-per-user');
+  const peakRatio = getVal('peak-ratio');
+  const reqSize = getVal('req-size');
+  const writeSize = getVal('write-size');
+  const dataPerUser = getVal('data-per-user');
+  const retention = getVal('retention');
+  const replication = getVal('replication');
+  const respSize = getVal('resp-size');
+  const infraReqSize = getVal('infra-req-size');
+  const cacheRate = getVal('cache-rate');
+  const cpuTime = getVal('cpu-time');
+  const rwRatio = getSelect('rw-ratio');
+  const [readPct, writePct] = rwRatio.split('-').map(Number);
+  
+  const dailyReads = dau * reqsPerUser * (readPct / 100);
+  const dailyWrites = dau * reqsPerUser * (writePct / 100);
+  const dailyReqs = dailyReads + dailyWrites;
+  const avgRPS = dailyReqs / 86400;
+  const peakRPS = avgRPS * peakRatio;
+  const avgCachedRPS = avgRPS * (1 - cacheRate / 100);
+  
+  const dailyBandwidth = (dailyReads * respSize + dailyWrites * writeSize) / 1024; // GB
+  const peakBandwidth = (peakRPS * respSize) / (1024 * 1024) * 8; // Gbps
+  
+  const dailyStorage = dau * dataPerUser / 1024; // GB
+  const totalStorage = dailyStorage * 365 * retention * replication; // GB
+  const totalStorageTB = totalStorage / 1024;
+  
+  const neededCores = Math.ceil(peakRPS * cpuTime / 1000 / 1000 * 100); // rough estimate
+  const neededMemory = neededCores * 4; // 4GB per core
+  const neededDBIOPS = peakRPS * writePct / 100 * 4; // rough estimate
+  
+  // Cost estimates (common cloud pricing ~2026)
+  const computeCost = neededCores * 30 * 0.04 * 730; // $0.04/core/hr
+  const storageCost = totalStorage * 0.023 / 12; // $0.023/GB/month
+  const networkCost = dailyBandwidth * 30 * 0.085; // $0.085/GB egress
+  const dbCost = neededDBIOPS * 0.1 * 730 * 0.01; // simplified
+  const cacheCost = Math.ceil(avgCachedRPS / 10000) * 150; // Redis node cost
+  const totalCost = computeCost + storageCost + networkCost + dbCost + cacheCost;
+  
+  const unitLabels = ['', 'K', 'M', 'B', 'T'];
+  function fmt(num, decimals = 1) {
+    if (num === 0) return '0';
+    let i = 0;
+    while (Math.abs(num) >= 1000 && i < unitLabels.length - 1) { num /= 1000; i++; }
+    return num.toFixed(decimals) + unitLabels[i];
+  }
+  
+  function fmtMoney(n) { return '$' + (n >= 1e6 ? (n/1e6).toFixed(1) + 'M' : (n >= 1e3 ? (n/1e3).toFixed(1) + 'K' : n.toFixed(0))); }
+  
+  const results = [
+    { label: 'Daily Requests', value: fmt(dailyReqs), unit: '', color: '' },
+    { label: 'Average RPS', value: fmt(avgRPS), unit: 'req/s', color: '' },
+    { label: 'Peak RPS', value: fmt(peakRPS), unit: 'req/s', color: 'red' },
+    { label: 'Daily Bandwidth', value: fmt(dailyBandwidth), unit: 'GB', color: 'orange' },
+    { label: 'Peak Bandwidth', value: fmt(peakBandwidth), unit: 'Gbps', color: 'red' },
+    { label: 'Daily Storage Growth', value: fmt(dailyStorage), unit: 'GB', color: '' },
+    { label: 'Total Storage Needed', value: fmt(totalStorageTB), unit: 'TB', color: 'red' },
+    { label: 'Compute Cores Needed', value: fmt(neededCores), unit: 'cores', color: 'orange' },
+    { label: 'Memory Needed', value: fmt(neededMemory), unit: 'GB', color: '' },
+    { label: 'DB IOPS Required', value: fmt(neededDBIOPS), unit: 'IOPS', color: '' },
+  ];
+  
+  const resultsDiv = document.getElementById('results');
+  resultsDiv.innerHTML = results.map(r => `
+    <div class="result-card ${r.color}">
+      <div class="label">${r.label}</div>
+      <div class="value">${r.value}</div>
+      <div class="unit">${r.unit}</div>
+    </div>
+  `).join('');
+  
+  const costBody = document.getElementById('cost-body');
+  costBody.innerHTML = `
+    <tr><td>Compute (EC2/GCE)</td><td>${neededCores} cores, on-demand</td><td>${fmtMoney(computeCost)}</td></tr>
+    <tr><td>Block Storage (EBS/Persistent Disk)</td><td>${fmt(totalStorage)} GB total</td><td>${fmtMoney(storageCost)}</td></tr>
+    <tr><td>Network Egress</td><td>${fmt(dailyBandwidth * 30)} GB/month</td><td>${fmtMoney(networkCost)}</td></tr>
+    <tr><td>Database</td><td>${fmt(neededDBIOPS)} IOPS, ${fmt(neededMemory/4)} GB</td><td>${fmtMoney(dbCost)}</td></tr>
+    <tr><td>Caching (ElastiCache/Redis)</td><td>${fmt(avgCachedRPS)} req/s tier</td><td>${fmtMoney(cacheCost)}</td></tr>
+    <tr class="total-row"><td><strong>Total Estimated Monthly</strong></td><td></td><td><strong>${fmtMoney(totalCost)}</strong></td></tr>
+  `;
+}
+
+function exportResults() {
+  const lines = ['Capacity & Cost Estimates', '======================='];
+  const cards = document.querySelectorAll('.result-card');
+  cards.forEach(c => {
+    const label = c.querySelector('.label').textContent;
+    const value = c.querySelector('.value').textContent;
+    const unit = c.querySelector('.unit').textContent;
+    lines.push(`${label}: ${value} ${unit}`);
+  });
+  lines.push('');
+  lines.push('Monthly Costs:');
+  const rows = document.querySelectorAll('#cost-body tr');
+  rows.forEach(r => {
+    const tds = r.querySelectorAll('td');
+    if (tds.length >= 3) lines.push(`${tds[0].textContent}: ${tds[2].textContent}`);
+  });
+  const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'capacity-estimate.txt';
+  a.click();
+}
+
+calculate();
+</script>
+</body>
+</html>

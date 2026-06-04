@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Design Quiz Generator</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { text-align: center; margin: 30px 0; font-size: 2rem; color: #1a1a2e; }
+.controls { display: flex; gap: 10px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+.controls select, .controls button { padding: 10px 16px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 14px; }
+.controls select { background: white; }
+.controls button { background: #4a90d9; color: white; border: none; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+.controls button:hover { background: #357abd; transform: translateY(-1px); }
+.controls button:disabled { opacity: 0.5; cursor: not-allowed; }
+#quiz-area { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); min-height: 300px; }
+.question { margin-bottom: 20px; }
+.question h3 { font-size: 1.1rem; margin-bottom: 12px; color: #1a1a2e; }
+.question .module-tag { display: inline-block; background: #4a90d9; color: white; padding: 2px 10px; border-radius: 12px; font-size: 12px; margin-bottom: 8px; }
+.question .difficulty { display: inline-block; background: #f39c12; color: #333; padding: 2px 10px; border-radius: 12px; font-size: 12px; margin-bottom: 8px; }
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.option { padding: 10px 14px; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+.option:hover { border-color: #4a90d9; background: #f0f7ff; }
+.option.selected { border-color: #4a90d9; background: #e8f0fe; }
+.option.correct { border-color: #10b981; background: #d1fae5; }
+.option.wrong { border-color: #ef4444; background: #fee2e2; }
+.option .letter { display: inline-block; width: 24px; height: 24px; line-height: 24px; text-align: center; background: #f3f4f6; border-radius: 4px; margin-right: 10px; font-size: 13px; font-weight: 600; }
+.explanation { background: #f0f7ff; border-left: 4px solid #4a90d9; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 10px; font-size: 14px; color: #374151; display: none; }
+.explanation.show { display: block; }
+#results-bar { background: white; border-radius: 12px; padding: 16px 24px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
+#results-bar .score { font-size: 1.2rem; font-weight: 700; color: #4a90d9; }
+.radio-group { display: flex; gap: 16px; align-items: center; }
+.radio-group label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.difficulty-filter { display: flex; gap: 20px; margin: 10px 0; justify-content: center; }
+.difficulty-filter label { cursor: pointer; display: flex; align-items: center; gap: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>System Design Quiz Generator</h1>
+<div class="controls">
+  <select id="module-select">
+    <option value="all">All Modules</option>
+    <option value="fundamentals">Fundamentals</option>
+    <option value="networking">Networking</option>
+    <option value="databases">Databases</option>
+    <option value="caching">Caching</option>
+    <option value="message-queues">Message Queues</option>
+    <option value="distributed-systems">Distributed Systems</option>
+    <option value="cloud">Cloud Architecture</option>
+    <option value="security">Security</option>
+    <option value="observability">Observability</option>
+  </select>
+  <select id="count-select">
+    <option value="5">5 Questions</option>
+    <option value="10" selected>10 Questions</option>
+    <option value="15">15 Questions</option>
+    <option value="20">20 Questions</option>
+  </select>
+  <button id="generate-btn">Generate Quiz</button>
+  <button id="reveal-btn" disabled>Reveal All Answers</button>
+</div>
+<div id="results-bar" style="display:none">
+  <span class="score" id="score-text">0/0 (0%)</span>
+  <span id="progress-text">0 answered</span>
+</div>
+<div id="quiz-area">
+  <p style="text-align:center;color:#6b7280;padding:40px 0">Select options and click "Generate Quiz" to start</p>
+</div>
+</div>
+<script>
+const QUESTIONS = [
+  { module: 'fundamentals', difficulty: 'easy', question: 'What does CAP Theorem stand for?', options: ['Consistency, Availability, Partition Tolerance', 'Capacity, Availability, Performance', 'Consistency, Atomicity, Persistence', 'Cache, Application, Protocol'], correct: 0, explanation: 'CAP stands for Consistency, Availability, and Partition Tolerance. You can only guarantee two simultaneously in a distributed system.' },
+  { module: 'fundamentals', difficulty: 'easy', question: 'What is horizontal scaling?', options: ['Adding more servers to a system', 'Upgrading existing server hardware', 'Adding more disk space to a server', 'Increasing network bandwidth'], correct: 0, explanation: 'Horizontal scaling adds more machines to handle load. Vertical scaling upgrades existing hardware.' },
+  { module: 'fundamentals', difficulty: 'medium', question: 'What is the difference between reliability and availability?', options: ['Reliability is probability of correct service, availability is uptime percentage', 'They are the same thing', 'Availability is harder to achieve', 'Reliability only applies to hardware'], correct: 0, explanation: 'Reliability measures if the system behaves correctly. Availability measures if the system is operational (uptime).' },
+  { module: 'fundamentals', difficulty: 'medium', question: 'What is the difference between latency and throughput?', options: ['Latency is delay per request, throughput is requests per second', 'Latency is network speed, throughput is storage speed', 'They are inversely proportional always', 'Throughput only matters for batch processing'], correct: 0, explanation: 'Latency = time for one request. Throughput = number of requests processed per unit time.' },
+  { module: 'fundamentals', difficulty: 'hard', question: 'What does the FLP impossibility result state?', options: ['Consensus is impossible in an asynchronous system with even one faulty node', 'Distributed systems cannot guarantee consistency', 'Partition tolerance is impossible', 'All distributed systems must have a leader'], correct: 0, explanation: 'The FLP result proves that in an asynchronous system, consensus is impossible if even one node can crash.' },
+  { module: 'networking', difficulty: 'easy', question: 'Which protocol is used by most web traffic?', options: ['HTTP/HTTPS', 'FTP', 'SMTP', 'SSH'], correct: 0, explanation: 'HTTP and HTTPS (over TLS) handle the vast majority of web traffic.' },
+  { module: 'networking', difficulty: 'easy', question: 'What port does HTTPS use by default?', options: ['443', '80', '22', '8080'], correct: 0, explanation: 'HTTPS uses port 443. HTTP uses port 80.' },
+  { module: 'networking', difficulty: 'medium', question: 'What is a DNS CNAME record used for?', options: ['Creating an alias for a domain name', 'Mapping a domain to an IP address', 'Specifying the mail server', 'Verifying domain ownership'], correct: 0, explanation: 'A CNAME (Canonical Name) record maps one domain name to another as an alias.' },
+  { module: 'networking', difficulty: 'medium', question: 'How does a CDN reduce latency?', options: ['Caches content at geographically distributed edge servers', 'Compresses data before transmission', 'Uses fiber optic cables', 'Prioritizes traffic with QoS'], correct: 0, explanation: 'CDNs cache content at edge servers close to users, reducing the distance data must travel.' },
+  { module: 'networking', difficulty: 'hard', question: 'What is the main advantage of HTTP/2 over HTTP/1.1?', options: ['Multiplexing - multiple streams over one connection', 'Faster SSL handshake', 'Smaller HTTP headers only', 'Built-in caching'], correct: 0, explanation: 'HTTP/2\'s key feature is multiplexing: multiple concurrent requests over a single TCP connection.' },
+  { module: 'databases', difficulty: 'easy', question: 'Which database is known as a document store?', options: ['MongoDB', 'Redis', 'PostgreSQL', 'Cassandra'], correct: 0, explanation: 'MongoDB is a document-oriented NoSQL database that stores data as JSON-like documents.' },
+  { module: 'databases', difficulty: 'easy', question: 'What does ACID stand for?', options: ['Atomicity, Consistency, Isolation, Durability', 'Availability, Consistency, Isolation, Durability', 'Atomicity, Consistency, Integrity, Durability', 'Automated, Consistent, Isolated, Durable'], correct: 0, explanation: 'ACID = Atomicity, Consistency, Isolation, Durability — guarantees for database transactions.' },
+  { module: 'databases', difficulty: 'medium', question: 'What is database sharding?', options: ['Horizontally partitioning data across multiple database instances', 'Creating indexes for faster queries', 'Replicating data to multiple servers', 'Encrypting the database'], correct: 0, explanation: 'Sharding splits data across multiple database instances, each holding a subset of the data.' },
+  { module: 'databases', difficulty: 'medium', question: 'What is the CAP tradeoff in Cassandra?', options: ['Cassandra prioritizes Availability and Partition Tolerance over Consistency', 'Cassandra prioritizes Consistency and Availability', 'Cassandra supports all three', 'Cassandra is CA'], correct: 0, explanation: 'Cassandra is AP — it remains available during partitions but may serve stale data.' },
+  { module: 'databases', difficulty: 'hard', question: 'What is a B-tree index?', options: ['A self-balancing tree structure that maintains sorted data for efficient queries', 'A hash-based index for exact lookups', 'A bitmap index for low-cardinality columns', 'A full-text search index'], correct: 0, explanation: 'B-trees maintain sorted data with O(log n) search, insert, and delete operations.' },
+  { module: 'caching', difficulty: 'easy', question: 'What is cache aside pattern?', options: ['Application checks cache first, loads from DB on miss', 'Cache automatically loads from DB on startup', 'Cache and DB are updated simultaneously', 'Cache is always ahead of DB'], correct: 0, explanation: 'In cache-aside, the application checks the cache first. On a miss, it loads from DB and populates the cache.' },
+  { module: 'caching', difficulty: 'medium', question: 'What is a cache stampede?', options: ['Many requests simultaneously miss cache and overload the database', 'Cache corruption from concurrent writes', 'Cache running out of memory', 'Slow cache eviction'], correct: 0, explanation: 'Cache stampede occurs when many requests miss cache at once, overwhelming the database.' },
+  { module: 'caching', difficulty: 'medium', question: 'Why should you delete (invalidate) cache on write rather than update it?', options: ['To avoid race conditions with concurrent writes', 'Delete is faster than update', 'Updates cause fragmentation', 'Cache doesn\'t support updates'], correct: 0, explanation: 'Invalidating avoids race conditions where concurrent writes could leave stale data in cache.' },
+  { module: 'message-queues', difficulty: 'easy', question: 'What is Apache Kafka?', options: ['A distributed event streaming platform', 'A relational database', 'A caching system', 'A load balancer'], correct: 0, explanation: 'Kafka is a distributed event streaming platform for high-throughput publish-subscribe messaging.' },
+  { module: 'message-queues', difficulty: 'medium', question: 'How does Kafka guarantee ordering?', options: ['Ordering is guaranteed within a single partition', 'Ordering is guaranteed across all partitions', 'Kafka does not guarantee ordering', 'Ordering is guaranteed by consumer groups'], correct: 0, explanation: 'Kafka guarantees message ordering within a partition, not across partitions.' },
+  { module: 'message-queues', difficulty: 'hard', question: 'What is exactly-once semantics in Kafka?', options: ['Messages are processed exactly once with idempotent producers and transactional consumers', 'Messages are never duplicated', 'Messages are always delivered', 'Messages are deduplicated at the broker level'], correct: 0, explanation: 'Kafka\'s exactly-once combines idempotent producers (no duplicates) with transactional consumers.' },
+  { module: 'distributed-systems', difficulty: 'easy', question: 'What is Raft?', options: ['A consensus algorithm for managing a replicated log', 'A distributed database', 'A load balancing algorithm', 'A caching protocol'], correct: 0, explanation: 'Raft is a consensus algorithm designed to be understandable, managing a replicated state machine.' },
+  { module: 'distributed-systems', difficulty: 'medium', question: 'What is the role of ZooKeeper in distributed systems?', options: ['Coordination service for configuration, naming, and synchronization', 'A distributed database', 'A message queue', 'A load balancer'], correct: 0, explanation: 'ZooKeeper provides coordination services including configuration management, naming, and distributed locking.' },
+  { module: 'distributed-systems', difficulty: 'medium', question: 'What is distributed consensus?', options: ['Multiple nodes agreeing on a single value or state', 'Multiple nodes processing data in parallel', 'Data replication across nodes', 'Load balancing across nodes'], correct: 0, explanation: 'Consensus ensures distributed nodes agree on a single value despite failures.' },
+  { module: 'distributed-systems', difficulty: 'hard', question: 'What problem does the Paxos algorithm solve?', options: ['Reaching agreement in a network of unreliable processors', 'Routing network packets efficiently', 'Load balancing web traffic', 'Storing large files across nodes'], correct: 0, explanation: 'Paxos solves consensus in a network of unreliable processors with message delays and failures.' },
+  { module: 'cloud', difficulty: 'easy', question: 'What is Kubernetes?', options: ['An orchestration platform for containerized applications', 'A cloud storage service', 'A monitoring tool', 'A database as a service'], correct: 0, explanation: 'Kubernetes orchestrates containerized applications across clusters of nodes.' },
+  { module: 'cloud', difficulty: 'easy', question: 'What is AWS Lambda?', options: ['A serverless compute service that runs code on demand', 'A virtual machine service', 'A database service', 'A load balancer'], correct: 0, explanation: 'Lambda runs code in response to events without provisioning servers.' },
+  { module: 'cloud', difficulty: 'medium', question: 'What is the difference between a Pod and a Deployment in Kubernetes?', options: ['Pod is the smallest unit (one+ containers); Deployment manages Pod replicas', 'They are the same thing', 'Deployment is a cloud-specific concept', 'Pod runs on VMs, Deployment runs on bare metal'], correct: 0, explanation: 'A Pod runs containers; a Deployment manages the desired state and scaling of Pods.' },
+  { module: 'cloud', difficulty: 'hard', question: 'How does AWS VPC peering work?', options: ['Direct network connection between two VPCs using private IPs', 'Internet gateway routing between VPCs', 'VPN connection between VPCs', 'Shared DNS namespace'], correct: 0, explanation: 'VPC peering creates a direct, private network connection between two VPCs.' },
+  { module: 'security', difficulty: 'easy', question: 'What is the difference between authentication and authorization?', options: ['Authn = who you are, Authz = what you can do', 'They are the same', 'Authn = permissions, Authz = identity', 'Authn = encryption, Authz = hashing'], correct: 0, explanation: 'Authentication verifies identity. Authorization determines what the authenticated user can access.' },
+  { module: 'security', difficulty: 'medium', question: 'What is JWT?', options: ['JSON Web Token - a compact, self-contained token format for transmitting claims', 'Java Web Toolkit', 'JavaScript Web Template', 'JSON With Tokens'], correct: 0, explanation: 'JWT is a compact URL-safe token format with JSON claims, commonly used for authentication.' },
+  { module: 'security', difficulty: 'medium', question: 'What is OAuth 2.0 primarily used for?', options: ['Authorization - granting third-party apps limited access', 'Authentication - verifying user identity', 'Encrypting API requests', 'Session management'], correct: 0, explanation: 'OAuth 2.0 is an authorization framework, not authentication (that\'s OpenID Connect).' },
+  { module: 'security', difficulty: 'hard', question: 'What is a DDoS attack?', options: ['Distributed attack overwhelming a system with traffic', 'Database corruption attack', 'DNS cache poisoning', 'Direct data theft attempt'], correct: 0, explanation: 'DDoS = Distributed Denial of Service, overwhelming targets with traffic from many sources.' },
+  { module: 'observability', difficulty: 'easy', question: 'What are the three pillars of observability?', options: ['Logs, Metrics, Traces', 'CPU, Memory, Disk', 'Monitoring, Alerting, Dashboards', 'Error, Info, Debug'], correct: 0, explanation: 'The three pillars are Logs (events), Metrics (aggregated measurements), and Traces (request flows).' },
+  { module: 'observability', difficulty: 'medium', question: 'What is distributed tracing?', options: ['Tracking a request as it flows through multiple services', 'Monitoring CPU across servers', 'Logging errors across services', 'Measuring network latency'], correct: 0, explanation: 'Distributed tracing follows a single request across multiple services to identify bottlenecks.' },
+  { module: 'observability', difficulty: 'medium', question: 'What is Prometheus?', options: ['An open-source monitoring and alerting toolkit', 'A logging system', 'A tracing system', 'A database'], correct: 0, explanation: 'Prometheus collects metrics via pull model and supports powerful querying (PromQL).' },
+  { module: 'observability', difficulty: 'hard', question: 'What is OpenTelemetry?', options: ['A vendor-agnostic observability framework for generating telemetry data', 'A proprietary monitoring tool', 'A specific tracing protocol', 'A visualization dashboard'], correct: 0, explanation: 'OpenTelemetry provides standardized APIs/SDKs for collecting telemetry data from cloud-native software.' },
+];
+
+const QUIZ_STORAGE_KEY = 'systemDesignQuizState';
+const SAVED_QUESTIONS_KEY = 'systemDesignQuizQuestions';
+
+let currentQuestions = [];
+let answers = {};
+let quizActive = false;
+
+function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+document.getElementById('generate-btn').addEventListener('click', generateQuiz);
+document.getElementById('reveal-btn').addEventListener('click', revealAll);
+
+document.getElementById('module-select').addEventListener('change', () => {
+  if (quizActive) generateQuiz();
+});
+
+document.getElementById('count-select').addEventListener('change', () => {
+  if (quizActive) generateQuiz();
+});
+
+function generateQuiz() {
+  const module = document.getElementById('module-select').value;
+  const count = parseInt(document.getElementById('count-select').value);
+  
+  let pool = module === 'all' ? [...QUESTIONS] : QUESTIONS.filter(q => q.module === module);
+  
+  if (pool.length === 0) {
+    document.getElementById('quiz-area').innerHTML = '<p style="color:#ef4444;text-align:center;padding:40px 0">No questions for this module. Select a different module.</p>';
+    return;
+  }
+  
+  currentQuestions = shuffle(pool).slice(0, Math.min(count, pool.length));
+  answers = {};
+  quizActive = true;
+  renderQuiz();
+  document.getElementById('reveal-btn').disabled = false;
+  document.getElementById('results-bar').style.display = 'flex';
+  updateScore();
+}
+
+function renderQuiz() {
+  const area = document.getElementById('quiz-area');
+  const letters = ['A', 'B', 'C', 'D'];
+  
+  area.innerHTML = currentQuestions.map((q, idx) => `
+    <div class="question" data-idx="${idx}">
+      <span class="module-tag">${q.module}</span>
+      <span class="difficulty">${q.difficulty}</span>
+      <h3>${idx + 1}. ${q.question}</h3>
+      <div class="options">
+        ${q.options.map((opt, oi) => `
+          <div class="option" data-q="${idx}" data-opt="${oi}" onclick="selectOption(${idx}, ${oi})">
+            <span class="letter">${letters[oi]}</span>${opt}
+          </div>
+        `).join('')}
+      </div>
+      <div class="explanation" data-idx="${idx}">${q.explanation}</div>
+    </div>
+  `).join('');
+}
+
+function selectOption(qIdx, optIdx) {
+  if (!quizActive) return;
+  const q = currentQuestions[qIdx];
+  
+  const questionEl = document.querySelector(`.question[data-idx="${qIdx}"]`);
+  const options = questionEl.querySelectorAll('.option');
+  
+  options.forEach(o => { o.classList.remove('selected', 'correct', 'wrong'); });
+  
+  const selected = options[optIdx];
+  selected.classList.add('selected');
+  
+  answers[qIdx] = optIdx;
+  updateScore();
+  
+  if (optIdx === q.correct) {
+    selected.classList.add('correct');
+  } else {
+    selected.classList.add('wrong');
+    options[q.correct].classList.add('correct');
+  }
+  
+  questionEl.querySelector('.explanation').classList.add('show');
+}
+
+function revealAll() {
+  currentQuestions.forEach((q, idx) => {
+    const questionEl = document.querySelector(`.question[data-idx="${idx}"]`);
+    if (!questionEl) return;
+    const options = questionEl.querySelectorAll('.option');
+    
+    options.forEach(o => o.classList.remove('selected', 'wrong'));
+    options[q.correct].classList.add('correct');
+    questionEl.querySelector('.explanation').classList.add('show');
+    answers[idx] = q.correct;
+  });
+  updateScore();
+  document.getElementById('reveal-btn').disabled = true;
+}
+
+function updateScore() {
+  let correct = 0;
+  let answered = 0;
+  currentQuestions.forEach((q, idx) => {
+    if (answers[idx] !== undefined) {
+      answered++;
+      if (answers[idx] === q.correct) correct++;
+    }
+  });
+  const scoreText = `${correct}/${currentQuestions.length} (${Math.round(correct / currentQuestions.length * 100)}%)`;
+  document.getElementById('score-text').textContent = scoreText;
+  document.getElementById('progress-text').textContent = `${answered}/${currentQuestions.length} answered`;
+}
+</script>
+</body>
+</html>
