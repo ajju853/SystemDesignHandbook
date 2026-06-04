@@ -4,7 +4,7 @@
 
 ### The Ultimate Cloud + System Design + DevOps + Architecture Operating System
 
-**From zero to Staff Engineer — 450+ topics across 25 modules with 550+ Mermaid diagrams**
+**From zero to Staff Engineer — 500+ topics across 25 modules with 678+ Mermaid diagrams**
 
 [![GitHub Stars](https://img.shields.io/github/stars/ajju853/SystemDesignHandbook?style=for-the-badge&logo=github&color=gold)](https://github.com/ajju853/SystemDesignHandbook/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/ajju853/SystemDesignHandbook?style=for-the-badge&logo=github&color=blue)](https://github.com/ajju853/SystemDesignHandbook/network/members)
@@ -41,7 +41,7 @@
 | **Case Studies** | ✅ 22 real architectures — Netflix, Uber, Stripe, TikTok, Discord, DoorDash, Figma, Notion, Cloudflare, Coinbase, Roblox | Usually 5-10 |
 | **Projects** | ✅ 19 hands-on — URL shortener → healthcare EMR with full end-to-end guide | Usually 3-5 |
 | **Staff Engineer** | ✅ 19 files — mentorship, strategy, migrations, incident leadership, executive comm | Unique to this repo |
-| **Mermaid Diagrams** | ✅ **550+ diagrams across 448 files** | Usually text-only |
+| **Mermaid Diagrams** | ✅ **678+ diagrams across 500+ files** | Usually text-only |
 | **Interview Prep** | ✅ 26 problems — from Tinder to distributed KV store to recommendation systems | Usually 10-15 |
 | **End-to-End Guide** | ✅ Complete E-Commerce platform from requirements to production SRE | Not offered |
 
@@ -122,25 +122,25 @@ graph TB
 | 03 | [Linux](03-Linux/) | 10 | Processes, memory management, file systems, networking, shell scripting, performance tuning, security hardening, containerization |
 | 04 | [Databases](04-Databases/) | 16 | PostgreSQL, MySQL, MongoDB, Cassandra, DynamoDB, Redis, Elasticsearch, indexing, sharding, transactions, ACID, BASE, query optimization |
 | 05 | [System Design](05-System-Design/) | 26 | Redis, Memcached, CDN, Kafka, RabbitMQ, SQS, Pulsar, caching patterns, load balancers, consistent hashing, bloom filters, rate limiters, CAP/PACELC, API gateway, ID generation |
-| 06 | [Distributed Systems](06-Distributed-Systems/) | 13 | Consensus, Paxos, Raft, leader election, distributed locking, ZooKeeper, etcd, service discovery, BFT, gossip protocol, vector clocks/CRDTs, distributed file systems |
+| 06 | [Distributed Systems](06-Distributed-Systems/) | 16 | Consensus, Paxos, Raft, leader election, distributed locking, ZooKeeper, etcd, service discovery, BFT, gossip, CRDTs, distributed file systems, distributed transactions, distributed scheduling, caching patterns, coordination |
 | 07 | [Microservices](07-Microservices/) | 11 | DDD, service decomposition, inter-service communication, service discovery, API gateway, circuit breaker, event-driven/Saga/CQRS, database-per-service, testing, observability |
 | 08 | [Docker](08-Docker/) | 10 | Architecture, Dockerfile, multi-stage builds, Compose, networking, storage/volumes, security, Swarm, production best practices |
 | 09 | [Kubernetes](09-Kubernetes/) | 17 | Pods (sidecar/ambassador/adapter), Deployments (rolling/canary), Services, ConfigMaps/Secrets, Ingress, Storage, RBAC, HPA/VPA, StatefulSets, Jobs, Network Policies, Operators/CRDs, kubectl, resource management |
 | 10 | [AWS](10-AWS/) | 42 | EC2, Lambda, S3, VPC, RDS, DynamoDB, ElastiCache, SQS, SNS, Kinesis, API Gateway, CloudFront, Route53, ECS, EKS, IAM, CloudWatch, CloudTrail, Step Functions, CloudFormation, CodePipeline, SSM, Config, GuardDuty, Analytics, Cognito, MSK, AppSync |
 | 11 | [Azure](11-Azure/) | 26 | VMs, Functions, AKS, Blob Storage, SQL, Cosmos DB, Load Balancer, Front Door, Monitor, Event Hub, Service Bus, Key Vault, Entra ID, Logic Apps, Defender, DevOps, Bicep/ARM, Policy, Cost Management, ADF/Synapse, API Management |
 | 12 | [GCP](12-GCP/) | 27 | Compute Engine, GKE, Cloud Run, Functions, Cloud Storage, BigQuery, Spanner, Cloud SQL, Pub/Sub, Dataflow, Vertex AI, Memorystore, CDN, VPC, Cloud Armor, Secret Manager, Operations Suite, IAM, Deployment Manager, Composer/Dataproc, Scheduler, Apigee, Data Catalog |
-| 13 | [Terraform](13-Terraform/) | 13 | IaC basics, core concepts, workflow, modules, state management, AWS provisioning, advanced patterns, Terraform Cloud, best practices, providers deep-dive, CDKTF, testing |
+| 13 | [Terraform](13-Terraform/) | 16 | IaC basics, core concepts, workflow, modules, state management, AWS provisioning, advanced patterns, Terraform Cloud, best practices, providers deep-dive, CDKTF, testing, Terragrunt, policy-as-code, multi-cloud, provider development |
 | 14 | [DevOps](14-DevOps/) | 15 | Git workflows, GitHub Actions, Jenkins, ArgoCD, Helm, Ansible, CI/CD pipeline design, GitOps, progressive delivery, platform engineering/Backstage, shift-left |
-| 15 | [SRE](15-SRE/) | 14 | SLO/SLI/error budgets, incident management, postmortem culture, change management, capacity planning, reliability patterns, toil reduction, emergency response, production readiness, SLI taxonomy, multi-window burn-rate alerting, error budget policy, SLO examples |
+| 15 | [SRE](15-SRE/) | 16 | SLO/SLI/error budgets, incident management, postmortem culture, change management, capacity planning, reliability patterns, toil reduction, emergency response, production readiness, SLI taxonomy, multi-window burn-rate alerting, error budget policy, SLO examples, SRE maturity model, SRE for ML, chaos engineering deep-dive |
 | 16 | [Security](16-Security/) | 21 | Auth/AuthZ, JWT, OAuth 2.0, OIDC, RBAC, ABAC, encryption, hashing, WAF, DDoS, zero trust, OWASP Top 10, TLS/mTLS, secrets management (Vault), security headers/CSP, API security, container security, threat modeling (STRIDE/PASTA), compliance (SOC2/PCI/HIPAA/GDPR) |
 | 17 | [Observability](17-Observability/) | 18 | Logging, monitoring, tracing, metrics, alerting, Prometheus, Grafana, ELK, Jaeger, OpenTelemetry, SLI/SLO deep-dive, commercial tools comparison, dashboard design, on-call practices, eBPF observability, maturity model, K8s observability |
 | 18 | [Case Studies](18-Case-Studies/) | 29 | Netflix, YouTube, WhatsApp, Instagram, Uber, Twitter/X, Spotify, Airbnb, Amazon, Google Search, Slack, Discord, TikTok, Stripe, LinkedIn, Zoom, DoorDash, Figma, Notion, Cloudflare, Coinbase, Roblox + 7 production incidents (Facebook BGP, AWS Kinesis, Google Cloud, Cloudflare, GitHub, Fastly, GitLab) |
 | 19 | [Projects](19-Projects/) | 20 | End-to-End Implementation Guide + URL Shortener, Chat System, Netflix Clone, YouTube, Uber, Payment Gateway, Instagram, Twitter, Dropbox, Google Drive, Food Delivery, Video Conferencing, Event Booking, Airline Reservation, Banking Ledger, Healthcare EMR, Java Full Stack Roadmap |
 | 20 | [Interview Prep](20-Interview-Prep/) | 26 | TinyURL, Parking Lot, Rate Limiter, Web Crawler, Instagram, WhatsApp, Twitter, Uber, Dropbox, Netflix, YouTube, Google Search, Amazon, Multi-Region Banking, Global CDN, Analytics, Event-Driven, Tinder, Distributed KV Store, Notification System, Collaborative Editor, Elevator OOD, Distributed Cache, Job Scheduler, Recommendation System |
 | 21 | [Staff Engineer](21-Staff-Engineer/) | 19 | Tradeoffs, architecture reviews, RFC writing, cost optimization, multi-region design, disaster recovery, chaos engineering, capacity planning, mentorship vs sponsorship, technical strategy, migration strategies, API versioning, executive communication, interviewing/hiring, technical debt management, incident leadership, engineering culture (DORA/SPACE), growth paths |
-| 22 | [AI & ML System Design](22-AI-ML-System-Design/) | 12 | Transformer architecture, RAG, vector databases, model serving (vLLM, TGI, Triton), prompt engineering, AI agent architectures, ML pipeline infra, model evaluation/monitoring, GPU optimization, cost optimization, AI system design examples |
-| 23 | [API Design](23-API-Design/) | 11 | RESTful API design, OpenAPI 3.1, GraphQL (schema, resolvers, federation, N+1), gRPC (protobuf, 4 streaming modes), API versioning, API security (OAuth2, OIDC, JWT), API gateway patterns, WebSocket/SSE, webhooks, API testing |
-| 24 | [Testing & Quality Engineering](24-Testing-Quality-Engineering/) | 11 | Testing strategies (pyramid, shift-left), unit/integration testing (mocking, test doubles, Testcontainers), contract testing (Pact CDC), E2E testing (Cypress, Playwright), performance testing (k6, Locust), load testing patterns, chaos engineering, test infra, CI test strategy, quality metrics |
+| 22 | [AI & ML System Design](22-AI-ML-System-Design/) | 16 | Transformer architecture, RAG, vector databases, model serving, prompt engineering, AI agent architectures, ML pipeline infra, model evaluation/monitoring, GPU optimization, cost optimization, AI system design examples, LLM fine-tuning, multimodal models, AI safety & alignment, model compression, MLOps platform |
+| 23 | [API Design](23-API-Design/) | 15 | RESTful API design, OpenAPI 3.1, GraphQL (schema, resolvers, federation, N+1), gRPC (protobuf, 4 streaming modes), API versioning, API security (OAuth2, OIDC, JWT), API gateway patterns, WebSocket/SSE, webhooks, API testing, API documentation, GraphQL federation, API monetization, design-first workflow, BFF patterns |
+| 24 | [Testing & Quality Engineering](24-Testing-Quality-Engineering/) | 15 | Testing strategies, unit/integration testing, contract testing, E2E testing, performance testing (k6, Locust), load testing patterns, chaos engineering, test infra, CI test strategy, quality metrics, visual testing, test data management, flaky test management, accessibility testing, mutation testing |
 | 25 | [Clean Architecture & Design Patterns](25-Clean-Architecture-Design-Patterns/) | 12 | SOLID principles (multi-language), 23 GoF patterns, Clean Architecture, Hexagonal Architecture, Domain-Driven Design, CQRS, Event Sourcing, Saga pattern, Strangler Fig, ADRs, Twelve-Factor App |
 
 ---

@@ -23,6 +23,12 @@ graph TB
 
         T9 --> T10["10 Quality Metrics<br/>Coverage, DORA, Mutation, SLOs"]
         T7 --> T10
+
+        T4 --> T11["11 Visual Testing<br/>Percy, Chromatic, Regression"]
+        T2 --> T12["12 Test Data Management<br/>Builders, Factories, Seeding"]
+        T9 --> T13["13 Flaky Test Management<br/>Detection, Quarantine, Budget"]
+        T11 --> T14["14 Accessibility Testing<br/>axe-core, WCAG, CI Gates"]
+        T2 --> T15["15 Mutation Testing<br/>PIT, Score, Equivalent"]
     end
 
     subgraph "Learning Path"
@@ -53,6 +59,11 @@ This module covers the complete spectrum of testing and quality engineering — 
 | 08 | Test Infrastructure | Testcontainers, ephemeral envs, preview deployments, DB seeding |
 | 09 | CI Test Strategy | Test selection, parallelization, flaky detection, merge gates |
 | 10 | Quality Metrics | Coverage, mutation testing, DORA metrics, SLI/SLO for quality |
+| 11 | Visual Testing | Visual regression, Percy, Chromatic, screenshot diffing, baselines |
+| 12 | Test Data Management | Data builders, factories, seeding, masking, pools, synthetic data |
+| 13 | Flaky Test Management | Detection, auto-quarantine, root cause analysis, flaky budget |
+| 14 | Accessibility Testing | WCAG, axe-core, screen reader, keyboard, contrast, CI gates |
+| 15 | Mutation Testing | PIT, mutation score, killed/survived mutants, equivalent mutants |
 
 ## Learning Path
 
@@ -61,6 +72,10 @@ This module covers the complete spectrum of testing and quality engineering — 
 3. **Build Resilience (07)**: Introduce chaos engineering to validate system robustness
 4. **Scale Infrastructure (08-09)**: Set up test environments, CI pipelines, and quality gates
 5. **Measure and Improve (10)**: Track quality metrics, enforce SLOs, continuously improve
+6. **Visual + Accessibility (11, 14)**: Add visual regression and accessibility gates to your CI pipeline
+7. **Data Discipline (12)**: Implement test data management for reliable, repeatable test runs
+8. **Flaky Discipline (13)**: Set up flaky detection, auto-quarantine, and a flaky budget
+9. **Test Quality (15)**: Use mutation testing to ensure your tests actually verify behavior
 
 ---
 Previous: [23 — API Design](../23-API-Design/README.md)

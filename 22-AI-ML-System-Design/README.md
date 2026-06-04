@@ -23,6 +23,8 @@ graph TD
         G["05 - Prompt Engineering<br/>CoT, ReAct, DSPy, Guardrails, Injection Prevention"]
         H["06 - AI Agent Architectures<br/>Function Calling, Multi-Agent, Memory, Planning"]
         I["07 - ML Pipeline Infra<br/>Feature Stores, Data Versioning, MLflow, W&B"]
+        L["12 - LLM Fine-Tuning<br/>LoRA, QLoRA, PEFT, Instruction Tuning"]
+        M["15 - Model Compression<br/>Quantization, Pruning, Distillation"]
     end
 
     subgraph QUALITY
@@ -31,6 +33,9 @@ graph TD
 
     subgraph APPLICATION
         K["11 - AI System Design Examples<br/>Chatbot, RAG, Code Assistant, Recommendations, Moderation"]
+        N["13 - Multimodal Models<br/>CLIP, LLaVA, GPT-4V, Video, Multi-Modal RAG"]
+        O["14 - AI Safety & Alignment<br/>RLHF, DPO, Guardrails, Red Teaming"]
+        P["16 - MLOps & ML Platform<br/>Feature Store, Registry, Monitoring, CI/CD"]
     end
 
     FOUNDATION --> RETRIEVAL
@@ -38,8 +43,10 @@ graph TD
     FOUNDATION --> DEVELOPMENT
     RETRIEVAL --> APPLICATION
     DEVELOPMENT --> INFERENCE
+    DEVELOPMENT --> APPLICATION
     INFERENCE --> QUALITY
     QUALITY --> APPLICATION
+    DEVELOPMENT --> QUALITY
 
     style A fill:#e3f2fd,stroke:#1565c0
     style B fill:#e8f5e9,stroke:#2e7d32
@@ -52,6 +59,11 @@ graph TD
     style I fill:#f3e5f5,stroke:#7b1fa2
     style J fill:#ffebee,stroke:#c62828
     style K fill:#e0f7fa,stroke:#00838f
+    style L fill:#f3e5f5,stroke:#7b1fa2
+    style M fill:#f3e5f5,stroke:#7b1fa2
+    style N fill:#e0f7fa,stroke:#00838f
+    style O fill:#e0f7fa,stroke:#00838f
+    style P fill:#e0f7fa,stroke:#00838f
 ```
 
 ## Learning Path
@@ -65,6 +77,8 @@ graph TD
 4. **05 - Prompt Engineering at Scale** — Few-shot, CoT, ReAct, Tree-of-Thought, DSPy, guardrails, injection prevention
 5. **06 - AI Agent Architectures** — Agent loops, tool use, function calling, multi-agent systems, memory, planning
 6. **07 - ML Pipeline Infrastructure** — Feature stores (Feast, Tecton), data versioning (DVC, LakeFS), experiment tracking, model registry
+7. **12 - LLM Fine-Tuning** — Full fine-tuning vs LoRA/QLoRA, PEFT, instruction tuning, dataset preparation, evaluation
+8. **15 - Model Compression** — Quantization (GPTQ, AWQ, GGUF), pruning, distillation, KV-cache optimization
 
 ### Phase 3: Deployment & Optimization
 7. **04 - Model Serving Infrastructure** — vLLM, TGI, Triton, TensorRT-LLM, continuous batching, tensor parallelism
@@ -73,7 +87,10 @@ graph TD
 
 ### Phase 4: Quality & Production
 10. **08 - Evaluation & Monitoring** — BLEU/ROUGE/METEOR, BERTScore, hallucination detection, drift, LangSmith, Weave
-11. **11 - AI System Design Examples** — Chatbot, RAG pipeline, code assistant, recommendation system, content moderation
+11. **13 - Multimodal Models** — CLIP, LLaVA, GPT-4V, video understanding, multimodal RAG, evaluation
+12. **14 - AI Safety & Alignment** — RLHF, DPO, Constitutional AI, guardrails, jailbreak prevention, red teaming
+13. **11 - AI System Design Examples** — Chatbot, RAG pipeline, code assistant, recommendation system, content moderation
+14. **16 - MLOps & ML Platform** — Feature store, experiment tracking, model registry, inference platform, monitoring
 
 ## Module Index
 
@@ -90,6 +107,11 @@ graph TD
 | 09 | [GPU Optimization](09-gpu-optimization.md) | CUDA, Flash Attention, PagedAttention, Speculative Decoding |
 | 10 | [Cost Optimization](10-cost-optimization.md) | Caching, Distillation, LoRA, Pruning, Quantization, Spot Instances |
 | 11 | [System Design Examples](11-ai-system-design-examples.md) | Chatbot, RAG, Code Assistant, Recommendations, Moderation |
+| 12 | [LLM Fine-Tuning](12-llm-fine-tuning.md) | LoRA, QLoRA, PEFT, instruction tuning, dataset prep, evaluation |
+| 13 | [Multimodal Models](13-multimodal-models.md) | CLIP, LLaVA, GPT-4V, video understanding, multimodal RAG |
+| 14 | [AI Safety & Alignment](14-ai-safety-alignment.md) | RLHF, DPO, Constitutional AI, guardrails, jailbreak detection |
+| 15 | [Model Compression](15-model-compression-quantization.md) | GPTQ, AWQ, GGUF, pruning, distillation, KV-cache optimization |
+| 16 | [MLOps & ML Platform](16-mlops-ml-platform.md) | Feature store, experiment tracking, model registry, monitoring |
 
 ## Key Technologies Covered
 

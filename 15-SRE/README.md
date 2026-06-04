@@ -37,15 +37,22 @@ graph TD
 
 | # | Topic | Description |
 |---|-------|-------------|
-| 1 | [SLOs, SLIs & Error Budgets](01-slo-sli-error-budgets.md) | Defining and measuring reliability |
-| 2 | [Incident Management](02-incident-management.md) | Structured incident response |
-| 3 | [Postmortem Culture](03-postmortem-culture.md) | Blameless learning from failures |
-| 4 | [Change Management](04-change-management.md) | Safe, progressive delivery |
-| 5 | [Capacity Planning](05-capacity-planning.md) | Forecasting and provisioning |
-| 6 | [Reliability Patterns](06-reliability-patterns.md) | Circuit breakers, bulkheads, retries |
-| 7 | [Toil Reduction](07-toil-reduction.md) | Automating operational work |
-| 8 | [Emergency Response](08-emergency-response.md) | On-call, escalation, runbooks |
-| 9 | [Production Readiness](09-production-readiness.md) | Launch checklists, PRRs, Game Days |
+| 01 | [SLOs, SLIs & Error Budgets](01-slo-sli-error-budgets.md) | Defining and measuring reliability |
+| 02 | [Incident Management](02-incident-management.md) | Structured incident response |
+| 03 | [Postmortem Culture](03-postmortem-culture.md) | Blameless learning from failures |
+| 04 | [Change Management](04-change-management.md) | Safe, progressive delivery |
+| 05 | [Capacity Planning](05-capacity-planning.md) | Forecasting and provisioning |
+| 06 | [Reliability Patterns](06-reliability-patterns.md) | Circuit breakers, bulkheads, retries |
+| 07 | [Toil Reduction](07-toil-reduction.md) | Automating operational work |
+| 08 | [Emergency Response](08-emergency-response.md) | On-call, escalation, runbooks |
+| 09 | [Production Readiness](09-production-readiness.md) | Launch checklists, PRRs, Game Days |
+| 10 | [SLI Deep Dive](10-sli-deep-dive.md) | Detailed SLI definitions, measurement, and instrumentation |
+| 11 | [Multi-Window Burn Rate](11-multi-window-burn-rate-alerting.md) | Alerting on error budget consumption velocity |
+| 12 | [Error Budget Policy](12-error-budget-policy.md) | Error budget governance, ownership, and enforcement |
+| 13 | [SLO Calculation Examples](13-slo-calculation-examples.md) | Real-world SLO math, compositing, and reporting |
+| 14 | [SRE Maturity Model](14-sre-maturity-model.md) | Capability assessment, maturity levels 0-4, roadmap |
+| 15 | [SRE for ML](15-sre-for-ml.md) | ML-specific SLIs, model monitoring, drift detection |
+| 16 | [Chaos Engineering Deep Dive](16-chaos-engineering-deep-dive.md) | Game days, blast radius, steady-state hypothesis, advanced failure injection |
 
 ## Key Metrics
 

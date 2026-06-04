@@ -64,11 +64,41 @@ mindmap
       Dead letter queues
       Consumer verification
     Testing
-      10-api-testing
-      Contract testing / Pact
-      Fuzzing / property-based
-      Performance testing
-      Postman / monitoring
+       10-api-testing
+       Contract testing / Pact
+       Fuzzing / property-based
+       Performance testing
+       Postman / monitoring
+     Documentation
+       11-api-documentation
+       OpenAPI / AsyncAPI
+       Swagger UI / Redoc
+       API portals / SDKs
+       Quality gates
+     Federation
+       12-graphql-federation
+       Supergraph / subgraphs
+       Apollo Federation
+       Entity resolution
+       Schema composition
+     Monetization
+       13-api-monetization-patterns
+       Usage-based billing
+       Tiered / metered
+       Quota enforcement
+       Stripe integration
+     Design Workflow
+       14-api-design-workflow
+       Design-first vs code-first
+       Contract validation
+       Breaking change detection
+       Mock servers
+     BFF Pattern
+       15-bff-patterns
+       Per-client backends
+       Web / mobile / IoT
+       Aggregation / sync
+       Client team ownership
 ```
 
 ```mermaid
@@ -94,6 +124,13 @@ graph LR
     subgraph "Quality"
         J[10-api-testing]
     end
+    subgraph "Extras"
+        K[11-api-documentation]
+        L[12-graphql-federation]
+        M[13-api-monetization]
+        N[14-api-design-workflow]
+        O[15-bff-patterns]
+    end
     A --> C
     A --> D
     B --> C
@@ -112,6 +149,18 @@ graph LR
     A --> J
     B --> J
     F --> J
+    A --> K
+    B --> K
+    J --> K
+    C --> L
+    B --> L
+    A --> M
+    G --> M
+    A --> N
+    B --> N
+    J --> N
+    G --> O
+    A --> O
     style A fill:#4a90d9,color:#fff
     style B fill:#4a90d9,color:#fff
     style C fill:#7b68ee,color:#fff
@@ -122,6 +171,11 @@ graph LR
     style H fill:#1abc9c,color:#fff
     style I fill:#1abc9c,color:#fff
     style J fill:#f39c12,color:#fff
+    style K fill:#95a5a6,color:#fff
+    style L fill:#95a5a6,color:#fff
+    style M fill:#95a5a6,color:#fff
+    style N fill:#95a5a6,color:#fff
+    style O fill:#95a5a6,color:#fff
 ```
 
 ## Learning Path
@@ -135,6 +189,11 @@ graph LR
 7. **Go Real-Time** (08) — WebSockets and SSE for low-latency, event-driven communication.
 8. **Automate with Webhooks** (09) — event-driven callback patterns for async integrations.
 9. **Verify Quality** (10) — contract testing, fuzzing, and performance testing ensure API reliability.
+10. **Document** (11) — great API docs reduce support tickets and accelerate adoption.
+11. **Federate** (12) — GraphQL Federation for distributed schema ownership at scale.
+12. **Monetize** (13) — usage-based billing, tiered plans, and metering infrastructure.
+13. **Design-First** (14) — contract-first workflow with breaking change detection and mock servers.
+14. **Apply BFF** (15) — dedicated backends per client type for optimized mobile, web, and IoT experiences.
 
 ---
 Previous: [22 — AI/ML System Design](../22-AI-ML-System-Design/README.md)

@@ -13,6 +13,13 @@
 | 07 | `07-advanced-patterns.md` | `count` vs `for_each`, `dynamic` blocks, `locals`, `depends_on`, provisioners, `moved`, refactoring |
 | 08 | `08-terraform-cloud.md` | Terraform Cloud/Enterprise: workspaces, remote runs, Sentinel, cost estimation, VCS, teams |
 | 09 | `09-best-practices.md` | Naming, file structure, env separation, secrets, CI/CD (GitLab/GitHub Actions), Terragrunt |
+| 10 | `10-providers-deep-dive.md` | Provider schema, CRUD, authentication, versioning, custom provider patterns |
+| 11 | `11-cdktf.md` | CDK for Terraform: TypeScript/Python/Go, stacks, constructs, synthesis |
+| 12 | `12-testing-strategies.md` | Unit tests, integration tests, Terratest, policy testing, compliance validation |
+| 13 | `13-terragrunt.md` | Terragrunt for DRY Terraform, module composition, multi-environment |
+| 14 | `14-policy-as-code.md` | Sentinel, OPA/Rego, tfsec, checkov, compliance pipelines |
+| 15 | `15-multi-cloud-terraform.md` | Multi-cloud provider patterns, cross-cloud networking, migration |
+| 16 | `16-terraform-provider-development.md` | Provider SDK, CRUD, acceptance tests, registry publishing |
 
 ```mermaid
 graph LR
