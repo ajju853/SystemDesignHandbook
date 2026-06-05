@@ -30,3 +30,5 @@
   - [23 — API Design](23-API-Design/README.md)
   - [24 — Testing & Quality](24-Testing-Quality-Engineering/README.md)
   - [25 — Clean Architecture](25-Clean-Architecture-Design-Patterns/README.md)
+  - [26 — Data Engineering](26-Data-Engineering/README.md)
+  - [27 — Frontend System Design](27-Frontend-System-Design/README.md)
