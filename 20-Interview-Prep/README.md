@@ -56,6 +56,11 @@ Multi-region, cross-functional, cost-aware designs.
 | 15 | [Global CDN](15-global-cdn.md) | Edge computing, cache hierarchy | 90 min |
 | 16 | [Real-Time Analytics Platform](16-real-time-analytics.md) | Stream processing, query engine | 90 min |
 | 17 | [Event-Driven Architecture](17-event-driven-architecture.md) | Event sourcing, CQRS, saga | 90 min |
+| 26 | [Reddit/HN Feed](26-design-reddit.md) | Voting, feed ranking, moderation | 75 min |
+| 27 | [Payment System](27-design-payment-system.md) | Idempotency, ledger, reconciliation | 90 min |
+| 28 | [Live Streaming](28-design-live-streaming.md) | RTMP ingest, transcoding, HLS/DASH | 90 min |
+| 29 | [Search Autocomplete](29-design-search-autocomplete.md) | Trie, top-K, fuzzy matching | 60 min |
+| 30 | [API Gateway](30-design-api-gateway.md) | Routing, auth, rate limiting, plugins | 75 min |
 
 ## Problem Solving Framework
 

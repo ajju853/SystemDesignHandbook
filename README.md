@@ -4,7 +4,7 @@
 
 ### The Ultimate Cloud + System Design + DevOps + Architecture Operating System
 
-**From zero to Staff Engineer — 540+ topics across 27 modules with 720+ Mermaid diagrams**
+**From zero to Staff Engineer — 550+ topics across 27 modules with 750+ Mermaid diagrams**
 
 [![GitHub Stars](https://img.shields.io/github/stars/ajju853/SystemDesignHandbook?style=for-the-badge&logo=github&color=gold)](https://github.com/ajju853/SystemDesignHandbook/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/ajju853/SystemDesignHandbook?style=for-the-badge&logo=github&color=blue)](https://github.com/ajju853/SystemDesignHandbook/network/members)
@@ -39,10 +39,10 @@
 | **Security** | ✅ 21 files — zero trust, OWASP, TLS/mTLS, threat modeling, secrets, API/container security | Usually 5-6 files |
 | **Observability** | ✅ 18 files — eBPF, SLI/SLO deep-dive, commercial tools, dashboards, oncall | Usually 3-4 files |
 | **Case Studies** | ✅ 22 real architectures — Netflix, Uber, Stripe, TikTok, Discord, DoorDash, Figma, Notion, Cloudflare, Coinbase, Roblox | Usually 5-10 |
-| **Projects** | ✅ 19 hands-on — URL shortener → healthcare EMR with full end-to-end guide | Usually 3-5 |
+| **Projects** | ✅ 25 hands-on — URL shortener → healthcare EMR with full end-to-end guide, serverless, ML serving, monitoring | Usually 3-5 |
 | **Staff Engineer** | ✅ 19 files — mentorship, strategy, migrations, incident leadership, executive comm | Unique to this repo |
-| **Mermaid Diagrams** | ✅ **720+ diagrams across 540+ files** | Usually text-only |
-| **Interview Prep** | ✅ 26 problems — from Tinder to distributed KV store to recommendation systems | Usually 10-15 |
+| **Mermaid Diagrams** | ✅ **750+ diagrams across 550+ files** | Usually text-only |
+| **Interview Prep** | ✅ 30 problems — from Tinder to distributed KV store to recommendation systems to live streaming | Usually 10-15 |
 | **End-to-End Guide** | ✅ Complete E-Commerce platform from requirements to production SRE | Not offered |
 
 ---
@@ -139,8 +139,8 @@ graph TB
 | 16 | [Security](16-Security/) | 21 | Auth/AuthZ, JWT, OAuth 2.0, OIDC, RBAC, ABAC, encryption, hashing, WAF, DDoS, zero trust, OWASP Top 10, TLS/mTLS, secrets management (Vault), security headers/CSP, API security, container security, threat modeling (STRIDE/PASTA), compliance (SOC2/PCI/HIPAA/GDPR) |
 | 17 | [Observability](17-Observability/) | 18 | Logging, monitoring, tracing, metrics, alerting, Prometheus, Grafana, ELK, Jaeger, OpenTelemetry, SLI/SLO deep-dive, commercial tools comparison, dashboard design, on-call practices, eBPF observability, maturity model, K8s observability |
 | 18 | [Case Studies](18-Case-Studies/) | 29 | Netflix, YouTube, WhatsApp, Instagram, Uber, Twitter/X, Spotify, Airbnb, Amazon, Google Search, Slack, Discord, TikTok, Stripe, LinkedIn, Zoom, DoorDash, Figma, Notion, Cloudflare, Coinbase, Roblox + 7 production incidents (Facebook BGP, AWS Kinesis, Google Cloud, Cloudflare, GitHub, Fastly, GitLab) |
-| 19 | [Projects](19-Projects/) | 20 | End-to-End Implementation Guide + URL Shortener, Chat System, Netflix Clone, YouTube, Uber, Payment Gateway, Instagram, Twitter, Dropbox, Google Drive, Food Delivery, Video Conferencing, Event Booking, Airline Reservation, Banking Ledger, Healthcare EMR, Java Full Stack Roadmap |
-| 20 | [Interview Prep](20-Interview-Prep/) | 26 | TinyURL, Parking Lot, Rate Limiter, Web Crawler, Instagram, WhatsApp, Twitter, Uber, Dropbox, Netflix, YouTube, Google Search, Amazon, Multi-Region Banking, Global CDN, Analytics, Event-Driven, Tinder, Distributed KV Store, Notification System, Collaborative Editor, Elevator OOD, Distributed Cache, Job Scheduler, Recommendation System |
+| 19 | [Projects](19-Projects/) | 25 | End-to-End Implementation Guide + URL Shortener, Chat System, Netflix Clone, YouTube, Uber, Payment Gateway, Instagram, Twitter, Dropbox, Google Drive, Food Delivery, Video Conferencing, Event Booking, Airline Reservation, Banking Ledger, Healthcare EMR, Java Full Stack Roadmap, Serverless App, ML Model Serving, Multi-Cloud Terraform, Monitoring Stack, API Gateway, Event-Driven Microservices |
+| 20 | [Interview Prep](20-Interview-Prep/) | 30 | TinyURL, Parking Lot, Rate Limiter, Web Crawler, Instagram, WhatsApp, Twitter, Uber, Dropbox, Netflix, YouTube, Google Search, Amazon, Multi-Region Banking, Global CDN, Analytics, Event-Driven, Tinder, Distributed KV Store, Notification System, Collaborative Editor, Elevator OOD, Distributed Cache, Job Scheduler, Recommendation System, Reddit/HN Feed, Payment System, Live Streaming, Search Autocomplete, API Gateway |
 | 21 | [Staff Engineer](21-Staff-Engineer/) | 19 | Tradeoffs, architecture reviews, RFC writing, cost optimization, multi-region design, disaster recovery, chaos engineering, capacity planning, mentorship vs sponsorship, technical strategy, migration strategies, API versioning, executive communication, interviewing/hiring, technical debt management, incident leadership, engineering culture (DORA/SPACE), growth paths |
 | 22 | [AI & ML System Design](22-AI-ML-System-Design/) | 16 | Transformer architecture, RAG, vector databases, model serving, prompt engineering, AI agent architectures, ML pipeline infra, model evaluation/monitoring, GPU optimization, cost optimization, AI system design examples, LLM fine-tuning, multimodal models, AI safety & alignment, model compression, MLOps platform |
 | 23 | [API Design](23-API-Design/) | 15 | RESTful API design, OpenAPI 3.1, GraphQL (schema, resolvers, federation, N+1), gRPC (protobuf, 4 streaming modes), API versioning, API security (OAuth2, OIDC, JWT), API gateway patterns, WebSocket/SSE, webhooks, API testing, API documentation, GraphQL federation, API monetization, design-first workflow, BFF patterns |
