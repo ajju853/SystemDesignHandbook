@@ -118,3 +118,4 @@ graph LR
 ---
 
 Previous: [25 — Clean Architecture & Design Patterns](../25-Clean-Architecture-Design-Patterns/README.md)
+Next: [27 — Frontend System Design](../27-Frontend-System-Design/README.md)
